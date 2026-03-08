@@ -4,9 +4,16 @@
 
 import json
 import os
+import sys
 from typing import List
 
-from config import resource_path
+
+def resource_path(relative_path: str) -> str:
+    try:
+        base = sys._MEIPASS
+    except AttributeError:
+        base = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base, relative_path)
 
 
 def list_languages() -> List[str]:

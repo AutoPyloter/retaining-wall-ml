@@ -12,7 +12,15 @@ from typing import Any, List
 import numpy as np
 import pandas as pd
 
-from config import resource_path
+import sys
+import os
+
+def resource_path(relative_path: str) -> str:
+    try:
+        base = sys._MEIPASS
+    except AttributeError:
+        base = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base, relative_path)
 
 logger = logging.getLogger(__name__)
 

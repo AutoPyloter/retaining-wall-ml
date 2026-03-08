@@ -20,7 +20,15 @@ import joblib
 import numpy as np
 import pandas as pd
 
-from config import read_config, write_config, resource_path
+from config import read_config, write_config
+
+def resource_path(relative_path: str) -> str:
+    try:
+        import sys
+        base = sys._MEIPASS
+    except AttributeError:
+        base = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base, relative_path)
 from language import list_languages, load_translations
 from model_info import MODEL_INFO
 from preprocessing import preprocess_inputs
@@ -60,13 +68,25 @@ def log_exceptions(func):
 # Model loading helpers
 # ---------------------------------------------------------------------------
 
-MODELS_DIR = os.path.abspath("saved_models")
+MODELS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "saved_models")
 os.makedirs(MODELS_DIR, exist_ok=True)
 
 metrics_df = pd.read_csv(resource_path("all_models_random_search_results.csv"), sep=";", decimal=",")
 unseen_df  = metrics_df[metrics_df["Dataset"] == "Unseen"][["Model", "MaxE"]].copy()
 unseen_df["MaxE"] = unseen_df["MaxE"].astype(float)
-MODEL_PREFIXES: List[str] = unseen_df.sort_values("MaxE")["Model"].unique().tolist()
+def _is_loadable(prefix: str) -> bool:
+    files = [f for f in os.listdir(MODELS_DIR) if f.startswith(f"{prefix}_k") and f.endswith(".pkl")]
+    if not files:
+        return False
+    try:
+        joblib.load(os.path.join(MODELS_DIR, files[0]))
+        return True
+    except Exception:
+        return False
+
+
+_all_prefixes = unseen_df.sort_values("MaxE")["Model"].unique().tolist()
+MODEL_PREFIXES: List[str] = [p for p in _all_prefixes if _is_loadable(p)]
 
 
 @log_exceptions
@@ -84,7 +104,7 @@ def load_model_file(prefix: str) -> Tuple[Any, int]:
 
     match = re.search(r"_k(\d+)", files[0])
     k = int(match.group(1)) if match else 10
-    model = joblib.load(resource_path(os.path.join("saved_models", files[0])))
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
     return model, k
 
 

@@ -1,0 +1,1247 @@
+2026-03-09 00:00:57,827 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:00:57,827 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:00:57,827 - app - ERROR - wrapper:63 - load_model_file raised an error: No saved model found for prefix 'CAT'.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 91, in load_model_file
+    raise FileNotFoundError(f"No saved model found for prefix '{prefix}'.")
+FileNotFoundError: No saved model found for prefix 'CAT'.
+2026-03-09 00:00:57,847 - app - ERROR - wrapper:63 - _run_model_predict raised an error: No saved model found for prefix 'CAT'.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 91, in load_model_file
+    raise FileNotFoundError(f"No saved model found for prefix '{prefix}'.")
+FileNotFoundError: No saved model found for prefix 'CAT'.
+2026-03-09 00:01:00,007 - app - DEBUG - wrapper:59 - _show_model_info started.
+2026-03-09 00:02:27,511 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:02:27,511 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:02:27,542 - app - ERROR - wrapper:63 - load_model_file raised an error: No module named 'catboost'
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(resource_path(os.path.join("saved_models", files[0])))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1538, in load_stack_global
+    self.append(self.find_class(module, name))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1580, in find_class
+    __import__(module, level=0)
+ModuleNotFoundError: No module named 'catboost'
+2026-03-09 00:02:27,559 - app - ERROR - wrapper:63 - _run_model_predict raised an error: No module named 'catboost'
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(resource_path(os.path.join("saved_models", files[0])))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1538, in load_stack_global
+    self.append(self.find_class(module, name))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1580, in find_class
+    __import__(module, level=0)
+ModuleNotFoundError: No module named 'catboost'
+2026-03-09 00:06:33,399 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:06:33,399 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:06:35,501 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:08:58,744 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:08:58,744 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:08:58,760 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:08:59,483 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:08:59,483 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:08:59,483 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:08:59,613 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:08:59,613 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:08:59,623 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:08:59,772 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:08:59,772 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:08:59,772 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:08:59,905 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:08:59,917 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:08:59,917 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:09:00,065 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:00,065 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:00,077 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:09:02,250 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:02,250 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:08,159 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:09:08,168 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:09:08,195 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:08,195 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:08,203 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:09:08,203 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:09:08,206 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:08,208 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:08,209 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:09:08,209 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:09:08,213 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:08,213 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:08,214 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:09:08,215 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:09:21,922 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:21,922 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:21,969 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 462, in load_build
+    _array_payload = array_wrapper.read(self, self.ensure_native_byte_order)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 284, in read
+    array = self.read_array(unpickler, ensure_native_byte_order)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 175, in read_array
+    array = pickle.load(unpickler.file_handle)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:09:21,969 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 462, in load_build
+    _array_payload = array_wrapper.read(self, self.ensure_native_byte_order)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 284, in read
+    array = self.read_array(unpickler, ensure_native_byte_order)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 175, in read_array
+    array = pickle.load(unpickler.file_handle)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:09:39,101 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:39,101 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:39,217 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:09:41,076 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:41,076 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:41,448 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:09:43,515 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:43,515 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:43,543 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:09:43,543 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:09:45,495 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:45,495 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:45,558 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:09:47,465 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:47,465 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:47,489 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:09:49,725 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:49,725 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:49,728 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:09:51,778 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:51,778 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:51,814 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:09:55,297 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:55,297 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:55,326 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:09:55,328 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:09:57,151 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:57,151 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:57,302 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:09:59,591 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:09:59,591 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:09:59,611 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:01,244 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:01,244 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:01,332 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:03,700 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:03,700 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:03,713 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:05,634 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:05,634 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:05,651 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:07,034 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:07,034 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:07,055 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:09,100 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:09,100 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:09,116 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:10,602 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:10,602 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:10,614 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:13,567 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:13,567 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:13,593 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:15,612 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:15,612 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:15,612 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:17,757 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:17,757 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:17,772 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:19,456 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:19,459 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:19,462 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:21,153 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:21,153 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:21,153 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:22,878 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:22,878 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:22,897 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:25,533 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:25,533 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:25,544 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:27,338 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:27,338 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:27,361 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:29,363 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:29,363 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:29,379 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:31,328 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:31,328 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:31,332 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:33,116 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:33,116 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:33,142 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:34,667 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:34,667 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:34,667 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:10:37,425 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:10:37,425 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:10:37,444 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:28,731 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:28,731 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:28,861 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:30,465 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:30,465 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:32,433 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:12:32,433 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:12:33,798 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:33,799 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:33,801 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 462, in load_build
+    _array_payload = array_wrapper.read(self, self.ensure_native_byte_order)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 284, in read
+    array = self.read_array(unpickler, ensure_native_byte_order)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 175, in read_array
+    array = pickle.load(unpickler.file_handle)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:12:33,802 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 462, in load_build
+    _array_payload = array_wrapper.read(self, self.ensure_native_byte_order)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 284, in read
+    array = self.read_array(unpickler, ensure_native_byte_order)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 175, in read_array
+    array = pickle.load(unpickler.file_handle)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:12:35,419 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:35,419 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:35,445 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:36,979 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:36,979 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:37,084 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:38,303 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:38,303 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:38,309 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:12:38,312 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:12:39,455 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:39,455 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:39,515 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:40,745 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:40,745 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:40,745 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:42,358 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:42,358 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:42,358 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:43,674 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:43,674 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:43,679 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:45,371 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:45,371 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:45,377 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:12:45,378 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 749, in load
+    obj = _unpickle(
+          ^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 626, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:12:46,553 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:46,553 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:46,687 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:48,191 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:48,191 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:48,191 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:49,581 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:49,581 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:49,646 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:51,133 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:51,133 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:51,137 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:52,574 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:52,580 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:52,581 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:53,827 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:53,827 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:53,827 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:55,670 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:55,670 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:55,670 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:57,892 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:57,892 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:57,892 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:12:59,183 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:12:59,183 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:12:59,183 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:00,760 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:00,760 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:00,760 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:02,305 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:02,305 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:02,305 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:04,239 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:04,239 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:04,239 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:05,679 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:05,679 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:05,679 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:06,815 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:06,815 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:06,815 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:08,062 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:08,062 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:08,070 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:09,692 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:09,692 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:09,708 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:12,108 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:12,108 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:12,108 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:13,692 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:13,692 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:13,692 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:14,952 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:14,952 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:14,952 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:16,559 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:16,559 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:16,559 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:13:17,916 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:13:17,916 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:13:17,916 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:11,121 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:11,121 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:11,201 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:12,719 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:12,719 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:13,544 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 658, in load
+    obj = _unpickle(fobj, filename, mmap_mode)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 577, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:14:13,545 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 658, in load
+    obj = _unpickle(fobj, filename, mmap_mode)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 577, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module.
+2026-03-09 00:14:15,209 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:15,209 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:15,209 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 658, in load
+    obj = _unpickle(fobj, filename, mmap_mode)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 577, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 415, in load_build
+    self.stack.append(array_wrapper.read(self))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 252, in read
+    array = self.read_array(unpickler)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 152, in read_array
+    array = pickle.load(unpickler.file_handle)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:14:15,209 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 658, in load
+    obj = _unpickle(fobj, filename, mmap_mode)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 577, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 415, in load_build
+    self.stack.append(array_wrapper.read(self))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 252, in read
+    array = self.read_array(unpickler)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 152, in read_array
+    array = pickle.load(unpickler.file_handle)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:14:16,925 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:16,925 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:16,953 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:18,264 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:18,264 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:18,367 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:19,546 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:19,546 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:19,561 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 658, in load
+    obj = _unpickle(fobj, filename, mmap_mode)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 577, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:14:19,561 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 658, in load
+    obj = _unpickle(fobj, filename, mmap_mode)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 577, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:14:20,676 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:20,676 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:20,726 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:21,889 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:21,889 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:21,901 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:23,162 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:23,162 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:23,162 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:25,520 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:25,520 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:25,525 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:27,139 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:27,146 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:27,151 - app - ERROR - wrapper:63 - load_model_file raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 658, in load
+    obj = _unpickle(fobj, filename, mmap_mode)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 577, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:14:27,153 - app - ERROR - wrapper:63 - _run_model_predict raised an error: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+Traceback (most recent call last):
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 272, in _run_model_predict
+    model_obj, model_k = load_model_file(self.model_prefix)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 61, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 95, in load_model_file
+    model = joblib.load(os.path.join(MODELS_DIR, files[0]))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 658, in load
+    obj = _unpickle(fobj, filename, mmap_mode)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\numpy_pickle.py", line 577, in _unpickle
+    obj = unpickler.load()
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1213, in load
+    dispatch[key[0]](self)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\pickle.py", line 1590, in load_reduce
+    stack[-1] = func(*args)
+                ^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\random\_pickle.py", line 34, in __bit_generator_ctor
+    raise ValueError(str(bit_generator_name) + ' is not a known '
+ValueError: <class 'numpy.random._mt19937.MT19937'> is not a known BitGenerator module.
+2026-03-09 00:14:28,542 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:28,542 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:28,622 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:30,941 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:30,941 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:30,941 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:33,222 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:33,222 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:33,286 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:34,607 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:34,607 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:34,608 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:35,923 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:35,923 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:35,935 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:37,259 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:37,259 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:37,259 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:38,627 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:38,627 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:38,627 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:40,340 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:40,340 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:40,388 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:41,614 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:41,614 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:41,618 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:43,119 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:43,119 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:43,119 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:44,872 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:44,872 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:44,872 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:46,685 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:46,685 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:46,685 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:48,266 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:48,266 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:48,269 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:49,474 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:49,474 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:49,476 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:51,247 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:51,247 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:51,247 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:52,783 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:52,783 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:52,783 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:53,933 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:53,933 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:53,933 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:55,176 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:55,176 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:55,176 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:56,504 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:56,504 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:56,504 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:58,247 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:58,247 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:58,247 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:14:59,620 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:14:59,620 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:14:59,621 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:21:56,133 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:21:56,133 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:21:56,133 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:21:58,166 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:21:58,166 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:21:58,173 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:00,985 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:01,001 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:01,002 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:03,150 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:03,150 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:03,249 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:04,864 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:04,864 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:04,864 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:06,878 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:06,878 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:06,878 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:08,285 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:08,285 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:08,285 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:09,670 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:09,670 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:09,750 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:11,402 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:11,402 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:11,402 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:13,473 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:13,473 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:13,537 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:15,658 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:15,658 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:15,658 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:17,084 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:17,084 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:17,097 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:18,664 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:18,665 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:18,665 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:20,037 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:20,037 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:20,051 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:21,243 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:21,243 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:21,243 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:22,823 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:22,823 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:22,823 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:23,898 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:23,898 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:23,898 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:25,284 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:25,284 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:25,289 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:27,165 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:27,165 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:27,165 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:28,600 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:28,600 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:28,600 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:30,267 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:30,267 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:30,267 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:32,231 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:32,231 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:32,231 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:34,214 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:34,214 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:34,216 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:35,629 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:35,629 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:35,629 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:38,269 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:38,269 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:38,269 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:39,493 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:39,504 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:39,504 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:41,573 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:41,573 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:41,580 - app - DEBUG - wrapper:59 - run_prediction started.
+2026-03-09 00:22:42,798 - app - DEBUG - wrapper:59 - _run_model_predict started.
+2026-03-09 00:22:42,798 - app - DEBUG - wrapper:59 - load_model_file started.
+2026-03-09 00:22:42,798 - app - DEBUG - wrapper:59 - run_prediction started.
