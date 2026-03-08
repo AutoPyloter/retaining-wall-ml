@@ -1,0 +1,30 @@
+{
+  "language_label": "Lang:",
+  "title": "Stability Prediction Tool",
+  "labels": {
+    "k": "Upper Body Width (m)",
+    "h": "Wall Height (m)",
+    "xx": "Foundation Thickness (m)",
+    "v1": "Front Overhang (m)",
+    "v2": "Back Overhang (m)",
+    "x1": "Foundation+Toe Thickness (m)",
+    "x2": "Toe Width (m)",
+    "s1": "Wall Slope (°)",
+    "x3": "Toe Back Distance (m)",
+    "hw": "Groundwater Depth (m)",
+    "gama": "Soil Unit Weight (kN/m³)",
+    "fi": "Internal Friction Angle (°)",
+    "c": "Cohesion (kPa)",
+    "q": "Surcharge Load (kN/m²)",
+    "sds": "Spectral Acceleration"
+  },
+  "buttons": {
+    "predict": "Predict",
+    "info": "Get Info"
+  },
+  "tabs": {
+    "input": "Input & Visualization",
+    "model": "Model Selection"
+  }
+  
+}
