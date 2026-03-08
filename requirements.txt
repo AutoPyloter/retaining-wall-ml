@@ -6,3 +6,11 @@ pywin32==306
 opencv-python==4.9.0.80
 pyautogui==0.9.54
 numpy<2
+pandas
+scikit-learn
+xgboost
+lightgbm
+catboost
+shap
+matplotlib
+joblib
