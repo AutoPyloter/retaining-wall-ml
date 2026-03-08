@@ -1,4 +1,4 @@
-from Geo5_2018_11_en_automation import CantileverWall
+from geo5_2018_11_en_cantilever_wall_automation import CantileverWall
 import time
 
 # ---------------------------------------------------------------------------

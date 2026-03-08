@@ -1,0 +1,8 @@
+pywinauto==0.6.8
+pygetwindow==0.0.9
+pyperclip==1.8.2
+keyboard==0.13.5
+pywin32==306
+opencv-python==4.9.0.80
+pyautogui==0.9.54
+numpy<2

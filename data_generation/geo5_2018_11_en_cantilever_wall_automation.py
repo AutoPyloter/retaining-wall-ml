@@ -465,7 +465,7 @@ class CantileverWall:
 
             dropdown1 = main_window.child_window(class_name="TEnvToolScroller", found_index=1)
             rect = dropdown1.rectangle()
-            mouse.click(button='left', coords=(rect.left + 340, rect.top + 10))
+            mouse.click(button='left', coords=(rect.left + 360, rect.top + 10))
             slip_center_x = self.read_field_value()
             keyboard.send_keys("{TAB}", pause=PAUSE_TAB)
             slip_center_z = self.read_field_value()
