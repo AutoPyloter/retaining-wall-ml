@@ -23,7 +23,11 @@ retaining-wall-ml/
 │   └── timelapse.py                                   # Compiles screenshots into MP4
 │
 ├── ml/
-│   └── (ML training, SHAP analysis, model evaluation)
+│   ├── split_dataset.py                               # Train / test / unseen split (70/20/10)
+│   ├── train_models.py                                # Full training pipeline (SHAP + RandomizedSearchCV)
+│   ├── metrics.py                                     # Regression metrics module (17 indicators)
+│   ├── predict.py                                     # Batch prediction on CSV datasets
+│   └── inference.py                                   # Single-scenario prediction (importable module)
 │
 ├── app/
 │   └── (PyQt5 desktop application)
@@ -119,6 +123,29 @@ python timelapse.py
 
 Produces `timelapse.mp4` from screenshots saved during the generation run.
 
+### 3. Split the dataset
+
+```bash
+cd ml
+python split_dataset.py
+```
+
+Produces `train.csv` (70%), `test.csv` (20%), `unseen.csv` (10%).
+
+### 4. Train models
+
+```bash
+python train_models.py
+```
+
+Trains 15+ algorithms with SHAP-guided feature selection. Saves models to `saved_models/` and results to `all_models_random_search_results.csv`.
+
+### 5. Run batch predictions
+
+```bash
+python predict.py
+```
+
 ---
 
 ## Dataset Description
@@ -191,11 +218,59 @@ Total dataset: **2048 scenarios**
 
 The ML pipeline (see `ml/`) consists of the following stages:
 
-1. **Data preparation** — F<sub>ss</sub> = Mp / Ma is computed from `output.txt`; dataset split into 70% train / 20% test / 10% unseen hold-out
-2. **Baseline model** — XGBoost trained on all features; SHAP values computed to rank feature importance
-3. **SHAP-guided feature selection** — For each candidate algorithm, Randomized Search CV (2000 iterations) selects the optimal feature subset based on SHAP ranking
-4. **Algorithm comparison** — 24+ algorithms evaluated using five metrics: NSE, KGE, sMAPE, CCC, VAF
-5. **Final model** — CatBoost with Bayesian bootstrap, trained on the SHAP-selected feature subset
+### 1. Data preparation — `split_dataset.py`
+F<sub>ss</sub> = Mp / Ma is computed from `output.txt`. The dataset is split into 70% train / 20% test / 10% unseen hold-out using stratified random sampling (`random_state=42`).
+
+```bash
+cd ml
+python split_dataset.py
+```
+
+### 2. Model training — `train_models.py`
+Full 7-stage pipeline:
+
+| Stage | Description |
+|-------|-------------|
+| 1 | Load train / test / unseen splits |
+| 2 | XGBoost grid-search → best baseline model |
+| 3 | SHAP feature ranking (TreeExplainer) |
+| 4 | Define 15+ model configurations |
+| 5 | RandomizedSearchCV (2000 iterations/model) with simultaneous k-feature selection |
+| 6 | Save trained models to `saved_models/` |
+| 7 | Save SHAP bar + summary plots |
+
+```bash
+python train_models.py
+```
+
+Output: `all_models_random_search_results.csv`, `shap_bar.png`, `shap_summary.png`, per-model convergence plots.
+
+### 3. Evaluation metrics — `metrics.py`
+Shared module providing `compute_metrics()` with 17 indicators:
+
+| Category | Metrics |
+|----------|---------|
+| Standard | MAE, MSE, RMSE, RSR, MAPE, sMAPE, R², EVS, MBE, CV(RMSE)%, MdAE, MaxE |
+| Advanced | NSE, KGE, CCC, VAF(%), PI |
+
+### 4. Batch prediction — `predict.py`
+Runs the trained CatBoost model over a full CSV dataset and saves results.
+
+```bash
+python predict.py
+```
+
+### 5. Single-scenario inference — `inference.py`
+Importable module for use in the PyQt5 desktop application:
+
+```python
+from inference import predict_fss, load_model
+
+model, features = load_model()
+fss = predict_fss([4, 1.80, 0.45, 0.32, 0.45, 1.26, 5, 0.9, 0.85, 1],
+                  model=model, selected_features=features)
+print(f"Predicted Fss: {fss:.4f}")
+```
 
 ---
 
