@@ -1,0 +1,29 @@
+{
+  "language_label": "Dil:",
+  "title": "Stabilite Tahmin Aracı",
+  "labels": {
+    "k": "Üst gövde genişliği (m)",
+    "h": "Duvar yüksekliği (m)",
+    "xx": "Temel kalınlığı (m)",
+    "v1": "Ön çıkma (m)",
+    "v2": "Arka çıkma (m)",
+    "x1": "Temel+diş kalınlığı (m)",
+    "x2": "Diş genişlik (m)",
+    "s1": "Duvar eğimi (°)",
+    "x3": "Diş arkadan mesafe (m)",
+    "hw": "Yeraltı su derinliği (m)",
+    "gama": "Zemin yoğunluğu (kN/m³)",
+    "fi": "İçsel sürtünme açısı (°)",
+    "c": "Kohezyon (kPa)",
+    "q": "Sürşarj yükü (kN/m²)",
+    "sds": "Spektral ivme"
+  },
+  "buttons": {
+    "predict": "Tahmin Yap",
+    "info": "Bilgi Al"
+  },
+  "tabs": {
+    "input": "Giriş ve Görselleştirme",
+    "model": "Model Seçimi"
+  }
+}
