@@ -78,11 +78,16 @@ matplotlib.use("Agg")
 RANDOM_SEED    = 42
 N_CV_FOLDS     = 5
 N_SEARCH_ITER  = 2000
-MODELS_DIR     = "saved_models"
-RESULTS_FILE   = "all_models_random_search_results.csv"
-LOG_FILE       = "training_log.txt"
+OUTPUT_DIR     = "outputs"
+MODELS_DIR     = os.path.join(OUTPUT_DIR, "saved_models")
+PLOTS_DIR      = os.path.join(OUTPUT_DIR, "plots")
+LOGS_DIR       = os.path.join(OUTPUT_DIR, "logs")
+RESULTS_FILE   = os.path.join(OUTPUT_DIR, "all_models_random_search_results.csv")
+LOG_FILE       = os.path.join(LOGS_DIR, "training_log.txt")
 
 os.makedirs(MODELS_DIR, exist_ok=True)
+os.makedirs(PLOTS_DIR,  exist_ok=True)
+os.makedirs(LOGS_DIR,   exist_ok=True)
 
 
 # ---------------------------------------------------------------------------
@@ -206,7 +211,7 @@ model_configs = {
                   for sel in ["cyclic", "random"]],
         "scale": True,
     },
-    "ElasticNet": {
+    "Elastic": {
         "est":   ElasticNet(max_iter=5000, random_state=RANDOM_SEED),
         "grid":  [{"alpha": a, "l1_ratio": l, "selection": sel}
                   for a   in [0.001, 0.01, 0.1, 1]
@@ -214,12 +219,7 @@ model_configs = {
                   for sel in ["cyclic", "random"]],
         "scale": True,
     },
-    "BayesianRidge": {
-        "est":   BayesianRidge(),
-        "grid":  [{}],
-        "scale": True,
-    },
-    "HuberRegressor": {
+    "Huber": {
         "est":   HuberRegressor(max_iter=300),
         "grid":  [{"epsilon": e, "alpha": a}
                   for e in [1.1, 1.35, 1.5]
@@ -235,7 +235,7 @@ model_configs = {
                   for e in [0.1, 0.2]],
         "scale": True,
     },
-    "KNN": {
+    "kNN": {
         "est":   KNeighborsRegressor(),
         "grid":  [{"n_neighbors": n, "weights": w, "p": p}
                   for n in [3, 5, 7]
@@ -243,7 +243,7 @@ model_configs = {
                   for p in [1, 2]],
         "scale": True,
     },
-    "DecisionTree": {
+    "DT": {
         "est":   DecisionTreeRegressor(random_state=RANDOM_SEED),
         "grid":  [{"max_depth": d, "min_samples_split": ms,
                    "min_samples_leaf": ml, "max_features": mf}
@@ -253,7 +253,7 @@ model_configs = {
                   for mf in [None, "sqrt", "log2"]],
         "scale": False,
     },
-    "RandomForest": {
+    "RF": {
         "est":   RandomForestRegressor(random_state=RANDOM_SEED, n_jobs=-1),
         "grid":  [{"n_estimators": n, "max_depth": d,
                    "min_samples_split": ms, "min_samples_leaf": ml,
@@ -333,6 +333,144 @@ model_configs = {
                   for ra  in [0, 0.1]
                   for rl  in [0, 1]],
         "scale": False,
+    },
+
+    "Bayesian": {
+        "est":   BayesianRidge(),
+        "grid":  [{"alpha_1": a1, "alpha_2": a2, "lambda_1": l1, "lambda_2": l2}
+                  for a1 in [1e-6, 1e-4]
+                  for a2 in [1e-6, 1e-4]
+                  for l1 in [1e-6, 1e-4]
+                  for l2 in [1e-6, 1e-4]],
+        "scale": True,
+    },
+    "ARD": {
+        "est":   ARDRegression(),
+        "grid":  [{"max_iter": mi, "alpha_1": a1, "alpha_2": a2, "lambda_1": l1, "lambda_2": l2}
+                  for mi in [300, 500]
+                  for a1 in [1e-6, 1e-4]
+                  for a2 in [1e-6, 1e-4]
+                  for l1 in [1e-6, 1e-4]
+                  for l2 in [1e-6, 1e-4]],
+        "scale": True,
+    },
+    "RANSAC": {
+        "est":   RANSACRegressor(),
+        "grid":  [{"max_trials": mt, "residual_threshold": rt}
+                  for mt in [50, 100]
+                  for rt in [1.0, 2.0]],
+        "scale": True,
+    },
+    "TheilSen": {
+        "est":   TheilSenRegressor(),
+        "grid":  [{"max_subpopulation": ms, "n_subsamples": ns}
+                  for ms in [100, 300]
+                  for ns in [50, 100]],
+        "scale": True,
+    },
+    "PLS": {
+        "est":   PLSRegression(),
+        "grid":  [{"n_components": n} for n in range(1, 19)],
+        "scale": True,
+    },
+    "MLP": {
+        "est":   MLPRegressor(max_iter=1000, random_state=RANDOM_SEED),
+        "grid":  [{"hidden_layer_sizes": h, "activation": act, "alpha": a,
+                   "learning_rate": lr, "early_stopping": es, "validation_fraction": vf}
+                  for h   in [(100,), (50, 50)]
+                  for act in ["relu", "tanh"]
+                  for a   in [1e-4, 1e-3]
+                  for lr  in ["constant", "adaptive"]
+                  for es  in [True, False]
+                  for vf  in [0.1, 0.2]],
+        "scale": True,
+    },
+    "HGB": {
+        "est":   HistGradientBoostingRegressor(random_state=RANDOM_SEED),
+        "grid":  [{"learning_rate": lr, "max_iter": it, "max_leaf_nodes": mln, "l2_regularization": l2}
+                  for lr  in [0.01, 0.1]
+                  for it  in [100, 200]
+                  for mln in [20, 31, None]
+                  for l2  in [0.0, 0.1, 1.0]],
+        "scale": False,
+    },
+    "KR": {
+        "est":   KernelRidge(),
+        "grid":  [{"alpha": a, "kernel": k, "gamma": g}
+                  for a in [0.01, 1, 10]
+                  for k in ["linear", "rbf", "polynomial"]
+                  for g in [0.1, 1, 10]],
+        "scale": True,
+    },
+    "PolyR": {
+        "est":   Pipeline([("poly", PolynomialFeatures()), ("ridge", Ridge(random_state=RANDOM_SEED))]),
+        "grid":  [{"poly__degree": d, "poly__interaction_only": io, "ridge__alpha": a}
+                  for d  in [2, 3, 4]
+                  for io in [False, True]
+                  for a  in [0.01, 1, 10]],
+        "scale": True,
+    },
+    "GPR": {
+        "est":   GaussianProcessRegressor(random_state=RANDOM_SEED, n_restarts_optimizer=0),
+        "grid":  [{"kernel": RBF(length_scale=1.0), "alpha": 1e-3}],
+        "scale": True,
+    },
+    "Stack": {
+        "est":   StackingRegressor(
+                      estimators=[
+                          ("xgb", xgb.XGBRegressor(objective="reg:squarederror", random_state=RANDOM_SEED)),
+                          ("svr", SVR()),
+                          ("rf",  RandomForestRegressor(random_state=RANDOM_SEED)),
+                      ],
+                      final_estimator=Ridge(random_state=RANDOM_SEED),
+                      passthrough=True,
+                      n_jobs=-1,
+                  ),
+        "grid":  [{"final_estimator__alpha": a, "passthrough": pt}
+                  for a  in [0.01, 1, 10]
+                  for pt in [True, False]],
+        "scale": True,
+    },
+    "Quantile": {
+        "est":   QuantileRegressor(),
+        "grid":  [{"quantile": q, "alpha": a}
+                  for q in [0.1, 0.5, 0.9]
+                  for a in [0.0, 0.1, 1.0]],
+        "scale": True,
+    },
+    "Poisson": {
+        "est":   PoissonRegressor(),
+        "grid":  [{"alpha": a, "max_iter": mi}
+                  for a  in [0.0, 0.1, 1.0]
+                  for mi in [100, 300]],
+        "scale": True,
+    },
+    "Tweedie": {
+        "est":   TweedieRegressor(),
+        "grid":  [{"power": p, "alpha": a}
+                  for p in [0, 1, 1.5, 2]
+                  for a in [0.0, 0.1, 1.0]],
+        "scale": True,
+    },
+    "Gamma": {
+        "est":   GammaRegressor(),
+        "grid":  [{"alpha": a, "max_iter": mi}
+                  for a  in [0.0, 0.1, 1.0]
+                  for mi in [100, 300]],
+        "scale": True,
+    },
+    "OMP": {
+        "est":   OrthogonalMatchingPursuit(),
+        "grid":  [{"n_nonzero_coefs": k} for k in [5, 10, 20, 50]],
+        "scale": True,
+    },
+    "PA": {
+        "est":   PassiveAggressiveRegressor(random_state=RANDOM_SEED),
+        "grid":  [{"C": c, "epsilon": e, "max_iter": mi}
+                  for c  in [0.01, 0.1, 1.0]
+                  for e  in [0.1, 0.5]
+                  for mi in [100, 300]],
+        "scale": True,
     },
     "CatBoost": {
         "est":   cb.CatBoostRegressor(
@@ -431,7 +569,7 @@ for model_name, cfg in model_configs.items():
         "cv_mse":          iter_mses,
         "best_so_far_mse": best_so_far,
     })
-    iter_df.to_csv(f"{model_name}_random_search_iters.csv", sep=";", decimal=",", index=False)
+    iter_df.to_csv(os.path.join(PLOTS_DIR, f"{model_name}_random_search_iters.csv"), sep=";", decimal=",", index=False)
 
     plt.figure()
     plt.plot(iter_df["iteration"], iter_df["best_so_far_mse"])
@@ -440,7 +578,7 @@ for model_name, cfg in model_configs.items():
     plt.ylabel("Best CV MSE so far")
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig(f"{model_name}_convergence.png")
+    plt.savefig(os.path.join(PLOTS_DIR, f"{model_name}_convergence.png"))
     plt.close()
 
     # Extract best parameters
@@ -502,12 +640,12 @@ df_results.to_csv(RESULTS_FILE, sep=";", decimal=",", index=False)
 print("\nStage 7: Saving SHAP plots...")
 shap.summary_plot(shap_vals, X_train, feature_names=feature_names, plot_type="bar", show=False)
 plt.tight_layout()
-plt.savefig("shap_bar.png")
+plt.savefig(os.path.join(PLOTS_DIR, "shap_bar.png"))
 plt.close()
 
 shap.summary_plot(shap_vals, X_train, feature_names=feature_names, show=False)
 plt.tight_layout()
-plt.savefig("shap_summary.png")
+plt.savefig(os.path.join(PLOTS_DIR, "shap_summary.png"))
 plt.close()
 
 print("Done.")
