@@ -1,6 +1,6 @@
 # Retaining Wall ML — Global Stability Prediction for Cantilever Retaining Walls
 
-A machine learning framework for instant prediction of the global stability safety factor (F<sub>ss</sub>) of reinforced concrete cantilever retaining walls. The project covers the full pipeline: automated dataset generation via GEO5, SHAP-guided feature selection, and a CatBoost model deployed in a PyQt5 desktop application.
+A machine learning framework for instant prediction of the global stability safety factor (F<sub>ss</sub>) of reinforced concrete cantilever retaining walls. The project covers the full pipeline: automated dataset generation via GEO5, SHAP-guided feature selection, and a trained CatBoost model deployed in a customtkinter desktop application.
 
 ---
 
@@ -30,7 +30,23 @@ retaining-wall-ml/
 │   └── inference.py                                   # Single-scenario prediction (importable module)
 │
 ├── app/
-│   └── (PyQt5 desktop application)
+│   ├── main.py                      # Entry point
+│   ├── app.py                       # StabilityApp GUI (customtkinter, two-tab layout)
+│   ├── model_info.py                # Metadata for all 33 regression models
+│   ├── preprocessing.py             # SHAP feature mapping and input standardisation
+│   ├── config.py                    # Config file helpers and PyInstaller path resolver
+│   ├── language.py                  # Translation loader
+│   ├── compute_scaling.py           # One-time script to compute scaling_factors.csv
+│   ├── test_scaling.py              # Validates scale_param.csv loading
+│   ├── utils.py                     # Shared utility functions
+│   ├── Language/
+│   │   ├── EN.json                  # English UI translations
+│   │   └── TR.json                  # Turkish UI translations
+│   ├── saved_models/                # Trained model binaries (.pkl)
+│   ├── scaling_factors.csv          # StandardScaler mean/scale per feature
+│   ├── model_scaling_info.csv       # Per-model scaling flag
+│   ├── all_models_random_search_results.csv  # Full evaluation results
+│   └── config.cfg                   # Persisted user preferences (language)
 │
 ├── requirements.txt
 └── README.md
@@ -96,8 +112,7 @@ cd retaining-wall-ml
 pip install -r requirements.txt
 ```
 
-> **Note:** NumPy 2.x is not compatible with the current OpenCV build.  
-> `requirements.txt` pins `numpy<2` to avoid this issue.
+> **Note:** `numpy<2` is pinned due to OpenCV compatibility. `scikit-learn==1.6.1` is pinned to match the serialised model binaries in `app/saved_models/`.
 
 ---
 
@@ -145,6 +160,15 @@ Trains 15+ algorithms with SHAP-guided feature selection. Saves models to `saved
 ```bash
 python predict.py
 ```
+
+### 6. Launch the desktop application
+
+```bash
+cd app
+python main.py
+```
+
+Select a model from the list, enter wall geometry and site parameters, and click **Predict** to obtain an instant F<sub>ss</sub> estimate with uncertainty bounds (± MaxE). The canvas updates the wall cross-section in real time as parameters are entered. The interface is available in English and Turkish.
 
 ---
 
