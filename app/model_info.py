@@ -370,4 +370,42 @@ MODEL_INFO = {
             "bagging_temperature": "Bayesian bootstrap temperature."
         }
     },
+    "NGBoost": {
+        "name": "Natural Gradient Boosting",
+        "description": "Probabilistic gradient boosting that models the full predictive distribution using natural gradient descent.",
+        "history": "Introduced by Duan et al. (2020) at Stanford.",
+        "equation": "P(y|x) = Dist(θ(x)), where θ is learned via natural gradient boosting",
+        "parameters": {
+            "n_estimators": "Number of boosting rounds.",
+            "learning_rate": "Shrinkage factor per round.",
+            "minibatch_frac": "Fraction of data used per iteration.",
+            "col_sample": "Fraction of features sampled per tree."
+        }
+    },
+    "XGBoost_RF": {
+        "name": "XGBoost Random Forest",
+        "description": "XGBoost operating in Random Forest mode: each tree is built independently with subsampling, combining boosting infrastructure with bagging.",
+        "history": "XGBoost RF mode introduced by Chen & Guestrin (2016); RF mode formalised in XGBoost 1.0.",
+        "equation": "F(x) = (1/T) Σ hₜ(x), each tree trained independently with row/col subsampling",
+        "parameters": {
+            "n_estimators": "Number of trees.",
+            "max_depth": "Maximum tree depth.",
+            "subsample": "Row subsampling ratio.",
+            "colsample_bytree": "Column subsampling ratio per tree.",
+            "num_parallel_tree": "Number of parallel trees per round (RF depth)."
+        }
+    },
+    "Voting": {
+        "name": "Voting Regressor",
+        "description": "Ensemble that averages predictions from multiple diverse base models (XGBoost, LightGBM, CatBoost, Random Forest).",
+        "history": "Classic ensemble averaging method; sklearn implementation by Pedregosa et al. (2011).",
+        "equation": "ŷ = (1/N) Σᵢ fᵢ(x), where fᵢ are base estimators",
+        "parameters": {
+            "xgb__n_estimators": "XGBoost number of trees.",
+            "xgb__learning_rate": "XGBoost learning rate.",
+            "lgb__n_estimators": "LightGBM number of trees.",
+            "rf__n_estimators": "Random Forest number of trees."
+        }
+    },
+
 }
