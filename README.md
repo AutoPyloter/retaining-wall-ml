@@ -1,12 +1,12 @@
 # Retaining Wall ML — Global Stability Prediction for Cantilever Retaining Walls
 
-A machine learning framework for instant prediction of the global stability safety factor (F<sub>ss</sub>) of reinforced concrete cantilever retaining walls. The project covers the full pipeline: automated dataset generation via GEO5, SHAP-guided feature selection, and a trained CatBoost model deployed in a customtkinter desktop application.
+A machine learning framework for instant prediction of the global stability safety factor (F<sub>ss</sub>) of reinforced concrete cantilever retaining walls. The project covers the full pipeline: automated dataset generation via GEO5, SHAP-guided feature selection, and an ensemble of 35 trained regression models deployed in a customtkinter desktop application.
 
 ---
 
 ## Motivation
 
-Conventional global stability analysis (Bishop circular-slip method) requires dedicated geotechnical software and significant computation time for each design scenario. This project replaces that process with a trained ML model capable of predicting F<sub>ss</sub> in real time, directly from wall geometry and site parameters — enabling rapid design screening and sensitivity analysis.
+Conventional global stability analysis (Bishop circular-slip method) requires dedicated geotechnical software and significant computation time for each design scenario. This project replaces that process with trained ML models capable of predicting F<sub>ss</sub> in real time, directly from wall geometry and site parameters — enabling rapid design screening and sensitivity analysis.
 
 ---
 
@@ -20,6 +20,9 @@ retaining-wall-ml/
 │   ├── geo5_interface.py                              # Single-scenario analysis orchestrator
 │   ├── design_space_sampler.py                        # Discrete sampler & ScenarioGenerator
 │   ├── generate_dataset.py                            # Entry point — generates output.txt
+│   ├── geo5_setup.py                                  # One-time automated GEO5 configuration
+│   ├── annotate_screenshots.py                        # Overlays metadata on scenario screenshots
+│   ├── SETUP.md                                       # GEO5 setup instructions
 │   └── timelapse.py                                   # Compiles screenshots into MP4
 │
 ├── ml/
@@ -27,80 +30,31 @@ retaining-wall-ml/
 │   ├── train_models.py                                # Full training pipeline (SHAP + RandomizedSearchCV)
 │   ├── metrics.py                                     # Regression metrics module (17 indicators)
 │   ├── predict.py                                     # Batch prediction on CSV datasets
-│   └── inference.py                                   # Single-scenario prediction (importable module)
+│   ├── inference.py                                   # Single-scenario prediction (importable module)
+│   ├── pipeline_components.py                         # Shared OptionalScaler and feature selector
+│   └── outputs/
+│       ├── saved_models/                              # Trained pipeline binaries (.pkl)
+│       ├── plots/                                     # SHAP and convergence plots
+│       ├── logs/                                      # training_log.txt and cache files
+│       └── all_models_random_search_results.csv       # Full evaluation results (35 models × 3 splits)
 │
 ├── app/
-│   ├── main.py                      # Entry point
+│   ├── main.py                      # Application entry point
 │   ├── app.py                       # StabilityApp GUI (customtkinter, two-tab layout)
-│   ├── model_info.py                # Metadata for all 33 regression models
-│   ├── preprocessing.py             # SHAP feature mapping and input standardisation
-│   ├── config.py                    # Config file helpers and PyInstaller path resolver
+│   ├── model_info.py                # Metadata for all 35 regression models
+│   ├── preprocessing.py             # SHAP feature ordering and input preparation
+│   ├── pipeline_components.py       # Shared pipeline classes (joblib compatibility)
+│   ├── config.py                    # Config file helpers and path resolver
 │   ├── language.py                  # Translation loader
-│   ├── compute_scaling.py           # One-time script to compute scaling_factors.csv
-│   ├── test_scaling.py              # Validates scale_param.csv loading
 │   ├── utils.py                     # Shared utility functions
 │   ├── Language/
 │   │   ├── EN.json                  # English UI translations
 │   │   └── TR.json                  # Turkish UI translations
-│   ├── saved_models/                # Trained model binaries (.pkl)
-│   ├── scaling_factors.csv          # StandardScaler mean/scale per feature
-│   ├── model_scaling_info.csv       # Per-model scaling flag
-│   ├── all_models_random_search_results.csv  # Full evaluation results
-│   └── config.cfg                   # Persisted user preferences (language)
+│   └── config.cfg                   # Persisted user preferences
 │
 ├── requirements.txt
 └── README.md
 ```
-
----
-
-## GEO5 Prerequisites
-
-Before running the data generation pipeline, the following must be configured **manually** in GEO5 (Cantilever Wall module):
-
-### Settings → Materials and Standards
-| Setting | Value |
-|--------|-------|
-| Active earth pressure | Coulomb |
-| Passive earth pressure | Coulomb |
-| Earthquake analysis | Mononobe-Okabe |
-| Shape of earth wedge | Consider always vertical |
-| Base key | Inclined footing bottom |
-| Allowable eccentricity | 0.333 |
-| Verification methodology | Safety Factors (ASD) |
-| SF_o = SF_s = SF_b | 1.50 |
-
-### Settings → Slope Stability
-| Setting | Value |
-|--------|-------|
-| Verification methodology | Safety Factors (ASD) |
-| SF | 1.50 |
-
-### Profile
-Enter two depth values. The second value is not critical — the automation script updates it at runtime.
-
-### Soils
-Define a soil named **`soil1`** with the following properties:
-- Poisson's ratio: `0.33`
-- Saturated unit weight: ≥ 20 kN/m³
-- γ, φ, c, δ: any values — the script overwrites them at runtime
-
-Define a second soil named **`backfill`** with:
-- φ = 40°, c = 0, δ = 26.67°, cohesionless
-
-### Backfill Tab
-- Select option 3
-- Slope = 45°
-- Assigned soil = `backfill`
-
-### FF Resistance
-- Resistance type: Passive
-- Soil: `backfill`
-- All other values are updated by the script at runtime
-
-### Earthquake
-- Enable **"Analyze earthquake"** checkbox
-- k<sub>h</sub> and k<sub>v</sub> values are entered by the script at runtime
 
 ---
 
@@ -112,63 +66,78 @@ cd retaining-wall-ml
 pip install -r requirements.txt
 ```
 
-> **Note:** `numpy<2` is pinned due to OpenCV compatibility. `scikit-learn==1.6.1` is pinned to match the serialised model binaries in `app/saved_models/`.
+> **Note:** `numpy<2` is pinned due to OpenCV compatibility. `scikit-learn==1.6.1` is pinned to match the serialised model binaries in `ml/outputs/saved_models/`.
 
 ---
 
 ## Usage
 
-### 1. Generate the dataset
+### 1. Configure GEO5 (one-time)
+
+Run the automated setup script before the first data generation session:
+
+```bash
+cd data_generation
+python geo5_setup.py
+```
+
+This will launch GEO5, configure all required settings (analysis methods, soil definitions, backfill, water, earthquake), and exit. See `data_generation/SETUP.md` for manual fallback instructions.
+
+### 2. Generate the dataset
 
 Ensure GEO5 is open with a Cantilever Wall project named **`guz`**, then run:
 
 ```bash
-cd data_generation
 python generate_dataset.py
 ```
 
-Results are appended to `output.txt` after each scenario.  
-Press **`i`** at any time for a clean interrupt.
+Results are appended to `output.txt` after each scenario. Press **`i`** at any time for a clean interrupt.
 
-### 2. Compile timelapse (optional)
+### 3. Annotate screenshots (optional)
+
+```bash
+python annotate_screenshots.py
+```
+
+Overlays wall parameters and computed F<sub>ss</sub> onto each scenario screenshot saved during the run. Annotated images are written to `screenshots/annotated/`.
+
+### 4. Compile timelapse (optional)
 
 ```bash
 python timelapse.py
 ```
 
-Produces `timelapse.mp4` from screenshots saved during the generation run.
+Produces `timelapse.mp4` from the scenario screenshots.
 
-### 3. Split the dataset
+### 5. Split the dataset
 
 ```bash
 cd ml
 python split_dataset.py
 ```
 
-Produces `train.csv` (70%), `test.csv` (20%), `unseen.csv` (10%).
+Produces `train.csv` (70 %), `test.csv` (20 %), `unseen.csv` (10 %) with stratified random sampling (`random_state=42`). F<sub>ss</sub> = M<sub>p</sub> / M<sub>a</sub> is computed and appended as the target column.
 
-### 4. Train models
+### 6. Train models
 
 ```bash
 python train_models.py
 ```
 
-Trains 15+ algorithms with SHAP-guided feature selection. Saves models to `saved_models/` and results to `all_models_random_search_results.csv`.
+Runs the full 8-stage training pipeline (see [ML Pipeline](#ml-pipeline-overview)). All outputs are saved to `ml/outputs/`.
 
-### 5. Run batch predictions
+### 7. Run batch predictions
 
 ```bash
 python predict.py
 ```
 
-### 6. Launch the desktop application
+### 8. Launch the desktop application
 
 ```bash
 cd app
 python main.py
 ```
-
-Select a model from the list, enter wall geometry and site parameters, and click **Predict** to obtain an instant F<sub>ss</sub> estimate with uncertainty bounds (± MaxE). The canvas updates the wall cross-section in real time as parameters are entered. The interface is available in English and Turkish.
 
 ---
 
@@ -177,54 +146,54 @@ Select a model from the list, enter wall geometry and site parameters, and click
 ### Design Space — Input Parameters (13)
 
 | Parameter | Description | Range |
-|-----------|-------------|-------|
-| H | Wall height (m) | 4 – 10 |
-| x1 | Heel slab width (m) | 0.3H – 10.0 |
-| x2 | Toe slab width (m) | 0.15x1 – 0.45x1 |
-| x3 | Base slab thickness (m) | 0.3 – 0.6 |
-| x4 | Stem bottom width (m) | 0.3 – x3 |
-| x5 | Stem top width (m) | 0.06H – 0.18H |
-| x6 | Key thickness (m) | 0 – 1.2x5 |
-| x7 | Key width (m) | 0 – 0.3x1 |
-| x8 | Key offset from heel (m) | 0 – 0.7x1 |
-| q | Surcharge load (kN/m²) | 0 – 20 |
-| SDS | Design spectral acceleration (g) | 0.6 – 1.8 |
+|---|---|---|
+| H | Wall height | 4 – 10 m |
+| x1 | Heel slab width | 0.3H – 10.0 m |
+| x2 | Toe slab width | 0.15x1 – 0.45x1 m |
+| x3 | Base slab thickness | 0.3 – 0.6 m |
+| x4 | Stem bottom width | 0.3 – x3 m |
+| x5 | Stem top width | 0.06H – 0.18H m |
+| x6 | Key thickness | 0 – 1.2x5 m |
+| x7 | Key width | 0 – 0.3x1 m |
+| x8 | Key offset from heel | 0 – 0.7x1 m |
+| q | Surcharge load | 0 – 20 kN/m² |
+| SDS | Design spectral acceleration | 0.6 – 1.8 g |
 | Soil_Class | Soil class index | 0 – 4 |
 | hw | Water level scenario index | 0 – 4 |
 
 **Soil classes:**
 
 | Index | Description | γ (kN/m³) | c (kPa) | φ (°) |
-|-------|-------------|-----------|---------|-------|
-| 0 | Dense sand/gravel | 20 | 0 | 40 |
+|---|---|---|---|---|
+| 0 | Dense sand / gravel | 20 | 0 | 40 |
 | 1 | Medium-dense sand | 20 | 0 | 36 |
 | 2 | Silty sand | 19 | 20 | 30 |
-| 3 | Silt/low-plasticity clay | 18 | 30 | 26 |
+| 3 | Silt / low-plasticity clay | 18 | 30 | 26 |
 | 4 | Soft clay | 17 | 40 | 20 |
 
 **Water level scenarios:**
 
 | Index | Water level |
-|-------|-------------|
+|---|---|
 | 0 | Dry (hw = 0) |
-| 1 | Mid-stem (hw = H/2) |
+| 1 | Mid-stem (hw = H / 2) |
 | 2 | Top of stem (hw = H) |
-| 3 | Mid-heel (hw = H/2 + x1/2) |
+| 3 | Mid-heel slab (hw = H + x1 / 2) |
 | 4 | Top of backfill (hw = H + x1) |
 
 ### Output Variables (7)
 
 | Variable | Description |
-|----------|-------------|
+|---|---|
 | Fa | Sum of active forces (kN/m) |
 | Fp | Sum of passive forces (kN/m) |
 | Ma | Sliding moment (kN·m/m) |
 | Mp | Resisting moment (kN·m/m) |
-| x | Slip circle center x-coordinate (m) |
-| z | Slip circle center z-coordinate (m) |
+| x | Slip circle centre x-coordinate (m) |
+| z | Slip circle centre z-coordinate (m) |
 | R | Slip circle radius (m) |
 
-> **Target variable:** F<sub>ss</sub> = Mp / Ma (factor of safety against sliding, Bishop method)
+> **Target variable:** F<sub>ss</sub> = M<sub>p</sub> / M<sub>a</sub> (global stability factor of safety, Bishop method)
 
 ### output.txt Format
 
@@ -240,61 +209,139 @@ Total dataset: **2048 scenarios**
 
 ## ML Pipeline Overview
 
-The ML pipeline (see `ml/`) consists of the following stages:
+### Stage 1 — Data preparation (`split_dataset.py`)
 
-### 1. Data preparation — `split_dataset.py`
-F<sub>ss</sub> = Mp / Ma is computed from `output.txt`. The dataset is split into 70% train / 20% test / 10% unseen hold-out using stratified random sampling (`random_state=42`).
+F<sub>ss</sub> = M<sub>p</sub> / M<sub>a</sub> is computed from `output.txt`. The dataset is split into 70 % train / 20 % test / 10 % unseen hold-out using stratified random sampling.
 
-```bash
-cd ml
-python split_dataset.py
+### Stage 2 — XGBoost baseline for SHAP
+
+An XGBoost grid search (256 combinations, 5-fold cross-validation) identifies the best baseline model. This model is used exclusively to compute SHAP feature importances.
+
+```
+Grid: n_estimators ∈ {100, 200} × max_depth ∈ {3, 5} × learning_rate ∈ {0.01, 0.1}
+      × subsample ∈ {0.8, 1.0} × colsample_bytree ∈ {0.8, 1.0}
+      × gamma ∈ {0, 0.1} × reg_alpha ∈ {0, 0.1} × reg_lambda ∈ {1, 10}
 ```
 
-### 2. Model training — `train_models.py`
-Full 7-stage pipeline:
+### Stage 3 — SHAP feature ranking
 
-| Stage | Description |
-|-------|-------------|
-| 1 | Load train / test / unseen splits |
-| 2 | XGBoost grid-search → best baseline model |
-| 3 | SHAP feature ranking (TreeExplainer) |
-| 4 | Define 15+ model configurations |
-| 5 | RandomizedSearchCV (2000 iterations/model) with simultaneous k-feature selection |
-| 6 | Save trained models to `saved_models/` |
-| 7 | Save SHAP bar + summary plots |
+`shap.TreeExplainer` computes mean absolute SHAP values across the training set. Features are ranked by global importance. This ranking is frozen and used by all downstream models.
 
-```bash
-python train_models.py
+### Stage 4 — Model configurations (35 algorithms)
+
+All models are wrapped in a three-step sklearn `Pipeline`:
+
+```
+FunctionTransformer (SHAP top-k selector) → OptionalScaler → Estimator
 ```
 
-Output: `all_models_random_search_results.csv`, `shap_bar.png`, `shap_summary.png`, per-model convergence plots.
+The `OptionalScaler` is a custom sklearn-compatible wrapper that applies one of five scalers (`StandardScaler`, `MinMaxScaler`, `RobustScaler`, `MaxAbsScaler`, or no scaling) depending on the model configuration. Both the feature count `k` and the scaler are treated as hyperparameters and tuned jointly with the model.
 
-### 3. Evaluation metrics — `metrics.py`
-Shared module providing `compute_metrics()` with 17 indicators:
+**Model families:**
+
+| Family | Models |
+|---|---|
+| Linear | OLS, Ridge, Lasso, ElasticNet, Bayesian, ARD, Huber, RANSAC, TheilSen, OMP, PA |
+| Cross-decomposition | PLS |
+| GLM | Quantile, Poisson, Tweedie, Gamma |
+| Kernel / Distance | SVM, kNN, KernelRidge, GPR |
+| Neural | MLP |
+| Polynomial | PolyR (PolynomialFeatures + Ridge) |
+| Tree | DT, AdaBoost, RF, ExtraTrees, GBDT, HGB |
+| Gradient Boosting | XGBoost, XGBoost_RF, LightGBM, CatBoost |
+| Ensemble | StackingRegressor, VotingRegressor, NGBoost |
+
+**CatBoost search space** includes both Bayesian bootstrap (`bagging_temperature`) and Bernoulli bootstrap variants with the following ranges:
+
+```
+iterations ∈ {100…500}, learning_rate ∈ {0.005…0.1}, depth ∈ {3…8},
+l2_leaf_reg ∈ {1…10}, min_data_in_leaf ∈ {1…20}, max_bin ∈ {32…256},
+random_strength ∈ {0.5…20}, nan_mode ∈ {Min, Max}
+```
+
+### Stage 5 — RandomizedSearchCV with simultaneous feature selection
+
+For each model, `RandomizedSearchCV` jointly optimises model hyperparameters and the number of SHAP-ranked features `k ∈ {1, …, 18}`. The search uses 5-fold cross-validation with negative MSE as the scoring criterion.
+
+| Model group | Iterations |
+|---|---|
+| SVM, KernelRidge, GPR, TheilSen, RANSAC, Stack, Voting | 500 |
+| MLP, PolyR | 1 000 |
+| All others | 5 000 |
+
+A resume mechanism detects already-completed models from `saved_models/` and skips them, enabling interrupted runs to continue cleanly.
+
+### Stage 6 — Final pipeline training and saving
+
+The best pipeline (feature count + scaler + model hyperparameters) is re-fit on the full training set and serialised with joblib. Filenames use an 8-character MD5 hash of the hyperparameter string to stay within OS filename length limits:
+
+```
+CatBoost_k10_None_a3f7c2b1.pkl
+```
+
+### Stage 7 — Evaluation metrics (`metrics.py`)
+
+Each model is evaluated on Train, Test, and Unseen splits with 17 indicators:
 
 | Category | Metrics |
-|----------|---------|
+|---|---|
 | Standard | MAE, MSE, RMSE, RSR, MAPE, sMAPE, R², EVS, MBE, CV(RMSE)%, MdAE, MaxE |
 | Advanced | NSE, KGE, CCC, VAF(%), PI |
 
-### 4. Batch prediction — `predict.py`
-Runs the trained CatBoost model over a full CSV dataset and saves results.
+Results are saved to `outputs/all_models_random_search_results.csv` (35 models × 3 splits = 105 rows).
 
-```bash
-python predict.py
-```
+### Stage 8 — SHAP visualisations
 
-### 5. Single-scenario inference — `inference.py`
-Importable module for use in the PyQt5 desktop application:
+`shap_bar.png` (mean absolute importance) and `shap_summary.png` (beeswarm) are saved to `outputs/plots/`. Per-model convergence plots and iteration logs are also written there.
 
-```python
-from inference import predict_fss, load_model
+---
 
-model, features = load_model()
-fss = predict_fss([4, 1.80, 0.45, 0.32, 0.45, 1.26, 5, 0.9, 0.85, 1],
-                  model=model, selected_features=features)
-print(f"Predicted Fss: {fss:.4f}")
-```
+## Desktop Application
+
+The application is built with `customtkinter` and provides two tabs.
+
+### Prediction tab
+
+- **Wall cross-section canvas** — renders a scaled diagram of the cantilever wall geometry in real time as parameters are entered. Includes the backfill wedge, groundwater line (extends to canvas edges; left edge reaches the canvas boundary when hw exceeds wall height), and surcharge arrows.
+- **Input panel** — 18 parameter fields organised by category (geometry, soil, loads).
+- **Model selector** — lists all loadable models sorted by MaxE on the unseen set. Selecting a model enables the Predict and Info buttons.
+- **Predict** — runs the selected pipeline and displays F<sub>ss</sub> ± MaxE.
+- **Model info** — shows full Train / Test / Unseen metrics for the selected model in a popup table.
+- **Bulk Predict** — runs all models simultaneously and opens a separate results window.
+
+### Bulk prediction window
+
+- Left panel: scrollable checkbox list of all models with individual predictions; **All / None** toggle buttons.
+- Right panel: matplotlib figure containing:
+  - KDE density curve of all predictions
+  - Semi-transparent error boxes (prediction ± MaxE per model)
+  - Box plot (Q1 / median / Q3 / whiskers / outliers)
+  - Jittered swarm dots
+  - Vernier-style axis with major and minor ticks
+  - Summary statistics in the title (n, min, Q1, median, Q3, max)
+- Chart updates instantly when checkboxes are toggled.
+
+### Language support
+
+The interface is available in English and Turkish. Language preference is persisted in `config.cfg`.
+
+---
+
+## GEO5 Automation
+
+The data generation module automates GEO5 2018 — Cantilever Wall using `pywinauto` for GUI control and `pyperclip` for clipboard-based value entry.
+
+### geo5_setup.py
+
+A standalone one-time configuration script that:
+1. Locates the GEO5 executable via Windows registry, `where` command, and `os.walk` scan across Program Files directories.
+2. Launches GEO5 and dismisses the startup dialog.
+3. Configures Settings (Coulomb earth pressure, Mononobe-Okabe earthquake, ASD verification), Profile (two-layer depth table), Soils (soil1 cohesive + backfill cohesionless), Assign, Backfill (45° slope), Water (behind wall), FF Resistance (passive, soil1), and Earthquake (analysis enabled).
+4. All mouse clicks are resolved via `pywinauto` element lookup (`child_window(class_name=..., found_index=...)`) and relative coordinates expressed as fractions of element dimensions — resolution and DPI independent.
+
+### generate_dataset.py
+
+Iterates over the design space, invokes GEO5 for each scenario, reads results from the Stability analysis window, and appends one row to `output.txt`. A screenshot of the GEO5 stability view is saved to `screenshots/` for each completed scenario.
 
 ---
 
