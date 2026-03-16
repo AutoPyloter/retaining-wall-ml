@@ -7,26 +7,26 @@
 # Overlays a metadata box in the top-left corner of each image.
 #
 # Column order in output.txt:
-#   [0]  counter   — scenario index (matches screenshot filename)
-#   [1]  H         — wall height (m)
-#   [2]  X1        — base width (m)
-#   [3]  X2        — toe slab thickness (m)
-#   [4]  X3        — toe projection (m)
-#   [5]  X4        — heel projection (m)
-#   [6]  X5        — stem bottom width (m)
-#   [7]  X6        — stem top width (m)
-#   [8]  X7        — key depth (m)  [X8 in some versions]
-#   [9]  q         — surcharge (kN/m²)
-#   [10] sds       — seismic coefficient SDS
+#   [0]  H          — wall height (m)
+#   [1]  x1         — foundation total width (m)
+#   [2]  x2         — front overhang / toe projection (m)
+#   [3]  x3         — stem bottom width (m)
+#   [4]  x4         — stem top width (m)
+#   [5]  x5         — foundation thickness (m)
+#   [6]  x6         — key thickness (m)
+#   [7]  x7         — key width (m)
+#   [8]  x8         — key offset from heel (m)
+#   [9]  q          — surcharge (kN/m²)
+#   [10] sds        — seismic coefficient SDS
 #   [11] soil_class — soil class index
-#   [12] hw        — groundwater depth (m)
-#   [13] Fa        — active force (kN/m)
-#   [14] Fp        — passive force (kN/m)
-#   [15] Ma        — overturning moment (kNm/m)
-#   [16] Mp        — stabilizing moment (kNm/m)
-#   [17] x         — resultant position x (m)
-#   [18] z         — resultant position z (m)
-#   [19] R         — resultant force R (kN/m)
+#   [12] hw         — groundwater depth (m)
+#   [13] Fa         — active force (kN/m)
+#   [14] Fp         — passive force (kN/m)
+#   [15] Ma         — overturning moment (kNm/m)
+#   [16] Mp         — stabilizing moment (kNm/m)
+#   [17] x          — resultant position x (m)
+#   [18] z          — resultant position z (m)
+#   [19] R          — resultant force R (kN/m)
 #   Fss = Mp / Ma  (computed)
 #
 # Usage:
@@ -48,7 +48,6 @@ SCREENSHOT_DIR = "screenshots"
 OUTPUT_DIR     = os.path.join(SCREENSHOT_DIR, "annotated")
 
 # Column indices in output.txt
-# No counter column — first column is H
 COL_H          = 0
 COL_X1         = 1
 COL_X2         = 2
@@ -159,32 +158,32 @@ def build_lines(cols: list[str]) -> list[tuple[str, str, tuple]]:
 
     lines = [
         # Geometry
-        ("Wall height H",         fmt(COL_H,   3, "m"),    TEXT_COLOR),
-        ("Base width X1",         fmt(COL_X1,  3, "m"),    TEXT_COLOR),
-        ("Toe slab X2",           fmt(COL_X2,  3, "m"),    TEXT_COLOR),
-        ("Toe proj. X3",          fmt(COL_X3,  3, "m"),    TEXT_COLOR),
-        ("Heel proj. X4",         fmt(COL_X4,  3, "m"),    TEXT_COLOR),
-        ("Stem bottom X5",        fmt(COL_X5,  3, "m"),    TEXT_COLOR),
-        ("Stem top X6",           fmt(COL_X6,  3, "m"),    TEXT_COLOR),
-        ("Key depth X7",          fmt(COL_X7,  3, "m"),    TEXT_COLOR),
-        ("Key width X8",          fmt(COL_X8,  3, "m"),    TEXT_COLOR),
+        ("Wall height H",              fmt(COL_H,   3, "m"),    TEXT_COLOR),
+        ("Foundation width x1",        fmt(COL_X1,  3, "m"),    TEXT_COLOR),
+        ("Front overhang x2",          fmt(COL_X2,  3, "m"),    TEXT_COLOR),
+        ("Stem bottom width x3",       fmt(COL_X3,  3, "m"),    TEXT_COLOR),
+        ("Stem top width x4",          fmt(COL_X4,  3, "m"),    TEXT_COLOR),
+        ("Foundation thickness x5",    fmt(COL_X5,  3, "m"),    TEXT_COLOR),
+        ("Key thickness x6",           fmt(COL_X6,  3, "m"),    TEXT_COLOR),
+        ("Key width x7",               fmt(COL_X7,  3, "m"),    TEXT_COLOR),
+        ("Key offset x8",              fmt(COL_X8,  3, "m"),    TEXT_COLOR),
         # Loads
-        ("Surcharge q",           fmt(COL_Q,   1, "kN/m2"),TEXT_COLOR),
-        ("Seismic SDS",           fmt(COL_SDS, 2),         TEXT_COLOR),
-        ("Soil class",            cols[COL_SOIL] if COL_SOIL < len(cols) else "—",
-                                                           TEXT_COLOR),
-        ("Groundwater idx",       fmt(COL_HW,  0),         TEXT_COLOR),
-        ("Groundwater depth",     _fmt_hw(cols),           TEXT_COLOR),
+        ("Surcharge q",                fmt(COL_Q,   1, "kN/m2"),TEXT_COLOR),
+        ("Seismic SDS",                fmt(COL_SDS, 2),         TEXT_COLOR),
+        ("Soil class",                 cols[COL_SOIL] if COL_SOIL < len(cols) else "—",
+                                                                TEXT_COLOR),
+        ("Groundwater idx",            fmt(COL_HW,  0),         TEXT_COLOR),
+        ("Groundwater depth",          _fmt_hw(cols),           TEXT_COLOR),
         # Forces & moments
-        ("Active force Fa",       fmt(COL_FA,  2, "kN/m"), TEXT_COLOR),
-        ("Passive force Fp",      fmt(COL_FP,  2, "kN/m"), TEXT_COLOR),
-        ("Overturning Ma",        fmt(COL_MA,  2, "kNm/m"),TEXT_COLOR),
-        ("Stabilizing Mp",        fmt(COL_MP,  2, "kNm/m"),TEXT_COLOR),
-        ("Resultant x",           fmt(COL_X,   3, "m"),    TEXT_COLOR),
-        ("Resultant z",           fmt(COL_Z,   3, "m"),    TEXT_COLOR),
-        ("Resultant R",           fmt(COL_R,   2, "kN/m"), TEXT_COLOR),
+        ("Active force Fa",            fmt(COL_FA,  2, "kN/m"), TEXT_COLOR),
+        ("Passive force Fp",           fmt(COL_FP,  2, "kN/m"), TEXT_COLOR),
+        ("Overturning Ma",             fmt(COL_MA,  2, "kNm/m"),TEXT_COLOR),
+        ("Stabilizing Mp",             fmt(COL_MP,  2, "kNm/m"),TEXT_COLOR),
+        ("Resultant x",                fmt(COL_X,   3, "m"),    TEXT_COLOR),
+        ("Resultant z",                fmt(COL_Z,   3, "m"),    TEXT_COLOR),
+        ("Resultant R",                fmt(COL_R,   2, "kN/m"), TEXT_COLOR),
         # Safety factor
-        ("Safety factor Fss",     fss_str,                 fss_col),
+        ("Safety factor Fss",          fss_str,                 fss_col),
     ]
     return lines
 
