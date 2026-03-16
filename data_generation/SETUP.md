@@ -1,10 +1,44 @@
 # GEO5 Pre-Run Setup
 
-Before running the data generation pipeline, GEO5 2018 – Cantilever Wall module must be configured manually. The automation script controls geometry, soil parameters, loads, and water table at runtime — but the settings below must be in place **once**, before the first run.
+Before running the data generation pipeline, GEO5 2018 – Cantilever Wall module
+must be configured. This can be done **automatically** using the setup script,
+or **manually** by following the steps below.
 
 ---
 
-## Step 1 — Settings: Analysis Methods
+## Automated Setup (Recommended)
+
+Run the following command once on each machine before starting data generation:
+
+```bash
+cd data_generation
+python geo5_setup.py
+```
+
+The script will:
+1. Automatically locate and launch GEO5
+2. Dismiss the startup dialog
+3. Configure all required settings, frames and parameters in the correct order
+4. Print progress to the console at each step
+
+After the script completes, GEO5 is ready. You can proceed with:
+
+```bash
+python generate_dataset.py
+```
+
+> **Note:** Run `geo5_setup.py` only once per machine. Re-running it on an
+> already-configured project file may cause unexpected behaviour.
+
+---
+
+## Manual Setup (Alternative)
+
+If the automated script fails, configure GEO5 manually by following the steps below.
+
+---
+
+### Step 1 — Settings: Analysis Methods
 
 `Settings` frame → **Edit** button
 
@@ -30,20 +64,9 @@ Before running the data generation pipeline, GEO5 2018 – Cantilever Wall modul
 
 ---
 
-## Step 2 — Settings: Slope Stability
+### Step 2 — Settings: Slope Stability
 
-From the same Settings panel → **Change analysis settings for program** → **Slope Stability**
-
-**Materials and standards** tab:
-
-| Parameter | Value |
-|---|---|
-| Earthquake analysis | Standard |
-| Verification methodology | Safety factors (ASD) |
-
-**Stability analysis** tab — analysis methods:
-- Methods of analysis for polygonal slip surface: *(default)*
-- Methods of analysis for circular slip surface: *(default)*
+Settings panel → **Change analysis settings for program** → **Slope Stability**
 
 **Permanent design situation** → Safety Factor:
 
@@ -53,69 +76,57 @@ From the same Settings panel → **Change analysis settings for program** → **
 
 ---
 
-## Step 3 — Profile
+### Step 3 — Profile
 
-`Profile` frame → **Add** button → add a second depth entry.
+`Profile` frame → **Add** → enter any depth value (e.g. 10.00 m).
 
-The depth value does not matter — the script overwrites it at runtime.
+The script overwrites this value at runtime.
 
 | Interface # | Depth (m) |
 |---|---|
 | 1 | 0.00 |
-| 2 | *(any value, e.g. 10.00)* |
+| 2 | 10.00 (any) |
 
 ---
 
-## Step 4 — Soils: Define Two Soil Types
+### Step 4 — Soils: Define Two Soil Types
 
 `Soils` frame → **Add** (twice)
 
-### Soil 1 — `soil1`
+#### Soil 1 — `soil1`
 
 | Parameter | Value |
 |---|---|
 | Name | soil1 |
 | Unit weight γ | 20.00 kN/m³ |
 | Stress-state | effective |
-| Angle of internal friction φef | *(any — overwritten by script)* |
-| Cohesion cef | *(any — overwritten by script)* |
-| Angle of friction struct.-soil δ | *(any — overwritten by script)* |
 | Soil (pressure at rest) | cohesive |
 | Poisson's ratio ν | **0.33** |
 | Saturated unit weight γsat | **≥ 20.00 kN/m³** |
 
-> **Note:** γ and γsat must be ≥ 20 kN/m³ because the design space includes dry unit weights up to 20 kN/m³.
-
-### Soil 2 — `backfill`
+#### Soil 2 — `backfill`
 
 | Parameter | Value |
 |---|---|
 | Name | backfill |
 | Unit weight γ | 20.00 kN/m³ |
-| Stress-state | effective |
 | Angle of internal friction φef | 40.00° |
 | Cohesion cef | 0.00 kPa |
 | Angle of friction struct.-soil δ | 26.67° |
 | Soil (pressure at rest) | cohesionless |
-| Poisson's ratio ν | *(default)* |
 | Saturated unit weight γsat | **≥ 20.00 kN/m³** |
 
 ---
 
-## Step 5 — Assign
+### Step 5 — Assign
 
 `Assign` frame → assign **both layers** to `soil1`.
 
-| Layer | Thickness (m) | Assigned soil |
-|---|---|---|
-| 1 | 10.00 | soil1 |
-| 2 | *(auto)* | soil1 |
-
 ---
 
-## Step 6 — Backfill
+### Step 6 — Backfill
 
-`Backfill` frame → select the **third icon** (slope backfill option)
+`Backfill` frame (right panel) → select the **third icon** (slope backfill)
 
 | Parameter | Value |
 |---|---|
@@ -124,43 +135,34 @@ The depth value does not matter — the script overwrites it at runtime.
 
 ---
 
-## Step 7 — FF Resistance
+### Step 7 — Water
 
-`FF resistance` frame → select the **second icon**
+`Water` frame → enable **water behind wall**.
+
+---
+
+### Step 8 — FF Resistance
+
+`FF resistance` frame → enable resistance
 
 | Parameter | Value |
 |---|---|
 | Resistance type | passive |
-| Soil | backfill |
-| Angle of friction struct.-soil δ | 0.00° |
-| Thickness h | 0.50 m |
-| Terrain surcharge f | 0.00 kN/m² |
-
-> Other fields are updated by the script at runtime.
+| Soil | soil1 |
 
 ---
 
-## Step 8 — Earthquake
+### Step 9 — Earthquake
 
 `Earthquake` frame → check **Analyze earthquake**
-
-| Parameter | Value |
-|---|---|
-| Factor of horizontal acceleration kh | 0.0000 |
-| Factor of vertical acceleration kv | 0.0000 |
-| Water influence | Confined water |
-
-> Kh and Kv are set by the script according to the SDS parameter.
 
 ---
 
 ## Ready
 
-After completing all steps above, save the `.guz` file and run the pipeline:
+After setup (automated or manual), save the `.guz` file and run:
 
 ```bash
 cd data_generation
 python generate_dataset.py
 ```
-
-The script will open GEO5 automatically, load the template file, and iterate through all 2048 design scenarios.
