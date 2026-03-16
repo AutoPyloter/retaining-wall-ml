@@ -1,529 +1,424 @@
-from pywinauto import Application, keyboard, mouse
-import re
+# geo5_setup_experiment.py
+#
+# GEO5 2018 - Cantilever Wall
+# Deneysel ilk kurulum otomasyonu.
+#
+# Kullanım:
+#   python geo5_setup_experiment.py
+#
+# NOT: Ana otomasyon koduna entegre edilmeden önce adım adım test edilmelidir.
+
+from pywinauto import Application, keyboard
 import time
-import pyperclip
-import pyautogui
 import os
-PAUSE_ENTER = 0.02
-PAUSE_TAB=0.02
-
-class CantileverWall:
-    _prev_geometry_params = []
-    _prev_water_level = None
-    _prev_surcharge_load = 0
-    _scenario_index=1
-
-    def __init__(self):
-        self.app = None
-        self.window = None
+import subprocess
 
 
-    def connect_to_application(self):
-        """Connects to the GEO5 - Cantilever Wall - guz window."""
-        regex = r"(?=.*GEO5)(?=.*Cantilever Wall)(?=.*guz)"
-        try:
-            self.app = Application(backend="win32").connect(title_re=regex)
-            self.window = self.app.window(title_re=regex)
-            if not self.window.exists():
-                print("Application window not found.")
-        except Exception as e:
-            print(f"Connection error: {e}")
+# =============================================================================
+# Zamanlama sabitleri — gerekirse artırın
+# =============================================================================
+T_KEY    = 0.08   # tek tuş basımı arası (s)
+T_SHORT  = 0.15   # kısa bekleme (s)
+T_MEDIUM = 0.40   # pencere açılması (s)
+T_LONG   = 0.80   # dialog tam yüklenme (s)
 
 
-    def focus_on_window(self):
-        """Sets focus to the application window."""
-        if self.window and self.window.exists():
-            try:
-                self.window.set_focus()
-            except Exception as e:
-                print(f"Error focusing on window: {e}")
-        else:
-            print("No window available to focus on.")
-
-    @staticmethod
-    def clear_clipboard():
-        """
-        Clears the clipboard and confirms it has been cleared.
-        """
-        pyperclip.copy("")  # Clear the clipboard
-        for _ in range(20):
-            for _ in range(100):
-                if pyperclip.paste() == "":
-                    return True  # Clipboard cleared
-                time.sleep(0.01)
-            if pyperclip.paste() == "":
-                return True
-            else:
-                pyperclip.copy("")
-        return False  # Clipboard could not be cleared
-    
-    @staticmethod
-    def copy_to_clipboard():
-        """
-        Sends Ctrl+A and Ctrl+C keystrokes and waits until the clipboard is populated.
-        """
-        while True:  # Loop continues as long as user responds "yes"
-            keyboard.send_keys("^a^c", pause=PAUSE_TAB)  # Send Ctrl+A and Ctrl+C
-            for _ in range(20):
-                for _ in range(100):
-                    clipboard_content = pyperclip.paste()
-                    if clipboard_content != "":
-                        return clipboard_content  # Clipboard populated, return content
-                    time.sleep(0.01)
-                if pyperclip.paste() == "":
-                    pyperclip.copy("")
-                else:
-                    return pyperclip.paste()  # Clipboard populated, return content
-                print("Problem occurred during copy. Retrying.")
-                keyboard.send_keys("^a^c", pause=PAUSE_TAB)
-
-            # If clipboard is still empty, prompt the user
-            print("Clipboard copy failed. Do you want to continue? (Yes/No)")
-            user_input = input("> ").strip().lower()
-
-            if user_input in ["yes", "y"]:
-                print("Waiting 3 seconds and retrying...")
-                time.sleep(3)
-            elif user_input in ["no", "n"]:
-                print("Operation terminated.")
-                exit()
-            else:
-                print("Invalid input. Please type 'Yes' or 'No'.")
+def pause(t: float = T_KEY) -> None:
+    time.sleep(t)
 
 
-    def read_field_value(self):
-        """
-        Clears the clipboard and then copies data into it.
-        Returns the clipboard content as a string.
-        """
-        # Clear clipboard
-        if not self.clear_clipboard():
-            raise RuntimeError("Clipboard could not be cleared.")
+# =============================================================================
+# Yardımcı tuş fonksiyonları
+# =============================================================================
 
-        # Populate clipboard
-        clipboard_content = self.copy_to_clipboard()
-        if clipboard_content is None:
-            raise RuntimeError("Clipboard was not populated.")
+def tabs(n: int) -> None:
+    for _ in range(n):
+        keyboard.send_keys("{TAB}")
+        pause(T_KEY)
 
-        return clipboard_content  # Return data from clipboard
+def shift_tabs(n: int) -> None:
+    for _ in range(n):
+        keyboard.send_keys("+{TAB}")
+        pause(T_KEY)
 
+def space() -> None:
+    keyboard.send_keys("{SPACE}")
+    pause(T_KEY)
 
-    def check_window_open(self, title_regex):
-        """
-        Checks whether a window with the specified title regex is open.
-        Returns True if the window exists, False otherwise.
-        """
-        try:
-            window = self.app.window(title_re=title_regex)
-            return window.exists()
-        except Exception as e:
-            print(f"Window check error: {e}")
-            return False
-    
-    def map_to_geo5_params(self, wall_params):
-        """
-        Computes GEO5 input parameters from raw wall geometry parameters.
-        Returns a list of values mapped to GEO5 field order.
-        """
-        return [
-            wall_params[4],                          # stem_top_width
-            wall_params[0],                          # wall_height (H)
-            wall_params[5],                          # base_front_width
-            wall_params[2],                          # base_thickness
-            round(wall_params[1] - wall_params[2] - wall_params[3], 2),  # heel_width
-            round(wall_params[5] + wall_params[6], 2),                   # base_total_width
-            wall_params[7],                          # stem_bottom_width
-            round(0 if wall_params[3] == wall_params[4] else wall_params[0] / (wall_params[3] - wall_params[4]), 2),  # batter_slope
-            wall_params[8]                           # key_depth
-        ]
+def down(n: int = 1) -> None:
+    for _ in range(n):
+        keyboard.send_keys("{DOWN}")
+        pause(T_KEY)
 
-    def geometry(self, geo5_params):
-        """
-        Enters values into the corresponding GEO5 geometry fields and saves the
-        last entered values for comparison in subsequent calls.
-        """
-        try:
-            # Check window availability
-            if not self.window or not self.window.exists():
-                raise RuntimeError("Window for value entry is not available.")
+def right(n: int = 1) -> None:
+    for _ in range(n):
+        keyboard.send_keys("{RIGHT}")
+        pause(T_KEY)
 
-            # Focus on the window
-            self.window.set_focus()
+def left(n: int = 1) -> None:
+    for _ in range(n):
+        keyboard.send_keys("{LEFT}")
+        pause(T_KEY)
 
-            # Navigate to the starting position using key combinations
-            if round(geo5_params[5] - geo5_params[2], 2) != 0:
-                keyboard.send_keys("{F10}IP{F10}IG{TAB}", pause=PAUSE_TAB)  # F10IP F10IG then one TAB
-                keyboard.send_keys("{SPACE}", pause=PAUSE_TAB)  # Press SPACE
-                keyboard.send_keys("{TAB 15}", pause=PAUSE_TAB)  # Press TAB 15 times
-            else:
-                keyboard.send_keys("{F10}IP{F10}IG{TAB 2}", pause=PAUSE_TAB)  # F10IP F10IG then two TABs
-                keyboard.send_keys("{SPACE}", pause=PAUSE_TAB)  # Press SPACE
-                keyboard.send_keys("{TAB 14}", pause=PAUSE_TAB)  # Press TAB 14 times
+def enter() -> None:
+    keyboard.send_keys("{ENTER}")
+    pause(T_SHORT)
 
-            # Enter values into fields sequentially
-            if round(geo5_params[5] - geo5_params[2], 2) != 0:
-                for index, value in enumerate(geo5_params):
-                    self.process_field(index, value)
-            else:
-                for index, value in enumerate(geo5_params):
-                    if index in {5, 6, 8}:  # Skip deactivated tabs
-                        continue
-                    self.process_field_skip_deactivated(index, value)
+def type_text(text: str) -> None:
+    """Metni karakter karakter yazar (Türkçe karakter sorununu önler)."""
+    import pyperclip
+    pyperclip.copy(str(text))
+    keyboard.send_keys("^v")
+    pause(T_SHORT)
 
-            # Save the current values
-            CantileverWall._prev_geometry_params = geo5_params[:]
-
-            return geo5_params
-
-        except IndexError as e:
-            raise RuntimeError(f"Error: Input is missing or invalid - {e}")
-        except RuntimeError as e:
-            raise RuntimeError(f"Error: {e}")
-        except Exception as e:
-            raise RuntimeError(f"Unexpected error: {e}")
-        
-
-    def process_field_skip_deactivated(self, index, value):
-        """
-        Enters a value into the specified field, skipping deactivated tabs.
-        Compares against the previously entered values to avoid redundant input.
-        """
-        try:
-            # Enter value if it differs from the last recorded value or index is new
-            if (
-                index >= len(CantileverWall._prev_geometry_params)
-                or value != CantileverWall._prev_geometry_params[index]
-            ):
-                keyboard.send_keys(f"{value}", pause=PAUSE_ENTER)
-            time.sleep(0.15)
-            # Skip deactivated tabs
-            if index not in {5, 6, 8}:
-                keyboard.send_keys("{TAB}", pause=PAUSE_TAB)
-
-        except Exception as e:
-            print(f"Error entering value for field ({index}): {e}")
-    
-
-    def process_field(self, index, value):
-        """
-        Enters a value into the specified field.
-        Handles special cases and conditions per field index.
-        Optionally validates the entered value via the clipboard before proceeding.
-        """
-        try:
-            # Special-case pre-processing per field index:
-            if index == 2:
-                keyboard.send_keys("0,05{TAB 3}4+{TAB 3}", pause=PAUSE_TAB)
-            if index == 6:
-                keyboard.send_keys("0.05{TAB 2}0+{TAB 2}", pause=PAUSE_TAB)
-
-            # Enter value if it differs from the previous or belongs to special indices
-            if (
-                index >= len(CantileverWall._prev_geometry_params)
-                or value != CantileverWall._prev_geometry_params[index]
-                or index in {2,5,6, 8}
-            ):
-                keyboard.send_keys(f"{value}", pause=PAUSE_ENTER)
-            else:
-                pass
-            time.sleep(0.15)
-            # Move to the next field
-            keyboard.send_keys("{TAB}", pause=PAUSE_TAB)
-
-        except Exception as e:
-            print(f"Error entering value for field ({index}): {e}")
-
-    def profile(self, soil_params):
-        """
-        Navigates to the profile section and sets the soil depth value.
-        """
-        soil_depth = soil_params[0]
-        self.window.set_focus()
-        keyboard.send_keys("{F10}IR", pause=PAUSE_TAB)
-        keyboard.send_keys("{TAB}{DOWN}", pause=PAUSE_TAB)
+def nav(letter: str, shift: bool = True) -> None:
+    """F10 (veya Shift+F10) → i → letter ile frame değiştir."""
+    if shift:
         keyboard.send_keys("+{F10}")
-        keyboard.send_keys("E", pause=PAUSE_TAB)
-        keyboard.send_keys(f"{soil_depth}", pause=PAUSE_ENTER)
-        keyboard.send_keys("{ENTER 2}", pause=PAUSE_ENTER)
+    else:
+        keyboard.send_keys("{F10}")
+    pause(T_SHORT)
+    keyboard.send_keys("i")
+    pause(T_SHORT)
+    keyboard.send_keys(letter)
+    pause(T_MEDIUM)
 
-            
-    def soil(self, soil_params):
-        """
-        Enters soil properties (unit_weight, friction_angle, cohesion, wall_friction_angle)
-        into the relevant GEO5 fields.
-        """
+
+# =============================================================================
+# GEO5 exe bulma
+# =============================================================================
+
+GEO5_EXE_NAMES = [
+    "CantileverWall_5_EN.exe",
+    "CantileverWall.exe",
+]
+
+
+def find_geo5_exe() -> str:
+    """GEO5 exe dosyasını registry → where → os.walk sırasıyla arar."""
+    import winreg
+
+    def _check(path: str):
+        if path and os.path.isfile(path):
+            print(f"[OK] GEO5 bulundu: {path}")
+            return path
+        return None
+
+    # 1. Registry
+    reg_roots = [
+        (winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"),
+        (winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"),
+        (winreg.HKEY_CURRENT_USER,  r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"),
+    ]
+    for hive, subkey in reg_roots:
         try:
-            if len(soil_params) < 2:
-                raise ValueError("Input incomplete. At least two values (friction_angle and cohesion) are required.")
-            unit_weight = soil_params[0]
-            friction_angle = soil_params[1]
-            cohesion = soil_params[2]
-            wall_friction_angle = round(friction_angle * 2 / 3, 2)
+            with winreg.OpenKey(hive, subkey) as key:
+                for i in range(winreg.QueryInfoKey(key)[0]):
+                    try:
+                        with winreg.OpenKey(key, winreg.EnumKey(key, i)) as sub:
+                            try:
+                                loc, _ = winreg.QueryValueEx(sub, "InstallLocation")
+                                for name in GEO5_EXE_NAMES:
+                                    r = _check(os.path.join(loc, name))
+                                    if r: return r
+                            except FileNotFoundError:
+                                pass
+                    except OSError:
+                        pass
+        except OSError:
+            pass
 
-            if not self.window or not self.window.exists():
-                raise RuntimeError("Window for value entry is not available.")
-
-            self.window.set_focus()
-
-            # Enter soil parameters
-            keyboard.send_keys("{F10}IO{TAB}{SPACE}", pause=PAUSE_TAB)
-
-            keyboard.send_keys("+{F10}")
-
-
-            keyboard.send_keys("E{TAB}", pause=PAUSE_TAB)
-            keyboard.send_keys(f"{unit_weight}", pause=PAUSE_ENTER)
-            keyboard.send_keys("{TAB 2}", pause=PAUSE_TAB)
-            keyboard.send_keys(f"{friction_angle}", pause=PAUSE_ENTER)  # Enter friction angle
-            keyboard.send_keys("{TAB}", pause=PAUSE_TAB)
-            keyboard.send_keys(f"{cohesion}", pause=PAUSE_ENTER)  # Enter cohesion
-            keyboard.send_keys("{TAB}", pause=PAUSE_TAB)
-            keyboard.send_keys(f"{wall_friction_angle}", pause=PAUSE_ENTER)  # Enter wall friction angle
-            keyboard.send_keys("{TAB}{LEFT 3}", pause=PAUSE_TAB)
-            if cohesion != 0:
-                keyboard.send_keys("{RIGHT}", pause=PAUSE_TAB)
-
-            keyboard.send_keys("+{TAB 8}{SPACE}", pause=PAUSE_TAB)
-
-        except IndexError:
-            print("Error: Invalid input format. Required index not present.")
-        except RuntimeError as e:
-            print(f"Error: {e}")
-        except Exception as e:
-            print(f"Unexpected error: {e}")
-
-    def water(self, wall_params):
-        """
-        Sets the water level in GEO5 to the value provided in wall_params[0].
-        Skips the operation if the value is unchanged from the previous call.
-        Validates the entered value via clipboard comparison.
-        """
+    # 2. where komutu
+    for name in GEO5_EXE_NAMES:
         try:
-            if not self.clear_clipboard():
-                raise RuntimeError("Clipboard could not be cleared.")
+            out = subprocess.check_output(
+                ["where", name], stderr=subprocess.DEVNULL, text=True
+            ).strip()
+            for line in out.splitlines():
+                r = _check(line.strip())
+                if r: return r
+        except subprocess.CalledProcessError:
+            pass
 
-            # New water level value
-            value = wall_params[0]
+    # 3. os.walk taraması
+    search_roots = [
+        os.environ.get("ProgramFiles",      r"C:\Program Files"),
+        os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)"),
+        os.environ.get("ProgramW6432",      r"C:\Program Files"),
+        os.path.join(os.environ.get("LOCALAPPDATA", ""), "Programs"),
+    ]
+    exe_lower = [n.lower() for n in GEO5_EXE_NAMES]
+    for root in search_roots:
+        if not root or not os.path.isdir(root):
+            continue
+        print(f"[..] Taranıyor: {root}")
+        for dirpath, _, filenames in os.walk(root):
+            for fname in filenames:
+                if fname.lower() in exe_lower:
+                    r = _check(os.path.join(dirpath, fname))
+                    if r: return r
 
-            # Skip if the same value was already entered
-            if CantileverWall._prev_water_level == value:
-                return
-
-            # Check window availability
-            if not self.window or not self.window.exists():
-                raise RuntimeError("Window for setting water level is not available.")
-
-            # Focus on the window
-            self.window.set_focus()
-
-            # Navigate to water level input and enter value
-            keyboard.send_keys("{F10}IW{TAB 2}{SPACE}", pause=PAUSE_TAB)
-            keyboard.send_keys("{TAB 4}", pause=PAUSE_TAB)
-            keyboard.send_keys(f"{value}", pause=PAUSE_ENTER)
-
-            clipboard_content = self.copy_to_clipboard()
-            if clipboard_content is None:
-                raise ValueError("Clipboard was not populated; value could not be validated.")
-            clipboard_content = clipboard_content.replace(",", ".")
-            if clipboard_content != str(value):
-                raise ValueError(
-                    f"Entered value ({value}) does not match clipboard value ({clipboard_content})."
-                )
-
-            # Save the new value
-            CantileverWall._prev_water_level = value
-
-        except IndexError:
-            print("Error: Invalid input format. Correct index for water level not found.")
-        except RuntimeError as e:
-            print(f"Error: {e}")
-        except Exception as e:
-            print(f"Unexpected error: {e}")
-
-    def surcharge(self, surcharge_load):
-        """
-        Applies a surcharge load in GEO5.
-        Skips if the value is unchanged. Creates a new surcharge entry if none exists,
-        or updates/removes the existing one depending on the value.
-        """
-        if CantileverWall._prev_surcharge_load == surcharge_load:
-            # If the value is unchanged, skip the operation.
-            print(f"Surcharge load unchanged ({surcharge_load} kN/m²), skipping.")
-            return
-
-        connected = False
-        regex = r"(?=.*GEO5)(?=.*Cantilever Wall)(?=.*guz)"
-
-        # Attempt to connect to the Cantilever Wall interface
-        for i in range(5000):
-            try:
-                app = Application(backend="win32").connect(title_re=regex)
-                main_window = app.window(title_re=regex)
-                connected = True
-                break
-            except Exception:
-                time.sleep(0.1)
-
-        if not connected:
-            print("Failed to connect to GEO5 window.")
-            return
-
-        main_window = app.window(title_re=regex)
-        dropdown1 = main_window.child_window(class_name="TEnvToolScroller", found_index=1)
-
-        if CantileverWall._prev_surcharge_load == 0:
-            # Actions to take when _prev_surcharge_load is zero (no existing surcharge)
-            keyboard.send_keys("{F10}IC", pause=0.1)
-            rect = dropdown1.rectangle()
-            mouse.click(button='left', coords=(rect.left + 30, rect.top + 10))
-            keyboard.send_keys("sursaj", pause=0.1)  # Type surcharge name in the first text box
-            keyboard.send_keys("{TAB 3}", pause=0.1)  # Press TAB 3 times
-            keyboard.send_keys(f"{surcharge_load}", pause=0.1)  # Enter the input value
-            keyboard.send_keys("{TAB}{ENTER}", pause=0.1)  # TAB and ENTER
-            keyboard.send_keys("{ESC}", pause=0.1)  # ESC
-
-        else:
-            if surcharge_load == 0:
-                # Actions to take when surcharge_load is zero (remove surcharge)
-                keyboard.send_keys("{F10}IC", pause=0.1)
-                keyboard.send_keys("{TAB}{SPACE}", pause=0.1)
-                rect = dropdown1.rectangle()
-                mouse.click(button='left', coords=(rect.left + 230, rect.top + 10))
-                keyboard.send_keys("{ENTER}", pause=0.1)
-
-            else:
-                # Actions to take when surcharge_load is non-zero (update surcharge)
-                keyboard.send_keys("{F10}IC", pause=0.1)
-                keyboard.send_keys("{TAB}{SPACE}", pause=0.1)
-                rect = dropdown1.rectangle()
-                mouse.click(button='left', coords=(rect.left + 125, rect.top + 10))
-                keyboard.send_keys("{TAB 3}", pause=0.1)
-                keyboard.send_keys(f"{surcharge_load}", pause=0.1)
-                keyboard.send_keys("{TAB}{ENTER}", pause=0.1)
+    raise FileNotFoundError(
+        f"GEO5 exe bulunamadı.\n"
+        f"Aranan isimler: {GEO5_EXE_NAMES}\n"
+        f"Registry, PATH ve Program Files tarandı."
+    )
 
 
-        # Update _prev_surcharge_load after operation completes
-        CantileverWall._prev_surcharge_load = surcharge_load
+# =============================================================================
+# GEO5 başlatma ve bağlantı
+# =============================================================================
 
-    def ff_resistance(self, resistance_params):
-        """
-        Enters foundation friction resistance parameters (wall_friction_angle, h) into
-        the relevant GEO5 fields under the resistance settings tab.
-        """
-        wall_friction_angle = resistance_params[0]
-        h = resistance_params[1]
-        keyboard.send_keys("{F10}IE{TAB 9}", pause=PAUSE_TAB)
-        keyboard.send_keys(f"{wall_friction_angle}", pause=PAUSE_ENTER)
-        keyboard.send_keys("{TAB}", pause=PAUSE_TAB)
-        keyboard.send_keys(f"{h}", pause=PAUSE_ENTER)
-
-    def earthquake(self, seismic_params):
-        """
-        Enters seismic coefficients (kh, kv) into the GEO5 earthquake settings tab.
-        """
-        kh = seismic_params[0]
-        kv = seismic_params[1]
-        keyboard.send_keys("{F10}IH{TAB 4}", pause=PAUSE_TAB)
-        keyboard.send_keys(f"{kh}", pause=PAUSE_ENTER)
-        keyboard.send_keys("{TAB}", pause=PAUSE_TAB)
-        keyboard.send_keys(f"{kv}", pause=PAUSE_ENTER)
-
-    def stability(self):
-
-        """Navigates to the stability check window, reads the results, and returns them."""
-        self.window.set_focus()
-        keyboard.send_keys("{F10}AS{ENTER}{F10}IY", pause=PAUSE_TAB)
-
-        # Attempt to connect to the stability window via regex
-        regex = r"(?=.*Stability)(?=.*Cantilever Wall).+"
-        connected = False
-
-        for i in range(5000):
-            try:
-                app = Application(backend="win32").connect(title_re=regex)
-                main_window = app.window(title_re=regex)
-                connected = True
-                break
-            except Exception:
-                time.sleep(0.1)
-
-        if connected:
-            time.sleep(0.01)
-            dropdown1 = main_window.child_window(class_name="TStabFrameAnalysis", found_index=0)
-            rect = dropdown1.rectangle()
-            mouse.click(button='left', coords=(rect.left + 50, rect.top + 90))
-            time.sleep(10)
-
-            dropdown2 = None
-            rect2 = None
-            while rect2 is None:
-                try:
-                    dropdown2 = main_window.child_window(class_name="TTextInputEx", found_index=1)
-                    rect2 = dropdown2.rectangle()
-                except Exception:
-                    time.sleep(0.01)
-
-            dropdown1 = main_window.child_window(class_name="TEnvToolScroller", found_index=1)
-            rect = dropdown1.rectangle()
-            mouse.click(button='left', coords=(rect.left + 360, rect.top + 10))
-            slip_center_x = self.read_field_value()
-            keyboard.send_keys("{TAB}", pause=PAUSE_TAB)
-            slip_center_z = self.read_field_value()
-            keyboard.send_keys("{TAB}", pause=PAUSE_TAB)
-            slip_radius = self.read_field_value()
-            keyboard.send_keys("{ESC}", pause=PAUSE_TAB)
-            mouse.click(button='left', coords=(rect.right - 50, rect.top + 10))
-            time.sleep(0.01)
-
-            keyboard.send_keys("{TAB}", pause=PAUSE_TAB)
-            text = self.read_field_value()
-            # Parse values according to the expected data format
-            fa_match = re.search(r"Sum of active forces\s*:\s*Fa\s*=\s*(\d+,\d+)", text)
-            fp_match = re.search(r"Sum of passive forces\s*:\s*Fp\s*=\s*(\d+,\d+)", text)
-            ma_match = re.search(r"Sliding moment\s*:\s*Ma\s*=\s*(\d+,\d+)", text)
-            mp_match = re.search(r"Resisting moment\s*:\s*Mp\s*=\s*(\d+,\d+)", text)
-
-            values = []
-            if fa_match:
-                values.append(float(fa_match.group(1).replace(',', '.')))
-            if fp_match:
-                values.append(float(fp_match.group(1).replace(',', '.')))
-            if ma_match:
-                values.append(float(ma_match.group(1).replace(',', '.')))
-            if mp_match:
-                values.append(float(mp_match.group(1).replace(',', '.')))
-
-            
-            values.append(float(slip_center_x.replace(',', '.')))
-            values.append(float(slip_center_z.replace(',', '.')))
-            values.append(float(slip_radius.replace(',', '.')))
-            keyboard.send_keys("{TAB}{ENTER}", pause=PAUSE_TAB)
-            
-            time.sleep(0.5)
+def launch_geo5() -> None:
+    """GEO5'i başlatır, açılış penceresini Enter ile geçer."""
+    exe = find_geo5_exe()
+    print("[LAUNCH] GEO5 başlatılıyor...")
+    subprocess.Popen([exe])
+    pause(T_LONG * 4)
+    print("[LAUNCH] Açılış penceresi geçiliyor (Enter)...")
+    keyboard.send_keys("{ENTER}")
+    pause(T_LONG * 3)
+    print("[LAUNCH] GEO5 hazır.")
 
 
-            # Build filename and save screenshot
-            values_str = "_".join([f"{value:.2f}" for value in values])  # Convert values to string
-            screenshot_path = f"screenshots/{CantileverWall._scenario_index}_stability_{values_str}.png"
-            CantileverWall._scenario_index = CantileverWall._scenario_index + 1
-            # Take and save screenshot
-            os.makedirs("screenshots", exist_ok=True)  # Create 'screenshots' directory
-            pyautogui.screenshot(screenshot_path)
-            print(f"Screenshot saved: {screenshot_path}")            
+def connect():
+    """GEO5 Cantilever Wall penceresine bağlan. (app, window) döndürür."""
+    regex = r"(?=.*GEO5)(?=.*Cantilever Wall)(?=.*guz)"
+    app    = Application(backend="win32").connect(title_re=regex)
+    window = app.window(title_re=regex)
+    window.set_focus()
+    pause(T_MEDIUM)
+    print("[OK] GEO5 penceresine bağlandı.")
+    return app, window
 
 
-            keyboard.send_keys("%{F4}{ENTER}", pause=PAUSE_TAB)
-            timeout = 30  # Max wait time for operation (seconds)
-            for _ in range(timeout):
-                stabilite_window_open = self.check_window_open(r"(?=.*Stability)(?=.*Cantilever Wall)")
-                if stabilite_window_open:
-                    time.sleep(0.01)  # Wait for the window to close
-                else:
-                    break
-            else:
-                raise TimeoutError("Window did not close in the specified time. Check operation.")
+# =============================================================================
+# ADIM 1 — Settings: analiz metodlarını ayarla
+#
+# Shift+F10 → i → s            : Settings penceresi
+# 4x Tab + Space               : Edit dialogu aç
+# 3x Tab + Space + Down + Enter: Active earth pressure → Coulomb
+# 2x Tab + Space + Down + Space: Shape of earth wedge → Consider always vertical
+# 11x Tab + Space              : OK
+# =============================================================================
 
-            return values
-        else:
-            print("Stability window not found.")
-            return []
+def setup_settings() -> None:
+    print("\n[SETTINGS] Başlıyor...")
+
+    nav("s")
+    print("[SETTINGS] Pencere açıldı.")
+
+    tabs(4); space(); pause(T_LONG)
+    print("[SETTINGS] Edit dialogu açıldı.")
+
+    tabs(3); space(); pause(T_SHORT); down(1); enter()
+    print("[SETTINGS] Active earth pressure → Coulomb.")
+
+    tabs(2); space(); pause(T_SHORT); down(1); space(); pause(T_SHORT)
+    print("[SETTINGS] Shape of earth wedge → Consider always vertical.")
+
+    tabs(11); space(); pause(T_MEDIUM)
+    print("[SETTINGS] Tamamlandı.")
+
+
+# =============================================================================
+# ADIM 2 — Profile: ikinci derinlik katmanını ekle
+#
+# Shift+F10 → i → r            : Profile frame
+# 2x Tab + "0"                 : Terrain elevation = 0
+# Mouse click (Add butonu)     : TEnvToolScroller {l:35, t:583, h:401} → +260px sağ, +15px aşağı
+# "10" + Tab + Enter + Esc     : Derinlik değeri gir, kapat
+# =============================================================================
+
+def setup_profile(window) -> None:
+    import pyautogui
+    print("\n[PROFILE] Başlıyor...")
+
+    nav("r")
+    print("[PROFILE] Frame açıldı.")
+
+    tabs(2); keyboard.send_keys("0"); pause(T_SHORT)
+    print("[PROFILE] Terrain elevation = 0.")
+
+    rect    = window.rectangle()
+    click_x = rect.left + 35 + 260
+    click_y = rect.top  + 583 + 15
+    print(f"[PROFILE] Add butonuna tıklanıyor: ({click_x}, {click_y})")
+    pyautogui.click(click_x, click_y)
+    pause(T_LONG)
+
+    keyboard.send_keys("10"); pause(T_SHORT)
+    tabs(1); enter(); pause(T_SHORT)
+    keyboard.send_keys("{ESC}"); pause(T_SHORT)
+    print("[PROFILE] Tamamlandı.")
+
+
+# =============================================================================
+# ADIM 3 — Soils: soil1 ve backfill tanımla
+#
+# F10 → i → o                 : Soils frame
+# Mouse click (Add butonu)    : TEnvToolScroller {l:35, t:583, h:28} → +15px sağ, dikey orta
+#
+# Her zemin için diyalog akışı:
+#   Name        → Tab
+#   Unit weight → Tab
+#   Stress-state (liste) → Tab  (geç)
+#   Angle φ     → Tab
+#   Cohesion c  → Tab
+#   Delta δ     → Tab
+#   Soil type (liste, cohesionless default) → Right (cohesive için) → Tab
+#   Poisson ν   → Tab
+#   Calc. mode  (liste) → Tab  (geç)
+#   γsat        → Shift+Tab×11 → Add (Space)
+#
+# İkinci zemin aynı sıra, sonra Shift+Tab → Cancel (Enter)
+# =============================================================================
+
+# Zemin parametreleri
+# cohesive=True  → liste 1 sağ ok ile cohesive'e geçer
+# cohesive=False → default (cohesionless), ok yok
+SOIL1 = {
+    "name":     "soil1",
+    "gamma":    "20",
+    "phi":      "10",
+    "c":        "0",
+    "delta":    "0",
+    "cohesive": True,
+    "poisson":  "0.33",
+    "gamma_sat":"20",
+}
+
+BACKFILL = {
+    "name":     "backfill",
+    "gamma":    "20",
+    "phi":      "40",
+    "c":        "0",
+    "delta":    "26.67",
+    "cohesive": False,
+    "poisson":  "0.33",
+    "gamma_sat":"20",
+}
+
+
+def _enter_soil(params: dict) -> None:
+    """Açık zemin diyaloguna parametreleri girer ve Add'e basar."""
+
+    # Name
+    type_text(params["name"]); tabs(1)
+    print(f"  Name = {params['name']}")
+
+    # Unit weight
+    keyboard.send_keys("^a")          # mevcut değeri seç
+    type_text(params["gamma"]); tabs(1)
+    print(f"  γ = {params['gamma']}")
+
+    # Stress-state (liste) — geç
+    tabs(1)
+
+    # Angle of internal friction φ
+    keyboard.send_keys("^a")
+    type_text(params["phi"]); tabs(1)
+    print(f"  φ = {params['phi']}")
+
+    # Cohesion c
+    keyboard.send_keys("^a")
+    type_text(params["c"]); tabs(1)
+    print(f"  c = {params['c']}")
+
+    # Angle of friction struct-soil δ
+    keyboard.send_keys("^a")
+    type_text(params["delta"]); tabs(1)
+    print(f"  δ = {params['delta']}")
+
+    # Soil type
+    # cohesive   → Right (cohesionless'tan cohesive'e geç)
+    # cohesionless → Left (bir önceki zemin cohesive bıraktıysa geri al)
+    if params["cohesive"]:
+        right(1)
+        print("  Soil type → cohesive")
+    else:
+        keyboard.send_keys("{LEFT}")
+        pause(T_KEY)
+        print("  Soil type → cohesionless")
+
+    # Poisson ν — bir sonraki kutu
+    tabs(1)
+    keyboard.send_keys("^a")
+    type_text(params["poisson"]); tabs(1)
+    print(f"  ν = {params['poisson']}")
+
+    # Calc. mode of uplift (liste) — geç
+    tabs(1)
+
+    # γsat
+    keyboard.send_keys("^a")
+    type_text(params["gamma_sat"])
+    print(f"  γsat = {params['gamma_sat']}")
+
+    # Shift+Tab × 11 → Add butonu
+    shift_tabs(11)
+    space()
+    pause(T_MEDIUM)
+    print(f"  [{params['name']}] eklendi.")
+
+
+def setup_soils(window) -> None:
+    import pyautogui
+    print("\n[SOILS] Başlıyor...")
+
+    nav("o", shift=False)
+    print("[SOILS] Frame açıldı.")
+
+    # Add butonuna tıkla — diyalog açılır
+    rect    = window.rectangle()
+    click_x = rect.left + 35 + 15
+    click_y = rect.top  + 583 + 28 // 2
+    print(f"[SOILS] Add butonuna tıklanıyor: ({click_x}, {click_y})")
+    pyautogui.click(click_x, click_y)
+    pause(T_LONG)
+
+    # soil1 gir
+    print("[SOILS] soil1 giriliyor...")
+    _enter_soil(SOIL1)
+
+    # Diyalog kapanmadı, backfill gir
+    # (önceki veriler kalır, name kutusu aktif)
+    print("[SOILS] backfill giriliyor...")
+    _enter_soil(BACKFILL)
+
+    # Diyalogu kapat: Shift+Tab → Cancel → Enter
+    shift_tabs(1)
+    enter()
+    pause(T_MEDIUM)
+    print("[SOILS] Diyalog kapatıldı.")
+    print("[SOILS] Tamamlandı.")
+
+
+# =============================================================================
+# Ana akış
+# =============================================================================
+
+def run_setup() -> None:
+    print("=" * 50)
+    print("GEO5 Setup Otomasyonu — Deneysel")
+    print("=" * 50)
+
+    launch_geo5()
+    _, window = connect()
+
+    window.set_focus(); pause(T_SHORT)
+    setup_settings()
+
+    window.set_focus(); pause(T_SHORT)
+    setup_profile(window)
+
+    window.set_focus(); pause(T_SHORT)
+    setup_soils(window)
+
+    print("\n" + "=" * 50)
+    print("Setup tamamlandı.")
+    print("=" * 50)
+
+
+if __name__ == "__main__":
+    run_setup()
