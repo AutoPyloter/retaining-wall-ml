@@ -6,7 +6,7 @@ import sys
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-SCREENSHOTS_DIR = "screenshots/"
+SCREENSHOTS_DIR = "screenshots/annotated"
 OUTPUT_VIDEO     = "timelapse.mp4"
 FRAME_RATE       = 30  # frames per second
 
