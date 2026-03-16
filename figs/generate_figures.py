@@ -180,17 +180,17 @@ def fig1_architecture(outdir):
 
     # ---- Katman 1: Dataset ----
     box(5.0, 3.52, 2.6, 0.42,
-        "output.txt  (2 048 scenarios)",
+        "output.txt  (>2 000 scenarios)",
         "13 inputs + 7 outputs per row",
         fc="#D6F5E9", ec=C_TEAL, lc=C_TEAL)
 
     # ---- Katman 2: ML module ----
     ml_boxes = [
-        (1.3,  2.32, "split_dataset.py",   "70/20/10 split"),
+        (1.3,  2.32, "split_dataset.py",  "70/20/10 split"),
         (3.1,  2.32, "XGBoost\ngrid search", "256 combos"),
-        (5.0,  2.32, "SHAP ranking",        "18 features"),
-        (6.9,  2.32, "RandomizedSearchCV",  "35 models"),
-        (8.8,  2.32, "saved_models/",       "*.pkl pipelines"),
+        (5.0,  2.32, "SHAP ranking",       "18 features"),
+        (6.9,  2.32, "Randomized\nSearchCV", "35 models"),
+        (8.8,  2.32, "saved_models/",      "*.pkl pipelines"),
     ]
     fc_ml = "#EEEDFE"
     ec_ml = C_PURPLE
@@ -209,9 +209,9 @@ def fig1_architecture(outdir):
 
     # ---- Katman 3: App ----
     app_boxes = [
-        (2.2,  0.77, "preprocessing.py",  "18-feature vector"),
+        (2.2,  0.77, "preprocessing.py",  "15 inputs → feature vector"),
         (5.0,  0.77, "Pipeline.predict()", "select → scale → model"),
-        (7.8,  0.77, "StabilityApp",       "canvas + bulk predict"),
+        (7.8,  0.77, "StabilityApp",       "prediction + uncertainty"),
     ]
     fc_ap = "#FFF0D6"
     ec_ap = C_AMBER
@@ -399,20 +399,25 @@ def _fig5_placeholder(outdir):
 # ===========================================================================
 
 TABLE2_ROWS = [
-    # (Sembol, Açıklama, Alt sınır, Üst sınır, Adım)
-    (r"$H$",          "Wall height",                  "4",         "10",        "1 m"),
-    (r"$x_1$",        "Heel slab width",              r"$0.3H$",   "10.0",      r"$0.05H$"),
-    (r"$x_2$",        "Toe slab width",               r"$0.15x_1$",r"$0.45x_1$",r"$0.05x_1$"),
-    (r"$x_3$",        "Base slab thickness",          "0.3",       "0.6",       "0.05 m"),
-    (r"$x_4$",        "Stem bottom width",            "0.3",       r"$x_3$",    "0.05 m"),
-    (r"$x_5$",        "Stem top width",               r"$0.06H$",  r"$0.18H$",  r"$0.01H$"),
-    (r"$x_6$",        "Key thickness",                "0",         r"$1.2x_5$", r"$0.05x_5$"),
-    (r"$x_7$",        "Key width",                    "0",         r"$0.30x_1$",r"$0.05x_1$"),
-    (r"$x_8$",        "Key offset from heel",         "0",         r"$0.70x_1$",r"$0.05x_1$"),
-    (r"$q$",          "Surcharge load (kN/m$^2$)",    "0",         "20",        "5"),
-    (r"$S_{DS}$",     "Spectral acceleration (g)",    "0.6",       "1.8",       "0.1"),
-    ("Soil class",    "Soil index (0–4)",             "0",         "4",         "1"),
-    (r"$h_w$",        "Water level index (0–4)",      "0",         "4",         "1"),
+    # (Sembol, Açıklama, Alt sınır, Üst sınır, Adım/Notlar)
+    (r"$H$",           "Wall height (m)",               "4",          "10",          "1"),
+    (r"$X_1$",         "Foundation total width (m)",    r"$0.3H$",    "10.0",        r"$0.05H$"),
+    (r"$X_2$",         "Front overhang (m)",            r"$0.15X_1$", r"$0.45X_1$", r"$0.05X_1$"),
+    (r"$X_3$",         "Stem bottom width (m)",         "0.3",        "0.6",         "0.05"),
+    (r"$X_4$",         "Stem top width (m)",            "0.3",        r"$X_3$",      "0.05"),
+    (r"$X_5$",         "Foundation thickness (m)",      r"$0.06H$",   r"$0.18H$",    r"$0.01H$"),
+    (r"$X_6$",         "Key thickness (m)",             "0",          r"$1.2X_5$",   r"$0.05X_5$"),
+    (r"$X_7$",         "Key width (m)",                 "0",          r"$0.30X_1$",  r"$0.05X_1$"),
+    (r"$X_8$",         "Key offset from heel (m)",      "0",          r"$0.70X_1$",  r"$0.05X_1$"),
+    (r"$q$",           "Surcharge load (kN/m$^2$)",     "0",          "20",          "5"),
+    (r"$s_{DS}$",      "Spectral acceleration (g)",     "0.6",        "1.8",         "0.1"),
+    (r"$v_2$",         "Rear overhang (m)",             "---",        "---",         "geometric"),
+    (r"$x_1$",         "$X_5 + X_6$ (m)",              "---",        "---",         "derived"),
+    (r"$s_1$",         "Wall batter slope",             "---",        "---",         "geometric"),
+    (r"$\gamma$",      "Soil unit weight (kN/m$^3$)",   "17",         "20",          "numerical"),
+    (r"$c$",           "Cohesion (kPa)",                "0",          "40",          "numerical"),
+    (r"$\varphi$",     "Friction angle ($^\circ$)",     "20",         "40",          "numerical"),
+    (r"$h_w$",         "Water level index (0--4)",      "0",          "4",           "1"),
 ]
 
 
@@ -427,7 +432,7 @@ def table2_design_space(outdir):
     lines.append(r"\label{tab:design_space}")
     lines.append(r"\begin{tabular*}{\tblwidth}{@{} L L L L L @{}}")
     lines.append(r"\toprule")
-    lines.append(r"Parameter & Description & Min & Max & Step \\")
+    lines.append(r"Parameter & Description & Min & Max & Step/Notes \\")
     lines.append(r"\midrule")
     for sym, desc, lo, hi, step in TABLE2_ROWS:
         lines.append(f"{sym} & {desc} & {lo} & {hi} & {step} \\\\")

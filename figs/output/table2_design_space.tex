@@ -4,21 +4,26 @@
 \label{tab:design_space}
 \begin{tabular*}{\tblwidth}{@{} L L L L L @{}}
 \toprule
-Parameter & Description & Min & Max & Step \\
+Parameter & Description & Min & Max & Step/Notes \\
 \midrule
-$H$ & Wall height & 4 & 10 & 1 m \\
-$x_1$ & Heel slab width & $0.3H$ & 10.0 & $0.05H$ \\
-$x_2$ & Toe slab width & $0.15x_1$ & $0.45x_1$ & $0.05x_1$ \\
-$x_3$ & Base slab thickness & 0.3 & 0.6 & 0.05 m \\
-$x_4$ & Stem bottom width & 0.3 & $x_3$ & 0.05 m \\
-$x_5$ & Stem top width & $0.06H$ & $0.18H$ & $0.01H$ \\
-$x_6$ & Key thickness & 0 & $1.2x_5$ & $0.05x_5$ \\
-$x_7$ & Key width & 0 & $0.30x_1$ & $0.05x_1$ \\
-$x_8$ & Key offset from heel & 0 & $0.70x_1$ & $0.05x_1$ \\
+$H$ & Wall height (m) & 4 & 10 & 1 \\
+$X_1$ & Foundation total width (m) & $0.3H$ & 10.0 & $0.05H$ \\
+$X_2$ & Front overhang (m) & $0.15X_1$ & $0.45X_1$ & $0.05X_1$ \\
+$X_3$ & Stem bottom width (m) & 0.3 & 0.6 & 0.05 \\
+$X_4$ & Stem top width (m) & 0.3 & $X_3$ & 0.05 \\
+$X_5$ & Foundation thickness (m) & $0.06H$ & $0.18H$ & $0.01H$ \\
+$X_6$ & Key thickness (m) & 0 & $1.2X_5$ & $0.05X_5$ \\
+$X_7$ & Key width (m) & 0 & $0.30X_1$ & $0.05X_1$ \\
+$X_8$ & Key offset from heel (m) & 0 & $0.70X_1$ & $0.05X_1$ \\
 $q$ & Surcharge load (kN/m$^2$) & 0 & 20 & 5 \\
-$S_{DS}$ & Spectral acceleration (g) & 0.6 & 1.8 & 0.1 \\
-Soil class & Soil index (0–4) & 0 & 4 & 1 \\
-$h_w$ & Water level index (0–4) & 0 & 4 & 1 \\
+$s_{DS}$ & Spectral acceleration (g) & 0.6 & 1.8 & 0.1 \\
+$v_2$ & Rear overhang (m) & --- & --- & geometric \\
+$x_1$ & $X_5 + X_6$ (m) & --- & --- & derived \\
+$s_1$ & Wall batter slope & --- & --- & geometric \\
+$\gamma$ & Soil unit weight (kN/m$^3$) & 17 & 20 & numerical \\
+$c$ & Cohesion (kPa) & 0 & 40 & numerical \\
+$\varphi$ & Friction angle ($^\circ$) & 20 & 40 & numerical \\
+$h_w$ & Water level index (0--4) & 0 & 4 & 1 \\
 \bottomrule
 \end{tabular*}
 \end{table}

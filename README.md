@@ -115,31 +115,29 @@ python main.py
 
 ### Design Space — Input Parameters (13)
 
-| Parameter | Description | Range |
+| Column | Description | Notes |
 |---|---|---|
 | H | Wall height | 4 – 10 m |
-| x1 | Foundation total width | 0.3H – 10.0 m |
-| x2 | Front overhang (toe projection) | 0.15x1 – 0.45x1 m |
-| x3 | Stem bottom width | 0.3 – 0.6 m |
-| x4 | Stem top width | 0.3 – x3 m |
-| x5 | Foundation thickness | 0.06H – 0.18H m |
-| x6 | Key thickness | 0 – 1.2x5 m |
-| x7 | Key width | 0 – 0.3x1 m |
-| x8 | Key offset from heel | 0 – 0.7x1 m |
+| X1 | Foundation total width | 0.3H – 10.0 m |
+| X2 | Front overhang (toe projection) | 0.15X1 – 0.45X1 m |
+| X3 | Stem bottom width | 0.3 – 0.6 m |
+| X4 | Stem top width | 0.3 – X3 m |
+| X5 | Foundation thickness | 0.06H – 0.18H m |
+| X6 | Key thickness | 0 – 1.2X5 m |
+| X7 | Key width | 0 – 0.3X1 m |
+| X8 | Key offset from heel | 0 – 0.7X1 m |
 | q | Surcharge load | 0 – 20 kN/m² |
-| SDS | Design spectral acceleration | 0.6 – 1.8 g |
-| Soil_Class | Soil class index | 0 – 4 |
+| sds | Design spectral acceleration | 0.6 – 1.8 g |
+| v2 | Rear overhang | geometric |
+| x1 | Foundation + key thickness (X5 + X6) | derived |
+| s1 | Wall batter slope | geometric |
+| gama | Soil unit weight (kN/m³) | numerical |
+| c | Cohesion (kPa) | numerical |
+| fi | Internal friction angle (°) | numerical |
 | hw | Water level scenario index | 0 – 4 |
+| **fss** | **Global stability safety factor (target)** | Fss = Mp / Ma |
 
-**Soil classes:**
-
-| Index | Description | γ (kN/m³) | c (kPa) | φ (°) |
-|---|---|---|---|---|
-| 0 | Dense sand / gravel | 20 | 0 | 40 |
-| 1 | Medium-dense sand | 20 | 0 | 36 |
-| 2 | Silty sand | 19 | 20 | 30 |
-| 3 | Silt / low-plasticity clay | 18 | 30 | 26 |
-| 4 | Soft clay | 17 | 40 | 20 |
+**Soil properties** (`gama`, `c`, `fi`) are stored as numerical values in the dataset. The original sampling drew from five soil classes (dense sand/gravel through soft clay); the class index is not retained in the final CSV.
 
 **Water level scenarios:**
 
@@ -151,29 +149,19 @@ python main.py
 | 3 | Mid-heel slab (hw = H + x1 / 2) |
 | 4 | Top of backfill (hw = H + x1) |
 
-### Output Variables (7)
+> **Target variable:** F<sub>ss</sub> = M<sub>p</sub> / M<sub>a</sub> (global stability factor of safety, Bishop method). Pre-computed and stored as the last column `fss`.
 
-| Variable | Description |
-|---|---|
-| Fa | Sum of active forces (kN/m) |
-| Fp | Sum of passive forces (kN/m) |
-| Ma | Sliding moment (kN·m/m) |
-| Mp | Resisting moment (kN·m/m) |
-| x | Slip circle centre x-coordinate (m) |
-| z | Slip circle centre z-coordinate (m) |
-| R | Slip circle radius (m) |
+### Dataset Format
 
-> **Target variable:** F<sub>ss</sub> = M<sub>p</sub> / M<sub>a</sub> (global stability factor of safety, Bishop method)
-
-### output.txt Format
-
-Each row corresponds to one scenario (comma-separated, no header):
+Semicolon-separated CSV with a one-row header:
 
 ```
-H, x1, x2, x3, x4, x5, x6, x7, x8, q, SDS, Soil_Class, hw, Fa, Fp, Ma, Mp, x, z, R
+H;X1;X2;X3;X4;X5;X6;X7;X8;q;sds;v2;x1;s1;gama;c;fi;hw;fss
 ```
 
-Total dataset: **2048 scenarios**
+- 18 input features + 1 target column (`fss`)
+- `fss` is pre-computed (Fss = Mp / Ma); no post-processing required
+- Total: **>2 000 scenarios** (outliers removed)
 
 ---
 
@@ -181,7 +169,7 @@ Total dataset: **2048 scenarios**
 
 ### Stage 1 — Data preparation (`split_dataset.py`)
 
-F<sub>ss</sub> = M<sub>p</sub> / M<sub>a</sub> is computed from `output.txt`. The dataset is split into 70 % train / 20 % test / 10 % unseen hold-out using stratified random sampling.
+The dataset CSV is read directly (header included, `fss` column is the target). The dataset is split into 70 % train / 20 % test / 10 % unseen hold-out using stratified random sampling.
 
 ### Stage 2 — XGBoost baseline for SHAP
 
