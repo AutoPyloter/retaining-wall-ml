@@ -15,22 +15,22 @@ design_space = {
     # Wall height (m)
     'H':          Discrete('4', '1', '10'),
 
-    # Heel slab width (m)
+    # Foundation total width (m)
     'x1':         Discrete('0.3*H', '0.05*H', '10.0'),
 
-    # Toe slab width (m)
+    # Front overhang / toe projection (m)
     'x2':         Discrete('0.15*x1', '0.05*x1', 'min(round(x1-0.3,2), 0.45*x1)'),
 
-    # Base slab thickness (m)
+    # Stem bottom width (m)
     'x3':         Discrete('0.3', '0.05', 'min(round(x1-x2,2), 0.6)'),
 
-    # Stem bottom width (m)
+    # Stem top width (m)
     'x4':         Discrete('0.3', '0.05', 'x3'),
 
-    # Stem top width (m)
+    # Foundation thickness (m)
     'x5':         Discrete('0.06*H', '0.01*H', '0.18*H'),
 
-    # Key thickness — excluding base slab (m); 0 means no key
+    # Key thickness — excluding foundation (m); 0 means no key
     'x6':         Discrete('0', '0.05*x5', '1.2*x5'),
 
     # Key width (m); 0 if no key
