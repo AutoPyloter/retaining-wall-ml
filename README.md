@@ -128,7 +128,7 @@ cd ml/
 python split_dataset.py
 ```
 
-Produces `train.csv` (70%), `test.csv` (20%), `unseen.csv` (10%) in `ml/outputs/` using stratified random sampling (`random_state=42`).
+Produces `train.csv` (70%), `test.csv` (20%), `unseen.csv` (10%) in `ml/outputs/` using random sampling (`random_state=42`).
 
 ### 2 — Train all models
 
