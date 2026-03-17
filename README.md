@@ -287,7 +287,7 @@ If you use this framework or dataset in your research, please cite:
 
 ```bibtex
 @article{ozcan2025retainingwallml,
-  author  = {Özcan, Abdulkadir and Uray, Esra},
+  author  = {Özcan, Abdulkadir and Uray, Esra and Demir, Vahdettin},
   title   = {Retaining Wall ML: An Open-Source Machine Learning Framework
              for Global Stability Safety Factor Prediction of
              Cantilever Retaining Walls},
@@ -303,4 +303,4 @@ If you use this framework or dataset in your research, please cite:
 
 ## License
 
-MIT © 2025 Abdulkadir Özcan, Esra Uray — KTO Karatay University
+MIT © 2025 Abdulkadir Özcan, Esra Uray, Vahdettin Demir — KTO Karatay University
