@@ -1,0 +1,30 @@
+{
+  "language_label": "Idioma:",
+  "title": "Ferramenta de Previsão de Estabilidade",
+  "labels": {
+    "k": "Largura Superior do Muro (m)",
+    "h": "Altura do Muro (m)",
+    "xx": "Espessura da Fundação (m)",
+    "v1": "Balanço Frontal (m)",
+    "v2": "Balanço Traseiro (m)",
+    "x1": "Espessura da Fundação + Dente (m)",
+    "x2": "Largura do Dente (m)",
+    "s1": "Inclinação do Muro (°)",
+    "x3": "Distância Traseira do Dente (m)",
+    "hw": "Profundidade do Lençol Freático (m)",
+    "gama": "Peso Específico do Solo (kN/m³)",
+    "fi": "Ângulo de Atrito Interno (°)",
+    "c": "Coesão (kPa)",
+    "q": "Sobrecarga (kN/m²)",
+    "sds": "Aceleração Espectral"
+  },
+  "buttons": {
+    "predict": "Prever",
+    "info": "Obter Informações",
+    "bulk_predict": "Previsão em Lote"
+  },
+  "tabs": {
+    "input": "Entrada e Visualização",
+    "model": "Seleção de Modelo"
+  }
+}

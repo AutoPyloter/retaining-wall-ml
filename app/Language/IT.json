@@ -1,0 +1,30 @@
+{
+  "language_label": "Lingua:",
+  "title": "Strumento di Previsione della Stabilità",
+  "labels": {
+    "k": "Larghezza Superiore del Muro (m)",
+    "h": "Altezza del Muro (m)",
+    "xx": "Spessore della Fondazione (m)",
+    "v1": "Sbalzo Anteriore (m)",
+    "v2": "Sbalzo Posteriore (m)",
+    "x1": "Spessore Fondazione + Dente (m)",
+    "x2": "Larghezza del Dente (m)",
+    "s1": "Inclinazione del Muro (°)",
+    "x3": "Distanza Posteriore del Dente (m)",
+    "hw": "Profondità della Falda Acquifera (m)",
+    "gama": "Peso Specifico del Terreno (kN/m³)",
+    "fi": "Angolo di Attrito Interno (°)",
+    "c": "Coesione (kPa)",
+    "q": "Sovraccarico (kN/m²)",
+    "sds": "Accelerazione Spettrale"
+  },
+  "buttons": {
+    "predict": "Prevedi",
+    "info": "Informazioni",
+    "bulk_predict": "Previsione Multipla"
+  },
+  "tabs": {
+    "input": "Input e Visualizzazione",
+    "model": "Selezione del Modello"
+  }
+}
