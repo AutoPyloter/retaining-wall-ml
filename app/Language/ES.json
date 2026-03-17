@@ -1,0 +1,30 @@
+{
+  "language_label": "Idioma:",
+  "title": "Herramienta de Predicción de Estabilidad",
+  "labels": {
+    "k": "Ancho superior del muro (m)",
+    "h": "Altura del muro (m)",
+    "xx": "Espesor de cimentación (m)",
+    "v1": "Voladizo frontal (m)",
+    "v2": "Voladizo trasero (m)",
+    "x1": "Espesor cimentación + dentellón (m)",
+    "x2": "Ancho del dentellón (m)",
+    "s1": "Inclinación del muro (°)",
+    "x3": "Distancia trasera del dentellón (m)",
+    "hw": "Profundidad del nivel freático (m)",
+    "gama": "Peso específico del suelo (kN/m³)",
+    "fi": "Ángulo de fricción interna (°)",
+    "c": "Cohesión (kPa)",
+    "q": "Carga de sobrecarga (kN/m²)",
+    "sds": "Aceleración espectral"
+  },
+  "buttons": {
+    "predict": "Predecir",
+    "info": "Obtener Información",
+    "bulk_predict": "Predicción en Lote"
+  },
+  "tabs": {
+    "input": "Entrada y Visualización",
+    "model": "Selección de Modelo"
+  }
+}

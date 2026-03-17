@@ -1,0 +1,30 @@
+{
+  "language_label": "Sprache:",
+  "title": "Stabilitätsvorhersage-Tool",
+  "labels": {
+    "k": "Obere Wandbreite (m)",
+    "h": "Wandhöhe (m)",
+    "xx": "Fundamentdicke (m)",
+    "v1": "Vorderer Überhang (m)",
+    "v2": "Hinterer Überhang (m)",
+    "x1": "Fundament- + Sporndicke (m)",
+    "x2": "Spornbreite (m)",
+    "s1": "Wandneigung (°)",
+    "x3": "Abstand hinterer Sporn (m)",
+    "hw": "Grundwassertiefe (m)",
+    "gama": "Wichte des Bodens (kN/m³)",
+    "fi": "Innerer Reibungswinkel (°)",
+    "c": "Kohäsion (kPa)",
+    "q": "Auflast (kN/m²)",
+    "sds": "Spektrale Beschleunigung"
+  },
+  "buttons": {
+    "predict": "Vorhersagen",
+    "info": "Info abrufen",
+    "bulk_predict": "Massen-Vorhersage"
+  },
+  "tabs": {
+    "input": "Eingabe & Visualisierung",
+    "model": "Modellauswahl"
+  }
+}

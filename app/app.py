@@ -182,12 +182,18 @@ class StabilityApp(ctk.CTkFrame):
         new_lang = self.lang_var.get()
         write_config("language", new_lang)
         self.translations = load_translations(new_lang)
+        # Mevcut girdi değerlerini kaydet
+        saved_values = {key: var.get() for key, var in self.vars.items()}
         for widget in self.winfo_children():
             widget.destroy()
         self.entries.clear()
         self.vars.clear()
         self.entry_labels.clear()
         self._build_ui()
+        # Kaydedilen değerleri geri yükle
+        for key, value in saved_values.items():
+            if key in self.vars and value:
+                self.vars[key].set(value)
 
     # ------------------------------------------------------------------
     # UI construction

@@ -1,1538 +1,170 @@
-2026-03-11 04:28:56,995 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:28:57,029 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:28:57,039 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:28:57,039 - app - ERROR - wrapper:70 - run_prediction raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:28:57,085 - app - ERROR - wrapper:70 - _run_model_predict raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 308, in _run_model_predict
-    prediction = run_prediction(X, pipeline)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:06,685 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:29:06,685 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:29:06,701 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:29:06,701 - app - ERROR - wrapper:70 - run_prediction raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:06,701 - app - ERROR - wrapper:70 - _run_model_predict raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 308, in _run_model_predict
-    prediction = run_prediction(X, pipeline)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:12,387 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:29:12,387 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:29:12,388 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:29:12,390 - app - ERROR - wrapper:70 - run_prediction raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:12,390 - app - ERROR - wrapper:70 - _run_model_predict raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 308, in _run_model_predict
-    prediction = run_prediction(X, pipeline)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:14,072 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:29:14,072 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:29:14,098 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:29:14,098 - app - ERROR - wrapper:70 - run_prediction raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:14,098 - app - ERROR - wrapper:70 - _run_model_predict raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 308, in _run_model_predict
-    prediction = run_prediction(X, pipeline)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:16,348 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:29:16,348 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:29:16,354 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:29:16,354 - app - ERROR - wrapper:70 - run_prediction raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:16,356 - app - ERROR - wrapper:70 - _run_model_predict raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 308, in _run_model_predict
-    prediction = run_prediction(X, pipeline)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:18,948 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:29:18,948 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:29:18,950 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:29:18,950 - app - ERROR - wrapper:70 - run_prediction raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:18,950 - app - ERROR - wrapper:70 - _run_model_predict raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 308, in _run_model_predict
-    prediction = run_prediction(X, pipeline)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:23,046 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:29:23,046 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:29:23,047 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:29:23,047 - app - ERROR - wrapper:70 - run_prediction raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:29:23,047 - app - ERROR - wrapper:70 - _run_model_predict raised an error: SHAP order not set. Call set_shap_order() first.
-Traceback (most recent call last):
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 308, in _run_model_predict
-    prediction = run_prediction(X, pipeline)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 68, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\app.py", line 129, in run_prediction
-    return float(pipeline.predict(X)[0])
-                 ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\pipeline.py", line 787, in predict
-    Xt = transform.transform(Xt)
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 260, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_function_transformer.py", line 387, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\ASUS\Documents\GitHub\retaining-wall-ml\app\pipeline_components.py", line 53, in select_top_k_features
-    raise RuntimeError("SHAP order not set. Call set_shap_order() first.")
-RuntimeError: SHAP order not set. Call set_shap_order() first.
-2026-03-11 04:31:57,443 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:31:57,443 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:31:57,453 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:06,921 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:06,921 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:06,939 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:07,893 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:07,902 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:07,902 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:08,477 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:08,477 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:08,477 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:09,053 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:09,053 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:09,083 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:09,676 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:09,676 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:09,683 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:10,201 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:10,201 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:10,201 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:10,799 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:10,799 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:10,875 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:11,340 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:11,340 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:11,435 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:11,932 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:11,932 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:11,943 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:12,478 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:12,478 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:12,606 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:13,073 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:13,073 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:13,184 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:13,632 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:13,632 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:13,718 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:14,198 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:14,198 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:14,210 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:14,725 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:14,725 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:14,825 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:15,433 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:15,433 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:15,433 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:15,881 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:15,881 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:15,884 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:16,291 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:16,293 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:16,327 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:16,830 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:16,830 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:16,868 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:17,386 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:17,386 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:17,395 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:17,871 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:17,871 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:17,873 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:18,410 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:18,410 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:18,426 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:18,968 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:18,972 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:18,972 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:19,480 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:19,480 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:19,480 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:19,973 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:19,973 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:19,973 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:20,502 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:20,502 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:20,502 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:20,996 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:20,996 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:20,996 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:21,520 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:21,520 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:21,522 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:21,992 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:21,992 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:21,994 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:22,477 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:22,477 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:22,477 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:22,987 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:22,987 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:22,987 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:23,512 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:23,512 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:23,512 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:24,009 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:24,009 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:24,011 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:24,497 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:24,497 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:24,497 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:25,023 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:25,023 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:25,030 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:25,463 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:25,463 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:25,463 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:25,961 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:25,961 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:25,961 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:32:26,481 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:32:26,481 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:32:26,481 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:38,509 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:38,509 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:38,510 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:39,448 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:39,448 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:39,449 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:39,726 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:39,726 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:39,728 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:39,877 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:39,877 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:39,878 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:40,308 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:40,309 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:40,309 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:40,506 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:40,506 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:40,507 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:46,227 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:46,228 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:46,240 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:46,994 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:46,994 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:47,006 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:47,183 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:47,183 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:47,195 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:47,365 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:47,365 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:47,378 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:47,467 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:47,467 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:47,480 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:47,786 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:47,787 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:47,799 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:54,249 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:54,250 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:54,278 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:33:58,836 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:33:58,837 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:33:58,849 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:00,207 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:00,208 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:00,232 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:00,799 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:00,800 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:00,801 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:03,675 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:03,676 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:03,677 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:04,495 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:04,495 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:04,499 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:05,398 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:05,398 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:05,403 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:08,237 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:08,237 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:08,239 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:10,417 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:10,418 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:10,467 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:12,896 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:12,896 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:12,898 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:13,928 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:13,929 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:13,976 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:14,515 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:14,516 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:14,528 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:15,093 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:15,093 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:15,101 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:15,672 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:15,673 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:15,804 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:16,599 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:16,600 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:16,733 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:17,333 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:17,333 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:17,409 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:17,993 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:17,994 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:17,995 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:18,622 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:18,622 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:18,719 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:19,291 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:19,291 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:19,293 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:20,005 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:20,006 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:20,007 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:20,735 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:20,735 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:20,737 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:22,035 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:22,036 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:22,037 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:22,549 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:22,549 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:22,586 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:23,155 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:23,156 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:23,164 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:23,772 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:23,772 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:23,773 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:24,277 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:24,277 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:24,278 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:24,816 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:24,816 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:24,817 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:25,408 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:25,409 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:25,410 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:26,001 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:26,001 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:26,002 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:26,554 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:26,554 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:26,562 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:27,101 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:27,101 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:27,101 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:27,605 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:27,605 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:27,608 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:28,160 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:28,160 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:28,162 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:28,854 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:28,854 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:28,856 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:29,369 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:29,369 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:29,371 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:29,923 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:29,923 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:29,923 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:30,459 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:30,461 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:30,461 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:31,317 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:31,317 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:31,318 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:31,828 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:31,829 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:31,834 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:32,198 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:32,198 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:32,200 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:32,632 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:32,632 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:32,633 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:34,442 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:34,442 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:34,442 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:35,096 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:35,096 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:35,097 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:35,751 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:35,751 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:35,751 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:36,431 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:36,431 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:36,436 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:37,024 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:37,024 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:37,030 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:37,445 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:37,445 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:37,446 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:37,836 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:37,836 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:37,838 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:34:38,258 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:34:38,258 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:34:38,264 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:01,596 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:01,596 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:01,596 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:04,344 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:04,344 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:04,376 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:05,875 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:05,875 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:05,887 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:07,094 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:07,094 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:07,110 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:07,810 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:07,810 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:07,810 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:08,754 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:08,754 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:08,754 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:09,563 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:09,564 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:09,564 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:10,088 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:10,088 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:10,088 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:10,647 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:10,647 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:10,647 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:11,164 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:11,164 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:11,215 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:11,678 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:11,678 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:11,687 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:12,195 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:12,195 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:12,204 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:12,765 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:12,765 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:12,895 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:13,277 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:13,277 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:13,406 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:13,956 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:13,956 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:14,032 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:14,562 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:14,562 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:14,562 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:16,179 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:16,179 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:16,192 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:35,964 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:35,964 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:35,979 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:36,956 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:36,956 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:36,972 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:37,127 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:37,127 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:37,133 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:37,738 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:37,738 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:37,770 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:38,459 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:38,459 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:38,459 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:38,968 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:38,968 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:38,968 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:40,981 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:40,981 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:40,981 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:41,713 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:41,714 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:41,714 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:42,280 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:42,280 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:42,329 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:42,887 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:42,894 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:42,901 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:43,451 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:43,451 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:43,452 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:44,001 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:44,001 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:44,130 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:44,507 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:44,507 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:44,626 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:45,022 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:45,022 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:45,098 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:45,532 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:45,532 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:45,534 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:46,073 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:46,073 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:46,172 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:46,559 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:46,559 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:46,559 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:47,078 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:47,078 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:47,080 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:47,609 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:47,609 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:47,641 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:48,113 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:48,113 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:48,125 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:48,661 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:48,661 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:48,661 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:49,133 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:49,133 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:49,133 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:49,589 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:49,589 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:49,589 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:50,031 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:50,047 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:50,048 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:50,549 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:50,549 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:50,563 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:50,994 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:50,994 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:50,994 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:51,475 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:51,475 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:51,475 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:51,856 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:51,856 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:51,856 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:52,296 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:52,296 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:52,296 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:52,776 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:52,776 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:52,776 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:53,266 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:53,266 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:53,266 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:53,662 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:53,662 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:53,662 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:54,141 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:54,141 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:54,141 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:54,520 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:54,521 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:54,521 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:54,951 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:54,951 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:54,965 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:55,491 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:55,491 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:55,491 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:56,083 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:56,083 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:56,083 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:56,496 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:56,496 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:56,496 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:56,945 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:56,945 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:56,945 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:57,372 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:57,373 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:57,373 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:35:57,765 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:35:57,765 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:35:57,766 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:00,384 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:00,384 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:00,390 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:00,916 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:00,916 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:00,931 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:01,387 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:01,387 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:01,389 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:01,875 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:01,875 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:01,880 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:02,395 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:02,395 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:02,395 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:02,907 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:02,907 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:02,907 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:03,387 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:03,387 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:03,401 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:03,847 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:03,847 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:03,906 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:04,312 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:04,312 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:04,328 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:04,951 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:04,951 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:04,965 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:05,433 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:05,433 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:05,634 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:05,897 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:05,897 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:06,006 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:06,372 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:06,372 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:06,452 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:06,819 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:06,819 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:06,821 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:07,316 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:07,316 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:07,415 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:07,756 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:07,756 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:07,756 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:08,213 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:08,213 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:08,223 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:08,722 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:08,722 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:08,753 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:09,206 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:09,206 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:09,215 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:09,636 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:09,636 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:09,636 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:10,103 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:10,103 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:10,103 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:10,548 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:10,548 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:10,548 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:11,086 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:11,086 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:11,091 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:11,618 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:11,618 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:11,620 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:12,004 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:12,004 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:12,004 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:12,479 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:12,479 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:12,493 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:13,019 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:13,019 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:13,027 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:13,498 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:13,498 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:13,504 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:14,006 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:14,006 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:14,006 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:14,486 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:14,486 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:14,495 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:14,907 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:14,907 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:14,907 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:15,369 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:15,369 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:15,369 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:15,783 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:15,783 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:15,787 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:16,135 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:16,135 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:16,135 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:16,517 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:16,517 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:16,517 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:16,848 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:16,848 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:16,848 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:17,168 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:17,168 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:17,177 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:17,452 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:17,452 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:17,452 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:17,754 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:17,754 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:17,754 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:18,074 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:18,074 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:18,074 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:20,222 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:20,222 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:20,228 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:20,880 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:20,880 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:20,910 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:21,386 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:21,386 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:21,386 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:21,785 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:21,785 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:21,785 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:22,202 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:22,202 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:22,208 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:32,797 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:32,797 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:32,868 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:33,377 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:33,377 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:33,449 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:33,734 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:33,734 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:33,805 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:33,881 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:33,881 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:33,962 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:34,198 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:34,198 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:34,281 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:34,362 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:34,362 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:34,435 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:34,659 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:34,659 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:34,729 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:34,811 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:34,811 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:34,875 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:34,977 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:34,977 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:35,062 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:35,146 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:35,161 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:35,224 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:35,334 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:35,334 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:35,397 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:35,481 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:35,481 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:35,543 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:35,630 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:35,630 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:35,693 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:35,958 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:35,958 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:36,069 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:36,115 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:36,115 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:36,244 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:36,497 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:36,497 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:36,628 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:36,736 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:36,736 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:36,863 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:36,996 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:36,996 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:37,019 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:37,302 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:37,302 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:37,314 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:37,646 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:37,646 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:37,685 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:37,997 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:37,997 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:38,010 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:38,322 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:38,322 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:38,329 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:38,616 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:38,616 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:38,618 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:38,949 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:38,949 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:38,951 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:39,229 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:39,229 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:39,229 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:39,546 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:39,546 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:39,580 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:39,857 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:39,875 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:39,887 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:40,157 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:40,157 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:40,173 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:40,442 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:40,442 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:40,458 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:40,740 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:40,740 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:40,745 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:41,080 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:41,080 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:41,080 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:41,414 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:41,416 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:41,426 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:43,012 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:43,013 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:43,031 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:43,874 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:43,874 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:43,874 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:49,298 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:49,298 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:49,310 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:52,018 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:52,018 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:52,044 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:53,656 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:53,656 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:53,656 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:36:55,280 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:36:55,280 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:36:55,295 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:01,197 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:01,197 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:01,197 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:01,826 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:01,826 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:01,827 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:02,239 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:02,241 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:02,245 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:02,798 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:02,798 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:02,798 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:03,316 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:03,316 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:03,355 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:03,739 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:03,739 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:03,755 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:04,167 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:04,167 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:04,171 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:04,598 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:04,598 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:04,799 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:05,078 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:05,078 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:05,189 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:05,545 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:05,547 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:05,612 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:06,045 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:06,045 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:06,045 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:06,528 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:06,528 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:06,633 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:07,028 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:07,028 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:07,028 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:07,534 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:07,534 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:07,534 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:07,980 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:07,980 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:08,016 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:08,381 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:08,381 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:08,402 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:08,857 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:08,857 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:08,857 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:09,365 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:09,365 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:09,365 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:09,811 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:09,811 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:09,811 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:10,278 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:10,278 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:10,278 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:10,786 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:10,786 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:10,786 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:11,226 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:11,232 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:11,232 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:11,728 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:11,728 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:11,728 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:12,143 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:12,143 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:12,143 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:12,585 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:12,585 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:12,585 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:13,013 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:13,013 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:13,013 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:13,444 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:13,444 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:13,444 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:13,929 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:13,929 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:13,934 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:14,400 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:14,400 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:14,400 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:14,837 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:14,837 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:14,837 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:15,274 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:15,274 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:15,274 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:15,736 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:15,736 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:15,736 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:16,170 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:16,170 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:16,170 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:16,595 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:16,595 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:16,595 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:17,039 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:17,039 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:17,039 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:17,485 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:17,485 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:17,485 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:17,898 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:17,898 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:17,898 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:18,425 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:18,425 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:18,425 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:18,681 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:18,693 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:18,693 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:18,949 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:18,949 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:18,949 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:19,206 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:19,206 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:19,206 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:19,471 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:19,471 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:19,474 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:19,727 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:19,727 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:19,729 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:20,034 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:20,034 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:20,047 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:20,262 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:20,262 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:20,262 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:20,483 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:20,498 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:20,498 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:37:22,850 - app - DEBUG - wrapper:66 - _run_model_predict started.
-2026-03-11 04:37:22,850 - app - DEBUG - wrapper:66 - load_model_file started.
-2026-03-11 04:37:22,850 - app - DEBUG - wrapper:66 - run_prediction started.
-2026-03-11 04:38:13,906 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:13,906 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:13,909 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:14,468 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:14,468 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:14,483 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:14,899 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:14,899 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:14,901 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:15,374 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:15,374 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:15,374 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:15,838 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:15,838 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:15,852 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:16,324 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:16,324 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:16,337 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:16,793 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:16,793 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:16,793 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:17,250 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:17,250 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:17,250 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:17,744 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:17,744 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:17,806 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:18,138 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:18,138 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:18,219 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:18,538 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:18,538 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:18,546 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:18,859 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:18,859 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:18,984 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:19,204 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:19,204 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:19,324 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:19,585 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:19,585 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:19,653 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:19,858 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:19,858 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:19,858 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:20,143 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:20,143 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:20,239 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:20,405 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:20,405 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:20,406 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:20,688 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:20,688 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:20,688 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:20,959 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:20,959 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:20,991 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:21,244 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:21,244 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:21,257 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:21,498 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:21,513 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:21,513 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:21,788 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:21,791 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:21,791 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:22,039 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:22,039 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:22,039 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:22,271 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:22,271 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:22,277 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:22,553 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:22,553 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:22,553 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:22,807 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:22,807 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:22,807 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:23,025 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:23,025 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:23,025 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:23,295 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:23,295 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:23,295 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:23,549 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:23,549 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:23,549 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:23,787 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:23,787 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:23,789 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:24,026 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:24,026 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:24,026 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:24,268 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:24,268 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:24,268 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:24,519 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:24,519 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:24,529 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:24,773 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:24,773 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:24,773 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:24,997 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:24,997 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:24,997 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:25,216 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:25,216 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:25,216 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:25,454 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:25,454 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:25,454 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:25,662 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:25,662 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:25,672 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:25,889 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:25,889 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:25,889 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:26,107 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:26,107 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:26,107 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:38:28,536 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:38:28,536 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:38:28,541 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 04:42:29,933 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 04:42:29,933 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 04:42:29,935 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:29:55,703 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 19:29:55,703 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:29:55,718 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:30:06,198 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 19:30:06,198 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:30:06,305 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:30:07,100 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 19:30:07,100 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:30:07,103 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:30:07,911 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 19:30:07,911 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:30:07,920 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:30:08,660 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 19:30:08,660 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:30:08,666 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:30:09,231 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 19:30:09,231 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:30:09,350 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:30:09,955 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 19:30:09,955 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:30:09,960 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:30:13,428 - app - DEBUG - wrapper:67 - _run_model_predict started.
-2026-03-11 19:30:13,428 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:30:13,450 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:56,652 - app - DEBUG - wrapper:67 - _run_bulk_predict started.
-2026-03-11 19:42:56,666 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:56,679 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:56,708 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:56,899 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:56,939 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:56,942 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:56,946 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:56,950 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:56,954 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:56,962 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:56,964 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:57,080 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:57,097 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:57,104 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:57,164 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:57,291 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:57,362 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:57,396 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:57,404 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:57,424 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:57,428 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:57,771 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:58,061 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:58,345 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:58,498 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:58,695 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:58,744 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:58,761 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:58,763 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:58,967 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,072 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,079 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,079 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,090 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,111 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,201 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,296 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,420 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,424 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,426 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,430 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,432 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,434 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,438 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,440 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,442 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,444 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,446 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,449 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,451 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,453 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,455 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,457 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,459 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,460 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,463 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,465 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,467 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,469 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,475 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,476 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,478 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,480 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,482 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,484 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,488 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,490 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,492 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:42:59,492 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:42:59,496 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:47,834 - app - DEBUG - wrapper:67 - _run_bulk_predict started.
-2026-03-11 19:44:47,834 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:47,847 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:47,865 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:47,929 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:47,943 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:47,947 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:47,949 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:47,953 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:47,955 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:47,960 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:47,965 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:47,978 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:47,980 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:47,986 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:47,989 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:48,172 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:48,198 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:48,234 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:48,236 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:48,252 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:48,269 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:48,822 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:49,084 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:49,355 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:49,477 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:49,657 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:49,703 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:49,719 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:49,721 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:49,938 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,044 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,054 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,056 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,056 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,062 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,150 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,222 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,392 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,396 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,398 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,402 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,404 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,406 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,408 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,410 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,412 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,414 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,416 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,418 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,420 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,422 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,424 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,426 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,428 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,428 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,431 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,434 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,436 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,438 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,442 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,444 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,446 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,447 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,449 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,452 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,454 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,456 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,458 - app - DEBUG - wrapper:67 - run_prediction started.
-2026-03-11 19:44:50,458 - app - DEBUG - wrapper:67 - load_model_file started.
-2026-03-11 19:44:50,460 - app - DEBUG - wrapper:67 - run_prediction started.
+2026-03-18 02:04:02,543 - app - DEBUG - wrapper:75 - _run_bulk_predict started.
+2026-03-18 02:04:02,543 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:02,543 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:02,560 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:02,654 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:02,664 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:02,664 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:02,670 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:02,671 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:02,671 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:02,673 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:02,673 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:02,681 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:02,689 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:02,689 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:02,717 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:02,773 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:02,801 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:02,817 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:02,817 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:02,826 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:02,826 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:02,988 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,095 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,222 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,266 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,354 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,368 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,376 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,376 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,475 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,523 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,524 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,524 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,524 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,534 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,565 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,596 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,604 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,606 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,606 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,608 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,608 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,610 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,610 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,612 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,612 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,612 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,614 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,614 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,616 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,616 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,617 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,617 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,617 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,619 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,619 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,621 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,621 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,621 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,623 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,625 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,625 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,625 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,627 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,627 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,629 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,629 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,629 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:03,631 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:03,631 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:10,465 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:10,465 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:10,475 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:11,243 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:11,243 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:11,259 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:11,745 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:11,745 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:11,757 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:11,919 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:11,919 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:11,919 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:12,081 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:12,087 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:12,099 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:12,243 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:12,243 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:12,265 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:12,385 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:12,385 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:12,399 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:12,546 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:12,546 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:12,549 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:12,688 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:12,688 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:12,707 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:13,521 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:13,521 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:13,543 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:13,963 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:13,963 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:13,987 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:14,276 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:14,276 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:14,290 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:14,386 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:14,386 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:14,417 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:15,621 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:15,621 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:15,621 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:16,349 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:16,349 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:16,360 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:16,814 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:16,814 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:16,823 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:17,385 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:17,385 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:17,385 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:17,837 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:17,844 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:17,893 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:18,205 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:18,205 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:18,215 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:18,698 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:18,698 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:18,705 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:19,167 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:19,167 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:19,301 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:19,340 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:19,349 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:19,488 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:19,536 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:19,536 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:19,610 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:19,641 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:19,641 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:19,720 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:19,799 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:19,799 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:19,878 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:19,989 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:19,989 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:20,070 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:20,116 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:20,116 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:20,195 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:20,294 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:20,294 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:20,373 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:42,485 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:42,485 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:42,511 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:46,603 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:46,603 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:46,618 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:49,859 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:49,859 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:49,868 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:51,065 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:51,065 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:51,081 - app - DEBUG - wrapper:75 - run_prediction started.
+2026-03-18 02:04:52,371 - app - DEBUG - wrapper:75 - _run_model_predict started.
+2026-03-18 02:04:52,371 - app - DEBUG - wrapper:75 - load_model_file started.
+2026-03-18 02:04:52,450 - app - DEBUG - wrapper:75 - run_prediction started.

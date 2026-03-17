@@ -20,7 +20,8 @@
   },
   "buttons": {
     "predict": "Tahmin Yap",
-    "info": "Bilgi Al"
+    "info": "Bilgi Al",
+    "bulk_predict": "Toplu Tahmin"
   },
   "tabs": {
     "input": "Giriş ve Görselleştirme",

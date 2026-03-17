@@ -9,7 +9,7 @@
     "v2": "Back Overhang (m)",
     "x1": "Foundation+Toe Thickness (m)",
     "x2": "Toe Width (m)",
-    "s1": "Wall Slope (°)",
+    "s1": "Wall Slope (Â°)",
     "x3": "Toe Back Distance (m)",
     "hw": "Groundwater Depth (m)",
     "gama": "Soil Unit Weight (kN/m³)",
@@ -20,11 +20,11 @@
   },
   "buttons": {
     "predict": "Predict",
-    "info": "Get Info"
+    "info": "Get Info",
+    "bulk_predict": "Bulk Predict"
   },
   "tabs": {
     "input": "Input & Visualization",
     "model": "Model Selection"
   }
-  
 }

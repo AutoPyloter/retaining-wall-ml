@@ -1,0 +1,30 @@
+{
+  "language_label": "Langue:",
+  "title": "Outil de Prédiction de Stabilité",
+  "labels": {
+    "k": "Largeur supérieure du mur (m)",
+    "h": "Hauteur du mur (m)",
+    "xx": "Épaisseur de la fondation (m)",
+    "v1": "Surplomb avant (m)",
+    "v2": "Surplomb arrière (m)",
+    "x1": "Épaisseur fondation + bêche (m)",
+    "x2": "Largeur de la bêche (m)",
+    "s1": "Inclinaison du mur (°)",
+    "x3": "Distance arrière de la bêche (m)",
+    "hw": "Profondeur de la nappe phréatique (m)",
+    "gama": "Poids volumique du sol (kN/m³)",
+    "fi": "Angle de frottement interne (°)",
+    "c": "Cohésion (kPa)",
+    "q": "Surcharge (kN/m²)",
+    "sds": "Accélération spectrale"
+  },
+  "buttons": {
+    "predict": "Prédire",
+    "info": "Plus d'infos",
+    "bulk_predict": "Prédiction en Masse"
+  },
+  "tabs": {
+    "input": "Saisie et Visualisation",
+    "model": "Sélection du Modèle"
+  }
+}
