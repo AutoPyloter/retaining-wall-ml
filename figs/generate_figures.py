@@ -5,24 +5,27 @@ Retaining Wall ML — SoftwareX makale görselleri ve tablo LaTeX kodu
 
 Çalıştırma:
     cd figs/
-    python generate_figures.py [--csv PATH] [--outdir PATH]
+    python generate_figures.py [--csv PATH] [--shap_values PATH] [--outdir PATH]
 
 Argümanlar:
-    --csv    all_models_random_search_results.csv yolu
-             (varsayılan: ../ml/outputs/all_models_random_search_results.csv)
-    --shap   shap_bar.png yolu
-             (varsayılan: ../ml/outputs/plots/shap_bar.png)
-    --shap_summary  shap_summary.png yolu
-             (varsayılan: ../ml/outputs/plots/shap_summary.png)
-    --outdir Çıktı klasörü (varsayılan: ./output/)
+    --csv          all_models_random_search_results.csv yolu
+                   (varsayılan: ../ml/outputs/all_models_random_search_results.csv)
+    --shap_values  SHAP mean absolute values CSV yolu — önerilen yöntem
+                   format: feature,shap_value (train_models.py çıktısı)
+                   (varsayılan: ../ml/outputs/shap_mean_abs_values.csv)
+    --shap         shap_bar.png yolu — shap_values yoksa fallback olarak kullanılır
+                   (varsayılan: ../ml/outputs/plots/shap_bar.png)
+    --shap_summary shap_summary.png yolu
+                   (varsayılan: ../ml/outputs/plots/shap_summary.png)
+    --outdir       Çıktı klasörü (varsayılan: ./output/)
 
 Üretilen dosyalar:
-    fig1_architecture.pdf   — Yazılım mimarisi flowchart
-    fig4_shap_bar.pdf       — SHAP bar plot (yeniden formatlanmış)
-    fig4_shap_summary.pdf   — SHAP beeswarm (yeniden formatlanmış)
+    fig1_architecture.pdf     — Yazılım mimarisi flowchart
+    fig4a_shap_bar.pdf        — SHAP bar plot (okunabilir feature isimleriyle)
+    fig4b_shap_summary.pdf    — SHAP beeswarm (yeniden formatlanmış)
     fig5_model_comparison.pdf — 35 model MaxE karşılaştırması
-    table2_design_space.tex — Dataset tasarım uzayı LaTeX tablosu
-    table3_top_models.tex   — En iyi 5 model metrikleri LaTeX tablosu
+    table2_design_space.tex   — Dataset tasarım uzayı LaTeX tablosu
+    table3_top_models.tex     — En iyi 5 model metrikleri LaTeX tablosu
 """
 
 import argparse
@@ -99,6 +102,10 @@ def parse_args():
         os.path.dirname(__file__), "..", "ml", "outputs", "plots", "shap_bar.png"))
     p.add_argument("--shap_summary", default=os.path.join(
         os.path.dirname(__file__), "..", "ml", "outputs", "plots", "shap_summary.png"))
+    p.add_argument("--shap_values", default=os.path.join(
+        os.path.dirname(__file__), "..", "ml", "outputs",
+        "shap_mean_abs_values.csv"),
+        help="CSV with columns [feature, shap_value] — produced by train_models.py")
     p.add_argument("--outdir", default=os.path.join(
         os.path.dirname(__file__), "output"))
     return p.parse_args()
@@ -236,31 +243,142 @@ def fig1_architecture(outdir):
 # FIG 4 — SHAP görselleri (mevcut PNG'yi yeniden çerçevele)
 # ===========================================================================
 
-def fig4_shap(shap_bar_path, shap_sum_path, outdir):
+# ---------------------------------------------------------------------------
+# Feature name map: CSV column → human-readable label
+# ---------------------------------------------------------------------------
+FEATURE_NAMES = {
+    "H":    "Wall height",
+    "X1":   "Foundation total width",
+    "X2":   "Front overhang",
+    "X3":   "Stem bottom width",
+    "X4":   "Stem top width",
+    "X5":   "Foundation thickness",
+    "X6":   "Key thickness",
+    "X7":   "Key width",
+    "X8":   "Key offset from heel",
+    "q":    "Surcharge load",
+    "sds":  "Spectral acceleration",
+    "v2":   "Rear overhang",
+    "x1":   "Foundation + key thickness",
+    "s1":   "Wall batter slope",
+    "gama": "Soil unit weight  γ",
+    "c":    "Cohesion  c",
+    "fi":   "Friction angle  φ",
+    "hw":   "Groundwater level index",
+}
+
+
+# ===========================================================================
+# FIG 4 — SHAP bar plot (sıfırdan üretim veya PNG fallback)
+# ===========================================================================
+
+def fig4_shap(shap_bar_path, shap_sum_path, outdir, shap_values_csv=None):
     """
-    Mevcut shap_bar.png ve shap_summary.png dosyalarını
-    Elsevier boyutuna göre yeniden çerçeveler ve PDF olarak kaydeder.
-    Dosyalar yoksa yer tutucu grafik üretir.
+    Öncelik: shap_values_csv varsa matplotlib ile sıfırdan çizer
+    (feature isimleri FEATURE_NAMES ile Türkçe/İngilizce okunabilir hale gelir).
+    Yoksa eski shap_bar.png'yi yeniden çerçeveler.
+    shap_summary.png her iki durumda da aynı şekilde çerçevelenir.
     """
-    for src_path, out_name, title in [
-        (shap_bar_path,  "fig4a_shap_bar.pdf",     "Mean |SHAP value|"),
-        (shap_sum_path,  "fig4b_shap_summary.pdf",  "SHAP summary (beeswarm)"),
-    ]:
-        fig, ax = plt.subplots(figsize=(SINGLE_COL_W, 3.2))
-        if os.path.isfile(src_path):
-            img = Image.open(src_path)
-            ax.imshow(img)
-            ax.axis("off")
-            ax.set_title(title, fontsize=TITLE_SIZE, pad=4)
-        else:
-            ax.text(0.5, 0.5,
-                    f"[Placeholder]\n{os.path.basename(src_path)}\nnot found",
-                    ha="center", va="center", fontsize=8,
-                    color=C_GRAY, transform=ax.transAxes)
-            ax.set_title(title, fontsize=TITLE_SIZE, pad=4)
-            ax.axis("off")
-        fig.tight_layout(pad=0.3)
-        savefig(fig, outdir, out_name)
+
+    # ── 4a: Bar plot ────────────────────────────────────────────────────────
+    if shap_values_csv and os.path.isfile(shap_values_csv):
+        _fig4a_from_csv(shap_values_csv, outdir)
+    else:
+        _fig4a_from_png(shap_bar_path, outdir)
+
+    # ── 4b: Beeswarm / summary (her zaman PNG çerçeveleme) ─────────────────
+    fig, ax = plt.subplots(figsize=(SINGLE_COL_W, 3.2))
+    if os.path.isfile(shap_sum_path):
+        from PIL import Image
+        img = Image.open(shap_sum_path)
+        ax.imshow(img)
+        ax.axis("off")
+        ax.set_title("SHAP summary (beeswarm)", fontsize=TITLE_SIZE, pad=4)
+    else:
+        ax.text(0.5, 0.5,
+                f"[Placeholder]\n{os.path.basename(shap_sum_path)}\nnot found",
+                ha="center", va="center", fontsize=8,
+                color=C_GRAY, transform=ax.transAxes)
+        ax.set_title("SHAP summary (beeswarm)", fontsize=TITLE_SIZE, pad=4)
+        ax.axis("off")
+    fig.tight_layout(pad=0.3)
+    savefig(fig, outdir, "fig4b_shap_summary.pdf")
+
+
+def _fig4a_from_csv(csv_path, outdir):
+    """
+    shap_mean_abs_values.csv formatı (train_models.py çıktısı):
+        feature,shap_value
+        H,0.312
+        sds,0.278
+        ...
+    Sütun adları farklıysa ilk iki sütun alınır.
+    """
+    df = pd.read_csv(csv_path)
+    # Sütun adlarını normalize et
+    df.columns = [c.strip().lower() for c in df.columns]
+    feat_col = df.columns[0]
+    val_col  = df.columns[1]
+
+    df[val_col] = pd.to_numeric(df[val_col], errors="coerce")
+    df = df.dropna(subset=[val_col]).sort_values(val_col, ascending=True)
+
+    # Feature isimlerini okunabilir hale getir
+    df["label"] = df[feat_col].map(
+        lambda x: FEATURE_NAMES.get(str(x), str(x))
+    )
+
+    n   = len(df)
+    fig, ax = plt.subplots(figsize=(SINGLE_COL_W, max(2.8, n * 0.28 + 0.6)))
+
+    colors = [C_TEAL if v >= df[val_col].quantile(0.5) else C_GRAY
+              for v in df[val_col].values]
+
+    bars = ax.barh(range(n), df[val_col].values,
+                   color=colors, height=0.72, edgecolor="none")
+
+    ax.set_yticks(range(n))
+    ax.set_yticklabels(df["label"].values, fontsize=7)
+    ax.set_xlabel("Mean |SHAP value|", fontsize=LABEL_SIZE)
+    ax.set_title("(a) Feature importance — XGBoost baseline",
+                 fontsize=TITLE_SIZE, pad=4, loc="left")
+    ax.grid(axis="x", zorder=0)
+    ax.set_axisbelow(True)
+
+    # En yüksek 3'ü etiketle
+    top3 = df[val_col].nlargest(3).index.tolist()
+    idx_map = {idx: i for i, idx in enumerate(df.index)}
+    for idx in top3:
+        i   = idx_map[idx]
+        val = df.loc[idx, val_col]
+        ax.text(val + df[val_col].max() * 0.01,
+                i, f"{val:.3f}",
+                va="center", fontsize=6, color="#333")
+
+    fig.tight_layout(pad=0.4)
+    savefig(fig, outdir, "fig4a_shap_bar.pdf")
+    print(f"    → {n} features plotted with readable names")
+
+
+def _fig4a_from_png(shap_bar_path, outdir):
+    """Eski yöntem: mevcut PNG'yi çerçevele."""
+    from PIL import Image
+    fig, ax = plt.subplots(figsize=(SINGLE_COL_W, 3.2))
+    if os.path.isfile(shap_bar_path):
+        img = Image.open(shap_bar_path)
+        ax.imshow(img)
+        ax.axis("off")
+        ax.set_title("Mean |SHAP value|", fontsize=TITLE_SIZE, pad=4)
+    else:
+        ax.text(0.5, 0.5,
+                f"[Placeholder]\n{os.path.basename(shap_bar_path)}\nnot found\n\n"
+                f"Pass --shap_values PATH to generate from CSV instead.",
+                ha="center", va="center", fontsize=7.5,
+                color=C_GRAY, transform=ax.transAxes)
+        ax.set_title("Mean |SHAP value|", fontsize=TITLE_SIZE, pad=4)
+        ax.axis("off")
+    fig.tight_layout(pad=0.3)
+    savefig(fig, outdir, "fig4a_shap_bar.pdf")
 
 
 # ===========================================================================
@@ -612,7 +730,8 @@ def main():
     fig1_architecture(out)
 
     print("[2/6] Fig 4a/4b — SHAP plots...")
-    fig4_shap(args.shap, args.shap_summary, out)
+    fig4_shap(args.shap, args.shap_summary, out,
+              shap_values_csv=args.shap_values)
 
     print("[3/6] Fig 5 — Model comparison...")
     fig5_model_comparison(args.csv, out)
