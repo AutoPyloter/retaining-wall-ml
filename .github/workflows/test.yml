@@ -1,3 +1,4 @@
+@"
 name: Tests
 
 on:
@@ -23,10 +24,18 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install black isort flake8
 
-      - name: Run split_dataset (generate train/test/unseen)
+      - name: Code quality checks
+        run: |
+          black --check --line-length 100 .
+          isort --check-only --profile black --line-length 100 .
+          flake8 .
+
+      - name: Run split_dataset
         working-directory: ml
         run: python split_dataset.py
 
       - name: Run tests
         run: python -m pytest tests/ -v --tb=short
+"@ | Set-Content C:\Users\ASUS\Documents\GitHub\retaining-wall-ml\.github\workflows\test.yml

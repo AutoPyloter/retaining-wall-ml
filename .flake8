@@ -1,0 +1,20 @@
+[flake8]
+max-line-length = 100
+extend-ignore =
+    E203,
+    E221,
+    E272,
+    E402,
+    E501,
+    W503,
+    F401,
+    F811,
+    F841,
+    W605,
+    F541,
+    E741
+exclude =
+    .git,
+    __pycache__,
+    ml/outputs,
+    figs/output
