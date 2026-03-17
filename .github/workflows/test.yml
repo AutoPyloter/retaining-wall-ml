@@ -1,4 +1,3 @@
-@"
 name: Tests
 
 on:
@@ -38,4 +37,3 @@ jobs:
 
       - name: Run tests
         run: python -m pytest tests/ -v --tb=short
-"@ | Set-Content C:\Users\ASUS\Documents\GitHub\retaining-wall-ml\.github\workflows\test.yml
