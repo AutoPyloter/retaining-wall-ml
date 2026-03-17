@@ -1,23 +1,12 @@
-# Retaining Wall ML
+# Retaining Wall ML — Global Stability Prediction for Cantilever Retaining Walls
 
-**An open-source machine learning framework for global stability safety factor prediction of cantilever retaining walls.**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Python 3.11+](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
+A machine learning framework for instant prediction of the global stability safety factor (F<sub>ss</sub>) of reinforced concrete cantilever retaining walls. The project covers the full pipeline: automated dataset generation via GEO5, SHAP-guided feature selection, and a CatBoost model deployed in a PyQt5 desktop application.
 
 ---
 
-## Overview
+## Motivation
 
-**Retaining Wall ML** predicts the global stability safety factor (*F*ss) of reinforced concrete cantilever retaining walls using an ensemble of 35 regression algorithms. The framework covers the full pipeline from dataset ingestion to interactive desktop inference:
-
-- **SHAP-guided feature selection** — XGBoost baseline + TreeExplainer ranks 18 input features by global importance
-- **35-model benchmark** — linear models, kernel methods, neural networks, gradient boosting (XGBoost, LightGBM, CatBoost), and meta-learners, all tuned jointly via `RandomizedSearchCV`
-- **Desktop application** — bilingual (EN/TR) `customtkinter` GUI with real-time wall cross-section rendering, single-scenario prediction, and bulk uncertainty analysis
-
-Gaussian Process Regression (GPR) achieves the lowest maximum absolute error on the unseen hold-out set (**MaxE = 0.184**, R² = 0.986).
-
-> ⚠️ The trained models are valid within the parameter ranges of the dataset. Predictions outside these bounds should be verified against independent analyses.
+Conventional global stability analysis (Bishop circular-slip method) requires dedicated geotechnical software and significant computation time for each design scenario. This project replaces that process with a trained ML model capable of predicting F<sub>ss</sub> in real time, directly from wall geometry and site parameters — enabling rapid design screening and sensitivity analysis.
 
 ---
 
@@ -26,263 +15,201 @@ Gaussian Process Regression (GPR) achieves the lowest maximum absolute error on 
 ```
 retaining-wall-ml/
 │
+├── data_generation/
+│   ├── geo5_2018_11_en_cantilever_wall_automation.py  # GEO5 GUI automation (CantileverWall class)
+│   ├── geo5_interface.py                              # Single-scenario analysis orchestrator
+│   ├── design_space_sampler.py                        # Discrete sampler & ScenarioGenerator
+│   ├── generate_dataset.py                            # Entry point — generates output.txt
+│   └── timelapse.py                                   # Compiles screenshots into MP4
+│
 ├── ml/
-│   ├── split_dataset.py               # Train / test / unseen split (70/20/10)
-│   ├── train_models.py                # Full training pipeline (SHAP + RandomizedSearchCV)
-│   ├── metrics.py                     # 17 regression metrics (MAE, RMSE, R², NSE, KGE, CCC …)
-│   ├── predict.py                     # Batch prediction on CSV datasets
-│   ├── inference.py                   # Single-scenario prediction (importable)
-│   ├── pipeline_components.py         # OptionalScaler and SHAP feature selector
-│   └── outputs/
-│       ├── saved_models/              # Trained pipeline binaries (.pkl)
-│       ├── plots/                     # SHAP bar and beeswarm plots
-│       ├── logs/                      # training_log.txt and cache files
-│       ├── train.csv                  # Training split (70 %)
-│       ├── test.csv                   # Test split (20 %)
-│       ├── unseen.csv                 # Hold-out split (10 %)
-│       └── all_models_random_search_results.csv   # Full results (35 models × 3 splits)
+│   └── (ML training, SHAP analysis, model evaluation)
 │
 ├── app/
-│   ├── main.py                        # Application entry point
-│   ├── app.py                         # StabilityApp GUI (two-tab layout)
-│   ├── model_info.py                  # Metadata for all 35 regression models
-│   ├── preprocessing.py               # SHAP feature ordering and input preparation
-│   ├── pipeline_components.py         # Shared pipeline classes (joblib compatibility)
-│   ├── config.py                      # Config file helpers and path resolver
-│   ├── language.py                    # Translation loader
-│   ├── utils.py                       # Shared utility functions
-│   ├── Language/
-│   │   ├── EN.json                    # English UI strings
-│   │   └── TR.json                    # Turkish UI strings
-│   └── config.cfg                     # Persisted user preferences
+│   └── (PyQt5 desktop application)
 │
-├── figs/
-│   └── generate_figures.py            # Reproduces all paper figures and LaTeX tables
-│
-├── output.csv                         # Full labelled dataset (>2 000 scenarios)
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
+## GEO5 Prerequisites
+
+Before running the data generation pipeline, the following must be configured **manually** in GEO5 (Cantilever Wall module):
+
+### Settings → Materials and Standards
+| Setting | Value |
+|--------|-------|
+| Active earth pressure | Coulomb |
+| Passive earth pressure | Coulomb |
+| Earthquake analysis | Mononobe-Okabe |
+| Shape of earth wedge | Consider always vertical |
+| Base key | Inclined footing bottom |
+| Allowable eccentricity | 0.333 |
+| Verification methodology | Safety Factors (ASD) |
+| SF_o = SF_s = SF_b | 1.50 |
+
+### Settings → Slope Stability
+| Setting | Value |
+|--------|-------|
+| Verification methodology | Safety Factors (ASD) |
+| SF | 1.50 |
+
+### Profile
+Enter two depth values. The second value is not critical — the automation script updates it at runtime.
+
+### Soils
+Define a soil named **`soil1`** with the following properties:
+- Poisson's ratio: `0.33`
+- Saturated unit weight: ≥ 20 kN/m³
+- γ, φ, c, δ: any values — the script overwrites them at runtime
+
+Define a second soil named **`backfill`** with:
+- φ = 40°, c = 0, δ = 26.67°, cohesionless
+
+### Backfill Tab
+- Select option 3
+- Slope = 45°
+- Assigned soil = `backfill`
+
+### FF Resistance
+- Resistance type: Passive
+- Soil: `backfill`
+- All other values are updated by the script at runtime
+
+### Earthquake
+- Enable **"Analyze earthquake"** checkbox
+- k<sub>h</sub> and k<sub>v</sub> values are entered by the script at runtime
+
+---
+
 ## Installation
 
 ```bash
-git clone https://github.com/AutoPyloter/retaining-wall-ml.git
+git clone https://github.com/<your-username>/retaining-wall-ml.git
 cd retaining-wall-ml
 pip install -r requirements.txt
 ```
 
-> **Note:** `numpy<2` is pinned due to OpenCV compatibility. `scikit-learn==1.6.1` is pinned to match the serialised model binaries in `ml/outputs/saved_models/` — using a different version will cause joblib deserialisation errors.
-
----
-
-## Dataset
-
-A labelled dataset of **more than 2,000 independent design scenarios** is provided as `output.csv` in the repository root. Each scenario is fully characterised by **18 input parameters** spanning four categories:
-
-| Category | Parameters |
-|---|---|
-| Geometry | H, x₁–x₈, v₂, x₁ (derived), s₁ |
-| Seismic loading | S_DS ∈ [0.6, 1.8] g |
-| Soil properties | γ, c, φ — five discrete soil classes (ZA–ZE) |
-| Hydrogeology | h_w — water-table depth in metres (five discrete scenarios) |
-
-**Soil classes:**
-
-| Class | γ (kN/m³) | c (kPa) | φ (°) |
-|---|---|---|---|
-| ZA | 20 | 0 | 40 |
-| ZB | 20 | 0 | 36 |
-| ZC | 19 | 20 | 30 |
-| ZD | 18 | 30 | 26 |
-| ZE | 17 | 40 | 20 |
-
-**Groundwater scenarios:**
-
-`h_w` is stored in the CSV as the **actual water-table depth in metres**, computed from the scenario formula below. Larger values correspond to deeper (drier) conditions.
-
-| Scenario | h_w in CSV (m) | Physical condition |
-|---|---|---|
-| S0 | 0 | At ground surface (fully saturated) |
-| S1 | 0.5H | At mid-height of wall stem |
-| S2 | H | At foundation base level |
-| S3 | H + 0.5x₁ | Below foundation base |
-| S4 | H + x₁ | Well below foundation (effectively dry) |
-
-**Target variable:** *F*ss = *M*p / *M*a (Bishop circular-slip method). Pre-computed and stored as the last column `fss`.
-
-**Dataset format** — semicolon-separated CSV with a one-row header:
-
-```
-H;X1;X2;X3;X4;X5;X6;X7;X8;q;sds;v2;x1;s1;gama;c;fi;hw;fss
-```
+> **Note:** NumPy 2.x is not compatible with the current OpenCV build.  
+> `requirements.txt` pins `numpy<2` to avoid this issue.
 
 ---
 
 ## Usage
 
-### 1 — Split the dataset
+### 1. Generate the dataset
+
+Ensure GEO5 is open with a Cantilever Wall project named **`guz`**, then run:
 
 ```bash
-cd ml/
-python split_dataset.py
+cd data_generation
+python generate_dataset.py
 ```
 
-Produces `train.csv` (70%), `test.csv` (20%), `unseen.csv` (10%) in `ml/outputs/` using random sampling (`random_state=42`).
+Results are appended to `output.txt` after each scenario.  
+Press **`i`** at any time for a clean interrupt.
 
-### 2 — Train all models
+### 2. Compile timelapse (optional)
 
 ```bash
-python train_models.py
+python timelapse.py
 ```
 
-Runs the full 8-stage training pipeline. A resume mechanism skips already-completed models — interrupted runs continue cleanly. All outputs are saved to `ml/outputs/`.
-
-### 3 — Run batch predictions
-
-```bash
-python predict.py
-```
-
-### 4 — Run the desktop application
-
-```bash
-cd app/
-python main.py
-```
-
-### 5 — Single-scenario inference (programmatic)
-
-```python
-from ml.inference import predict_fss
-
-result = predict_fss(
-    model_path="ml/outputs/saved_models/GPR_k14_Standard_a3f7c2b1.pkl",
-    inputs={
-        "H": 7.0, "X1": 3.5, "X2": 0.6, "X3": 0.45, "X4": 0.35,
-        "X5": 0.42, "X6": 0.50, "X7": 0.35, "X8": 1.2,
-        "q": 10, "sds": 1.2, "gama": 19, "c": 20, "fi": 30, "hw": 7.0
-    }
-)
-print(f"Predicted Fss: {result:.4f}")
-```
-
-### 6 — Reproduce paper figures
-
-```bash
-cd figs/
-python generate_figures.py \
-  --csv ../ml/outputs/all_models_random_search_results.csv \
-  --shap ../ml/outputs/plots/shap_bar.png \
-  --outdir ./output
-```
+Produces `timelapse.mp4` from screenshots saved during the generation run.
 
 ---
 
-## ML Pipeline
+## Dataset Description
 
-### Stage 1 — Data preparation
-`split_dataset.py` reads `output.csv` directly (header included, `fss` is the target column) and produces the three splits.
+### Design Space — Input Parameters (13)
 
-### Stage 2 — XGBoost baseline
-Grid search over 256 hyperparameter combinations with 5-fold cross-validation identifies the best XGBoost baseline, used exclusively for SHAP computation.
+| Parameter | Description | Range |
+|-----------|-------------|-------|
+| H | Wall height (m) | 4 – 10 |
+| x1 | Heel slab width (m) | 0.3H – 10.0 |
+| x2 | Toe slab width (m) | 0.15x1 – 0.45x1 |
+| x3 | Base slab thickness (m) | 0.3 – 0.6 |
+| x4 | Stem bottom width (m) | 0.3 – x3 |
+| x5 | Stem top width (m) | 0.06H – 0.18H |
+| x6 | Key thickness (m) | 0 – 1.2x5 |
+| x7 | Key width (m) | 0 – 0.3x1 |
+| x8 | Key offset from heel (m) | 0 – 0.7x1 |
+| q | Surcharge load (kN/m²) | 0 – 20 |
+| SDS | Design spectral acceleration (g) | 0.6 – 1.8 |
+| Soil_Class | Soil class index | 0 – 4 |
+| hw | Water level scenario index | 0 – 4 |
 
-### Stage 3 — SHAP feature ranking
-`shap.TreeExplainer` computes mean absolute SHAP values across the training set. All 18 features are ranked by global importance. This ranking is frozen and reused by every downstream model.
+**Soil classes:**
 
-### Stage 4 — Model configurations
-All 35 algorithms are wrapped in a three-step sklearn `Pipeline`:
+| Index | Description | γ (kN/m³) | c (kPa) | φ (°) |
+|-------|-------------|-----------|---------|-------|
+| 0 | Dense sand/gravel | 20 | 0 | 40 |
+| 1 | Medium-dense sand | 20 | 0 | 36 |
+| 2 | Silty sand | 19 | 20 | 30 |
+| 3 | Silt/low-plasticity clay | 18 | 30 | 26 |
+| 4 | Soft clay | 17 | 40 | 20 |
+
+**Water level scenarios:**
+
+| Index | Water level |
+|-------|-------------|
+| 0 | Dry (hw = 0) |
+| 1 | Mid-stem (hw = H/2) |
+| 2 | Top of stem (hw = H) |
+| 3 | Mid-heel (hw = H/2 + x1/2) |
+| 4 | Top of backfill (hw = H + x1) |
+
+### Output Variables (7)
+
+| Variable | Description |
+|----------|-------------|
+| Fa | Sum of active forces (kN/m) |
+| Fp | Sum of passive forces (kN/m) |
+| Ma | Sliding moment (kN·m/m) |
+| Mp | Resisting moment (kN·m/m) |
+| x | Slip circle center x-coordinate (m) |
+| z | Slip circle center z-coordinate (m) |
+| R | Slip circle radius (m) |
+
+> **Target variable:** F<sub>ss</sub> = Mp / Ma (factor of safety against sliding, Bishop method)
+
+### output.txt Format
+
+Each row corresponds to one scenario (comma-separated, no header):
 
 ```
-FunctionTransformer (SHAP top-k selector) → OptionalScaler → Estimator
+H, x1, x2, x3, x4, x5, x6, x7, x8, q, SDS, Soil_Class, hw, Fa, Fp, Ma, Mp, x, z, R
 ```
 
-`OptionalScaler` applies one of five scalers (`StandardScaler`, `MinMaxScaler`, `RobustScaler`, `MaxAbsScaler`, or no scaling). Feature count `k` and scaler are treated as hyperparameters and tuned jointly.
-
-### Stage 5 — Joint hyperparameter search
-`RandomizedSearchCV` jointly optimises feature count, scaler, and model hyperparameters (up to 5,000 iterations, 5-fold CV, negative MSE scoring).
-
-### Stage 6 — Final training and serialisation
-The best pipeline per model is re-fitted on the full training set and saved with `joblib`. Filenames embed feature count, scaler name, and an 8-character MD5 hash of the hyperparameter string.
-
-### Stage 7 — Evaluation
-Each pipeline is evaluated on all three splits using **17 performance indicators**:
-
-`MAE`, `MSE`, `RMSE`, `RSR`, `MAPE`, `sMAPE`, `R²`, `EVS`, `MBE`, `CV(RMSE)%`, `MdAE`, `MaxE`, `NSE`, `KGE`, `CCC`, `VAF(%)`, `PI`
-
-Results are consolidated in `ml/outputs/all_models_random_search_results.csv` (35 models × 3 splits = 105 rows).
-
-### Stage 8 — SHAP visualisations
-`shap_bar.png` (mean absolute importance) and `shap_summary.png` (beeswarm) are saved to `ml/outputs/plots/`.
+Total dataset: **2048 scenarios**
 
 ---
 
-## Screenshots
+## ML Pipeline Overview
 
-### Input & Visualisation Tab
-![Input & Visualisation Tab](figs/output/fig2_app_screenshot.png)
+The ML pipeline (see `ml/`) consists of the following stages:
 
-The left panel provides editable input fields for wall geometry, soil properties, and loading parameters. The canvas below renders the wall cross-section in real time — including the backfill wedge, groundwater line, and surcharge arrows — updating on every keystroke.
-
-### Model Selection Tab
-![Model Selection Tab](figs/output/fig3_bulk_predict.png)
-
-All trained pipelines are listed and sorted by MaxE on the unseen set. Selecting a model and pressing **Predict** returns *F*ss ± MaxE instantly. **Toplu Tahmin** (Bulk Predict) runs all 35 models simultaneously and opens the uncertainty visualisation window.
-
----
-
-## Desktop Application
-
-Built with `customtkinter`, the application provides two tabs.
-
-### Input & Visualisation tab
-- **Input panel** — 15 editable parameter fields (3 further geometric parameters are derived automatically)
-- **Wall canvas** — renders a scaled cross-section of the cantilever wall in real time as values are typed, including the backfill wedge, groundwater line, and surcharge arrows
-- **Model selector** — lists all loadable pipelines sorted by MaxE on the unseen set
-- **Predict** — runs the selected pipeline and displays *F*ss ± MaxE
-- **Get Info** — shows a popup table with all 17 metrics across Train / Test / Unseen splits
-
-### Bulk prediction window
-- **Model list** — scrollable checkbox list with individual *F*ss predictions
-- **KDE chart** — density curve, per-model error boxes (*F*ss ± MaxE), box plot, and jittered swarm dots on a shared axis
-- Chart updates instantly when model checkboxes are toggled
-
-### Language support
-Interface is available in **English** and **Turkish**. Language preference is persisted in `config.cfg`.
-
----
-
-## Results
-
-Top-5 models ranked by MaxE on the unseen hold-out set:
-
-| Model | MAE | RMSE | R² | MaxE |
-|---|---|---|---|---|
-| GPR | 0.0404 | 0.0531 | 0.9855 | **0.184** |
-| HGB | 0.0494 | 0.0657 | 0.9778 | 0.240 |
-| Kernel Ridge | 0.0459 | 0.0602 | 0.9813 | 0.250 |
-| Polynomial Ridge | 0.0448 | 0.0593 | 0.9819 | 0.252 |
-| MLP | 0.0447 | 0.0604 | 0.9812 | 0.255 |
-
-Full results for all 35 models across all three splits are in `ml/outputs/all_models_random_search_results.csv`.
+1. **Data preparation** — F<sub>ss</sub> = Mp / Ma is computed from `output.txt`; dataset split into 70% train / 20% test / 10% unseen hold-out
+2. **Baseline model** — XGBoost trained on all features; SHAP values computed to rank feature importance
+3. **SHAP-guided feature selection** — For each candidate algorithm, Randomized Search CV (2000 iterations) selects the optimal feature subset based on SHAP ranking
+4. **Algorithm comparison** — 24+ algorithms evaluated using five metrics: NSE, KGE, sMAPE, CCC, VAF
+5. **Final model** — CatBoost with Bayesian bootstrap, trained on the SHAP-selected feature subset
 
 ---
 
 ## Citation
 
-If you use this framework or dataset in your research, please cite:
+If you use this dataset or codebase in your research, please cite:
 
 ```bibtex
-@article{ozcan2025retainingwallml,
-  author  = {Özcan, Abdulkadir and Uray, Esra},
-  title   = {Retaining Wall ML: An Open-Source Machine Learning Framework
-             for Global Stability Safety Factor Prediction of
-             Cantilever Retaining Walls},
+@article{,
+  title   = {},
+  author  = {},
   journal = {SoftwareX},
-  year    = {2025},
-  note    = {Under review}
+  year    = {},
+  doi     = {}
 }
 ```
 
@@ -292,4 +219,4 @@ If you use this framework or dataset in your research, please cite:
 
 ## License
 
-MIT © 2025 Abdulkadir Özcan, Esra Uray — KTO Karatay University
+This repository is currently private. License will be added upon publication.
