@@ -87,7 +87,7 @@ A labelled dataset of **more than 2,000 independent design scenarios** is provid
 | Geometry | H, x₁–x₈, v₂, x₁ (derived), s₁ |
 | Seismic loading | S_DS ∈ [0.6, 1.8] g |
 | Soil properties | γ, c, φ — five discrete soil classes (ZA–ZE) |
-| Hydrogeology | h_w — five discrete groundwater scenarios |
+| Hydrogeology | h_w — water-table depth in metres (five discrete scenarios) |
 
 **Soil classes:**
 
@@ -101,13 +101,15 @@ A labelled dataset of **more than 2,000 independent design scenarios** is provid
 
 **Groundwater scenarios:**
 
-| h_w | Water-table depth | Condition |
+`h_w` is stored in the CSV as the **actual water-table depth in metres**, computed from the scenario formula below. Larger values correspond to deeper (drier) conditions.
+
+| Scenario | h_w in CSV (m) | Physical condition |
 |---|---|---|
-| 0 | 0 | At ground surface (fully saturated) |
-| 1 | 0.5H | At mid-height of wall stem |
-| 2 | H | At foundation base level |
-| 3 | H + 0.5x₁ | Below foundation base |
-| 4 | H + x₁ | Well below foundation (effectively dry) |
+| S0 | 0 | At ground surface (fully saturated) |
+| S1 | 0.5H | At mid-height of wall stem |
+| S2 | H | At foundation base level |
+| S3 | H + 0.5x₁ | Below foundation base |
+| S4 | H + x₁ | Well below foundation (effectively dry) |
 
 **Target variable:** *F*ss = *M*p / *M*a (Bishop circular-slip method). Pre-computed and stored as the last column `fss`.
 
@@ -161,7 +163,7 @@ result = predict_fss(
     inputs={
         "H": 7.0, "X1": 3.5, "X2": 0.6, "X3": 0.45, "X4": 0.35,
         "X5": 0.42, "X6": 0.50, "X7": 0.35, "X8": 1.2,
-        "q": 10, "sds": 1.2, "gama": 19, "c": 20, "fi": 30, "hw": 2
+        "q": 10, "sds": 1.2, "gama": 19, "c": 20, "fi": 30, "hw": 7.0
     }
 )
 print(f"Predicted Fss: {result:.4f}")
