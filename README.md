@@ -27,55 +27,42 @@ Gaussian Process Regression (GPR) achieves the lowest maximum absolute error on 
 retaining-wall-ml/
 │
 ├── ml/
-│   ├── split_dataset.py          # Train / test / unseen split (70/20/10)
-│   ├── train_models.py           # Full training pipeline (SHAP + RandomizedSearchCV)
-│   ├── metrics.py                # 17 regression metrics (MAE, RMSE, R², NSE, KGE, CCC …)
-│   ├── predict.py                # Batch prediction on CSV datasets
-│   ├── inference.py              # Single-scenario prediction (importable)
-│   ├── pipeline_components.py    # OptionalScaler and SHAP feature selector
+│   ├── split_dataset.py               # Train / test / unseen split (70/20/10)
+│   ├── train_models.py                # Full training pipeline (SHAP + RandomizedSearchCV)
+│   ├── metrics.py                     # 17 regression metrics (MAE, RMSE, R², NSE, KGE, CCC …)
+│   ├── predict.py                     # Batch prediction on CSV datasets
+│   ├── inference.py                   # Single-scenario prediction (importable)
+│   ├── pipeline_components.py         # OptionalScaler and SHAP feature selector
 │   └── outputs/
-│       ├── saved_models/         # Trained pipeline binaries (.pkl)
-│       ├── plots/                # SHAP and convergence plots
-│       ├── logs/                 # Training log and cache files
-│       └── all_models_random_search_results.csv
+│       ├── saved_models/              # Trained pipeline binaries (.pkl)
+│       ├── plots/                     # SHAP bar and beeswarm plots
+│       ├── logs/                      # training_log.txt and cache files
+│       ├── train.csv                  # Training split (70 %)
+│       ├── test.csv                   # Test split (20 %)
+│       ├── unseen.csv                 # Hold-out split (10 %)
+│       └── all_models_random_search_results.csv   # Full results (35 models × 3 splits)
 │
 ├── app/
-│   ├── main.py                   # Application entry point
-│   ├── app.py                    # StabilityApp GUI (two-tab layout)
-│   ├── model_info.py             # Metadata for all 35 regression models
-│   ├── preprocessing.py          # SHAP feature ordering and input preparation
-│   ├── pipeline_components.py    # Shared pipeline classes (joblib compatibility)
-│   ├── config.py                 # Config file helpers
-│   ├── language.py               # Translation loader
-│   ├── utils.py                  # Shared utilities
+│   ├── main.py                        # Application entry point
+│   ├── app.py                         # StabilityApp GUI (two-tab layout)
+│   ├── model_info.py                  # Metadata for all 35 regression models
+│   ├── preprocessing.py               # SHAP feature ordering and input preparation
+│   ├── pipeline_components.py         # Shared pipeline classes (joblib compatibility)
+│   ├── config.py                      # Config file helpers and path resolver
+│   ├── language.py                    # Translation loader
+│   ├── utils.py                       # Shared utility functions
 │   ├── Language/
-│   │   ├── EN.json               # English UI strings
-│   │   └── TR.json               # Turkish UI strings
-│   └── config.cfg                # Persisted user preferences
+│   │   ├── EN.json                    # English UI strings
+│   │   └── TR.json                    # Turkish UI strings
+│   └── config.cfg                     # Persisted user preferences
 │
 ├── figs/
-│   └── generate_figures.py       # Reproduces all paper figures and LaTeX tables
+│   └── generate_figures.py            # Reproduces all paper figures and LaTeX tables
 │
+├── output.csv                         # Full labelled dataset (>2 000 scenarios)
 ├── requirements.txt
 └── README.md
 ```
-
----
-
-## Dataset
-
-A labelled dataset of **more than 2,000 independent design scenarios** is provided in the repository root. Each scenario is fully characterised by **18 input parameters** spanning four categories:
-
-| Category | Parameters |
-|---|---|
-| Geometry | H, x₁–x₈, v₂, x₁ (derived), s₁ |
-| Seismic loading | S_DS ∈ [0.6, 1.8] g |
-| Soil properties | γ, c, φ — five discrete soil classes (ZA–ZE) |
-| Hydrogeology | h_w — five discrete groundwater scenarios |
-
-The target variable is the global stability safety factor *F*ss = *M*p / *M*a, where *M*p is the resisting moment and *M*a is the overturning moment of the critical Bishop slip circle.
-
-The dataset is split into **training (70%) / test (20%) / unseen hold-out (10%)** by `split_dataset.py`.
 
 ---
 
@@ -87,35 +74,84 @@ cd retaining-wall-ml
 pip install -r requirements.txt
 ```
 
-**Requirements:** Python 3.11+, scikit-learn, XGBoost, LightGBM, CatBoost, SHAP, customtkinter, matplotlib, joblib
+> **Note:** `numpy<2` is pinned due to OpenCV compatibility. `scikit-learn==1.6.1` is pinned to match the serialised model binaries in `ml/outputs/saved_models/` — using a different version will cause joblib deserialisation errors.
+
+---
+
+## Dataset
+
+A labelled dataset of **more than 2,000 independent design scenarios** is provided as `output.csv` in the repository root. Each scenario is fully characterised by **18 input parameters** spanning four categories:
+
+| Category | Parameters |
+|---|---|
+| Geometry | H, x₁–x₈, v₂, x₁ (derived), s₁ |
+| Seismic loading | S_DS ∈ [0.6, 1.8] g |
+| Soil properties | γ, c, φ — five discrete soil classes (ZA–ZE) |
+| Hydrogeology | h_w — five discrete groundwater scenarios |
+
+**Soil classes:**
+
+| Class | γ (kN/m³) | c (kPa) | φ (°) |
+|---|---|---|---|
+| ZA | 20 | 0 | 40 |
+| ZB | 20 | 0 | 36 |
+| ZC | 19 | 20 | 30 |
+| ZD | 18 | 30 | 26 |
+| ZE | 17 | 40 | 20 |
+
+**Groundwater scenarios:**
+
+| h_w | Water-table depth | Condition |
+|---|---|---|
+| 0 | 0 | At ground surface (fully saturated) |
+| 1 | 0.5H | At mid-height of wall stem |
+| 2 | H | At foundation base level |
+| 3 | H + 0.5x₁ | Below foundation base |
+| 4 | H + x₁ | Well below foundation (effectively dry) |
+
+**Target variable:** *F*ss = *M*p / *M*a (Bishop circular-slip method). Pre-computed and stored as the last column `fss`.
+
+**Dataset format** — semicolon-separated CSV with a one-row header:
+
+```
+H;X1;X2;X3;X4;X5;X6;X7;X8;q;sds;v2;x1;s1;gama;c;fi;hw;fss
+```
 
 ---
 
 ## Usage
 
-### 1 — Train all models
+### 1 — Split the dataset
 
 ```bash
 cd ml/
+python split_dataset.py
+```
+
+Produces `train.csv` (70%), `test.csv` (20%), `unseen.csv` (10%) in `ml/outputs/` using stratified random sampling (`random_state=42`).
+
+### 2 — Train all models
+
+```bash
 python train_models.py
 ```
 
-Trains all 35 pipelines via `RandomizedSearchCV` (up to 5,000 iterations per model). A resume mechanism skips already-completed models — interrupted runs continue cleanly.
+Runs the full 8-stage training pipeline. A resume mechanism skips already-completed models — interrupted runs continue cleanly. All outputs are saved to `ml/outputs/`.
 
-Results are saved to `ml/outputs/all_models_random_search_results.csv`.
+### 3 — Run batch predictions
 
-### 2 — Run the desktop application
+```bash
+python predict.py
+```
+
+### 4 — Run the desktop application
 
 ```bash
 cd app/
 python main.py
 ```
 
-**Input & Visualisation tab** — enter 15 parameter values; the wall cross-section renders in real time.
-
-**Model Selection tab** — choose a model, press **Predict** to get *F*ss ± MaxE. Press **Bulk Predict** to run all 35 models and view the KDE + box plot uncertainty window.
-
-### 3 — Single-scenario inference (programmatic)
+### 5 — Single-scenario inference (programmatic)
 
 ```python
 from ml.inference import predict_fss
@@ -131,7 +167,7 @@ result = predict_fss(
 print(f"Predicted Fss: {result:.4f}")
 ```
 
-### 4 — Reproduce paper figures
+### 6 — Reproduce paper figures
 
 ```bash
 cd figs/
@@ -140,6 +176,65 @@ python generate_figures.py \
   --shap ../ml/outputs/plots/shap_bar.png \
   --outdir ./output
 ```
+
+---
+
+## ML Pipeline
+
+### Stage 1 — Data preparation
+`split_dataset.py` reads `output.csv` directly (header included, `fss` is the target column) and produces the three splits.
+
+### Stage 2 — XGBoost baseline
+Grid search over 256 hyperparameter combinations with 5-fold cross-validation identifies the best XGBoost baseline, used exclusively for SHAP computation.
+
+### Stage 3 — SHAP feature ranking
+`shap.TreeExplainer` computes mean absolute SHAP values across the training set. All 18 features are ranked by global importance. This ranking is frozen and reused by every downstream model.
+
+### Stage 4 — Model configurations
+All 35 algorithms are wrapped in a three-step sklearn `Pipeline`:
+
+```
+FunctionTransformer (SHAP top-k selector) → OptionalScaler → Estimator
+```
+
+`OptionalScaler` applies one of five scalers (`StandardScaler`, `MinMaxScaler`, `RobustScaler`, `MaxAbsScaler`, or no scaling). Feature count `k` and scaler are treated as hyperparameters and tuned jointly.
+
+### Stage 5 — Joint hyperparameter search
+`RandomizedSearchCV` jointly optimises feature count, scaler, and model hyperparameters (up to 5,000 iterations, 5-fold CV, negative MSE scoring).
+
+### Stage 6 — Final training and serialisation
+The best pipeline per model is re-fitted on the full training set and saved with `joblib`. Filenames embed feature count, scaler name, and an 8-character MD5 hash of the hyperparameter string.
+
+### Stage 7 — Evaluation
+Each pipeline is evaluated on all three splits using **17 performance indicators**:
+
+`MAE`, `MSE`, `RMSE`, `RSR`, `MAPE`, `sMAPE`, `R²`, `EVS`, `MBE`, `CV(RMSE)%`, `MdAE`, `MaxE`, `NSE`, `KGE`, `CCC`, `VAF(%)`, `PI`
+
+Results are consolidated in `ml/outputs/all_models_random_search_results.csv` (35 models × 3 splits = 105 rows).
+
+### Stage 8 — SHAP visualisations
+`shap_bar.png` (mean absolute importance) and `shap_summary.png` (beeswarm) are saved to `ml/outputs/plots/`.
+
+---
+
+## Desktop Application
+
+Built with `customtkinter`, the application provides two tabs.
+
+### Input & Visualisation tab
+- **Input panel** — 15 editable parameter fields (3 further geometric parameters are derived automatically)
+- **Wall canvas** — renders a scaled cross-section of the cantilever wall in real time as values are typed, including the backfill wedge, groundwater line, and surcharge arrows
+- **Model selector** — lists all loadable pipelines sorted by MaxE on the unseen set
+- **Predict** — runs the selected pipeline and displays *F*ss ± MaxE
+- **Get Info** — shows a popup table with all 17 metrics across Train / Test / Unseen splits
+
+### Bulk prediction window
+- **Model list** — scrollable checkbox list with individual *F*ss predictions
+- **KDE chart** — density curve, per-model error boxes (*F*ss ± MaxE), box plot, and jittered swarm dots on a shared axis
+- Chart updates instantly when model checkboxes are toggled
+
+### Language support
+Interface is available in **English** and **Turkish**. Language preference is persisted in `config.cfg`.
 
 ---
 
@@ -155,7 +250,7 @@ Top-5 models ranked by MaxE on the unseen hold-out set:
 | Polynomial Ridge | 0.0448 | 0.0593 | 0.9819 | 0.252 |
 | MLP | 0.0447 | 0.0604 | 0.9812 | 0.255 |
 
-All 35 model results are in `ml/outputs/all_models_random_search_results.csv`.
+Full results for all 35 models across all three splits are in `ml/outputs/all_models_random_search_results.csv`.
 
 ---
 
@@ -174,6 +269,8 @@ If you use this framework or dataset in your research, please cite:
   note    = {Under review}
 }
 ```
+
+> Citation details will be updated upon publication.
 
 ---
 
