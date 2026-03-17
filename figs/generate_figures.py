@@ -181,7 +181,7 @@ def fig1_architecture(outdir):
     # ---- Katman 1: Dataset ----
     box(5.0, 3.52, 2.6, 0.42,
         "Dataset  (>2\u202f000 scenarios)",
-        "13 inputs \u00b7 F\u209bS per row",
+        "18 inputs (13 sampled\u202f+\u202f5 derived) \u00b7 F\u209bS per row",
         fc="#D6F5E9", ec=C_TEAL, lc=C_TEAL)
 
     # ---- Katman 2: ML module ----
