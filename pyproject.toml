@@ -1,13 +1,7 @@
-﻿python -c "
-content = '''[tool.black]
+﻿[tool.black]
 line-length = 100
-target-version = [\"py311\"]
+target-version = ["py311"]
 
 [tool.isort]
-profile = \"black\"
+profile = "black"
 line_length = 100
-'''
-with open('pyproject.toml', 'w', encoding='utf-8') as f:
-    f.write(content)
-print('OK')
-"
