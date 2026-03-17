@@ -121,7 +121,7 @@ def savefig(fig, outdir, name):
 def fig1_architecture(outdir):
     """
     Üç katman:
-      Katman 1: Dataset  (output.txt)
+      Katman 1: Dataset  (>2,000 scenarios)
       Katman 2: ML module  (split → SHAP → train → evaluate → serialise)
       Katman 3: App  (preprocess → pipeline → visualise)
     """
@@ -180,8 +180,8 @@ def fig1_architecture(outdir):
 
     # ---- Katman 1: Dataset ----
     box(5.0, 3.52, 2.6, 0.42,
-        "output.txt  (>2 000 scenarios)",
-        "13 inputs + 7 outputs per row",
+        "Dataset  (>2\u202f000 scenarios)",
+        "13 inputs \u00b7 F\u209bS per row",
         fc="#D6F5E9", ec=C_TEAL, lc=C_TEAL)
 
     # ---- Katman 2: ML module ----
