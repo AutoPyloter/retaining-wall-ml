@@ -220,12 +220,12 @@ Results are consolidated in `ml/outputs/all_models_random_search_results.csv` (3
 ## Screenshots
 
 ### Input & Visualisation Tab
-![Input & Visualisation Tab](figs/fig2_app_screenshot.png)
+![Input & Visualisation Tab](figs/output/fig2_app_screenshot.png)
 
 The left panel provides editable input fields for wall geometry, soil properties, and loading parameters. The canvas below renders the wall cross-section in real time — including the backfill wedge, groundwater line, and surcharge arrows — updating on every keystroke.
 
 ### Model Selection Tab
-![Model Selection Tab](figs/fig3_bulk_predict.png)
+![Model Selection Tab](figs/output/fig3_bulk_predict.png)
 
 All trained pipelines are listed and sorted by MaxE on the unseen set. Selecting a model and pressing **Predict** returns *F*ss ± MaxE instantly. **Toplu Tahmin** (Bulk Predict) runs all 35 models simultaneously and opens the uncertainty visualisation window.
 
