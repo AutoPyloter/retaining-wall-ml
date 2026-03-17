@@ -4,10 +4,10 @@ import pandas as pd
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-MODEL_FILE    = "catboost_model.pkl"
+MODEL_FILE = "catboost_model.pkl"
 FEATURES_FILE = "catboost_selected_features.csv"
-INPUT_FILE    = "data.csv"
-OUTPUT_FILE   = "predictions.csv"
+INPUT_FILE = "data.csv"
+OUTPUT_FILE = "predictions.csv"
 
 
 def predict_batch(
@@ -36,9 +36,7 @@ def predict_batch(
     """
     # Load model and selected features
     model = joblib.load(model_file)
-    selected_features = (
-        pd.read_csv(features_file, sep=";")["selected_feature"].tolist()
-    )
+    selected_features = pd.read_csv(features_file, sep=";")["selected_feature"].tolist()
 
     # Load input data and filter to selected features
     data = pd.read_csv(input_file, sep=";", decimal=",", engine="python")

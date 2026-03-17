@@ -4,12 +4,12 @@ from sklearn.model_selection import train_test_split
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-INPUT_FILE  = "data.csv"
+INPUT_FILE = "data.csv"
 RANDOM_SEED = 42
 
 # Split ratios: 70% train / 20% test / 10% unseen
-TRAIN_RATIO  = 0.70
-TEST_RATIO   = 0.20
+TRAIN_RATIO = 0.70
+TEST_RATIO = 0.20
 UNSEEN_RATIO = 0.10
 
 
@@ -43,11 +43,13 @@ def split_dataset(input_file=INPUT_FILE, random_seed=RANDOM_SEED):
     # Step 2: Split remainder into test (20%) and unseen (10%)
     # unseen fraction of temp = UNSEEN_RATIO / (TEST_RATIO + UNSEEN_RATIO) = 0.10/0.30 = 1/3
     unseen_fraction = UNSEEN_RATIO / (TEST_RATIO + UNSEEN_RATIO)
-    test_df, unseen_df = train_test_split(temp_df, test_size=unseen_fraction, random_state=random_seed)
+    test_df, unseen_df = train_test_split(
+        temp_df, test_size=unseen_fraction, random_state=random_seed
+    )
 
     # Save splits
-    train_df.to_csv("train.csv",   sep=";", decimal=",", index=False)
-    test_df.to_csv("test.csv",     sep=";", decimal=",", index=False)
+    train_df.to_csv("train.csv", sep=";", decimal=",", index=False)
+    test_df.to_csv("test.csv", sep=";", decimal=",", index=False)
     unseen_df.to_csv("unseen.csv", sep=";", decimal=",", index=False)
 
     print(f"Dataset split complete:")

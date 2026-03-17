@@ -4,8 +4,7 @@
 # Must be importable from both ml/ and app/ contexts.
 
 import numpy as np
-from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.base import clone
+from sklearn.base import BaseEstimator, TransformerMixin, clone
 
 
 class OptionalScaler(BaseEstimator, TransformerMixin):

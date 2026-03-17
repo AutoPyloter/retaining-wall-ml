@@ -7,6 +7,7 @@
 #   python test_scaling.py
 
 import os
+
 import pandas as pd
 
 SCALE_FILE = "scale_param.csv"
@@ -40,7 +41,7 @@ def load_scale_params(filepath: str = SCALE_FILE) -> tuple[dict, dict]:
 
     # Case-insensitive column lookup
     mean_col = next((c for c in df.columns if c.lower() == "mean"), None)
-    std_col  = next((c for c in df.columns if c.lower() == "std"),  None)
+    std_col = next((c for c in df.columns if c.lower() == "std"), None)
 
     if mean_col is None or std_col is None:
         raise KeyError(
@@ -50,7 +51,7 @@ def load_scale_params(filepath: str = SCALE_FILE) -> tuple[dict, dict]:
 
     df = df.set_index("feature")
     means = df[mean_col].to_dict()
-    stds  = df[std_col].to_dict()
+    stds = df[std_col].to_dict()
 
     return means, stds
 

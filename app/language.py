@@ -19,11 +19,7 @@ def resource_path(relative_path: str) -> str:
 def list_languages() -> List[str]:
     """Return language codes available in the Language/ directory (e.g. ['EN', 'TR'])."""
     lang_dir = resource_path("Language")
-    return [
-        os.path.splitext(f)[0]
-        for f in os.listdir(lang_dir)
-        if f.endswith(".json")
-    ]
+    return [os.path.splitext(f)[0] for f in os.listdir(lang_dir) if f.endswith(".json")]
 
 
 def load_translations(lang_code: str) -> dict:

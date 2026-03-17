@@ -5,7 +5,7 @@ import pandas as pd
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-MODEL_FILE    = "catboost_model.pkl"
+MODEL_FILE = "catboost_model.pkl"
 FEATURES_FILE = "catboost_selected_features.csv"
 
 
@@ -24,9 +24,7 @@ def load_model(model_file=MODEL_FILE, features_file=FEATURES_FILE):
     selected_features : list[str] — feature names in the order expected by the model
     """
     model = joblib.load(model_file)
-    selected_features = (
-        pd.read_csv(features_file, sep=";")["selected_feature"].tolist()
-    )
+    selected_features = pd.read_csv(features_file, sep=";")["selected_feature"].tolist()
     return model, selected_features
 
 
@@ -65,8 +63,8 @@ def predict_fss(input_values, model=None, selected_features=None):
         model, selected_features = load_model()
 
     input_array = np.array([input_values])
-    input_df    = pd.DataFrame(input_array, columns=selected_features)
-    prediction  = model.predict(input_df.values)
+    input_df = pd.DataFrame(input_array, columns=selected_features)
+    prediction = model.predict(input_df.values)
     return float(prediction[0])
 
 

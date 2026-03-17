@@ -4,10 +4,12 @@ rename_models.py
 Mevcut uzun isimli pkl dosyalarını kısa hash formatına dönüştürür.
 ml/ dizininde çalıştır:  python rename_models.py
 """
-import os, re, hashlib
 
-MODELS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                          "outputs", "saved_models")
+import hashlib
+import os
+import re
+
+MODELS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "outputs", "saved_models")
 
 pattern = re.compile(r"^(.+?)_k(\d+)_([^_]+)_(.+)\.pkl$")
 
@@ -29,10 +31,10 @@ for fname in os.listdir(MODELS_DIR):
         skipped += 1
         continue
 
-    params_hash  = hashlib.md5(params_str.encode()).hexdigest()[:8]
-    new_name     = f"{model_name}_k{k}_{scaler_name}_{params_hash}.pkl"
-    old_path     = os.path.join(MODELS_DIR, fname)
-    new_path     = os.path.join(MODELS_DIR, new_name)
+    params_hash = hashlib.md5(params_str.encode()).hexdigest()[:8]
+    new_name = f"{model_name}_k{k}_{scaler_name}_{params_hash}.pkl"
+    old_path = os.path.join(MODELS_DIR, fname)
+    new_path = os.path.join(MODELS_DIR, new_name)
 
     if os.path.exists(new_path):
         os.remove(old_path)

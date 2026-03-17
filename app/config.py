@@ -5,10 +5,10 @@
 import os
 import sys
 
-
 # ---------------------------------------------------------------------------
 # Path resolution
 # ---------------------------------------------------------------------------
+
 
 def resource_path(relative_path: str) -> str:
     """Return absolute path to *relative_path*, compatible with PyInstaller bundles.

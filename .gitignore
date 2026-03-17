@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.log
+ml/train.csv
+ml/test.csv
+ml/unseen.csv

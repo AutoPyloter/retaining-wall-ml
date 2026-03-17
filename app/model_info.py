@@ -11,8 +11,8 @@ MODEL_INFO = {
         "equation": "y = β₀ + Σᵢ βᵢ xᵢ",
         "parameters": {
             "fit_intercept": "Whether to include the intercept term β₀.",
-            "normalize": "Standardises inputs to zero mean and unit variance before fitting."
-        }
+            "normalize": "Standardises inputs to zero mean and unit variance before fitting.",
+        },
     },
     "XGBoost": {
         "name": "eXtreme Gradient Boosting",
@@ -26,8 +26,8 @@ MODEL_INFO = {
             "subsample": "Fraction of training samples used per tree.",
             "colsample_bytree": "Fraction of features sampled per tree.",
             "reg_alpha": "L1 regularisation coefficient.",
-            "reg_lambda": "L2 regularisation coefficient."
-        }
+            "reg_lambda": "L2 regularisation coefficient.",
+        },
     },
     "LightGBM": {
         "name": "Light Gradient Boosting Machine",
@@ -38,8 +38,8 @@ MODEL_INFO = {
             "n_estimators": "Total number of boosting trees.",
             "max_depth": "Maximum tree depth.",
             "learning_rate": "Step size per iteration (η).",
-            "num_leaves": "Maximum number of leaves per tree."
-        }
+            "num_leaves": "Maximum number of leaves per tree.",
+        },
     },
     "Ridge": {
         "name": "Ridge Regression (L2 Regularisation)",
@@ -48,8 +48,8 @@ MODEL_INFO = {
         "equation": "minimise ||y – Xβ||² + α ||β||²",
         "parameters": {
             "alpha": "L2 penalty strength.",
-            "solver": "Optimisation algorithm (auto, svd, lsqr)."
-        }
+            "solver": "Optimisation algorithm (auto, svd, lsqr).",
+        },
     },
     "Lasso": {
         "name": "Lasso Regression (L1 Regularisation)",
@@ -58,8 +58,8 @@ MODEL_INFO = {
         "equation": "minimise ||y – Xβ||² + α ||β||₁",
         "parameters": {
             "alpha": "L1 penalty strength.",
-            "selection": "Coefficient update order (cyclic or random)."
-        }
+            "selection": "Coefficient update order (cyclic or random).",
+        },
     },
     "Elastic": {
         "name": "Elastic Net",
@@ -68,8 +68,8 @@ MODEL_INFO = {
         "equation": "minimise ||y – Xβ||² + α [ρ ||β||₁ + (1–ρ) ||β||²]",
         "parameters": {
             "alpha": "Overall regularisation strength.",
-            "l1_ratio": "Fraction of L1 penalty (ρ)."
-        }
+            "l1_ratio": "Fraction of L1 penalty (ρ).",
+        },
     },
     "Bayesian": {
         "name": "Bayesian Ridge Regression",
@@ -80,8 +80,8 @@ MODEL_INFO = {
             "alpha_1": "Shape parameter α₁ of the coefficient prior.",
             "alpha_2": "Rate parameter α₂ of the coefficient prior.",
             "lambda_1": "Shape parameter λ₁ of the noise prior.",
-            "lambda_2": "Rate parameter λ₂ of the noise prior."
-        }
+            "lambda_2": "Rate parameter λ₂ of the noise prior.",
+        },
     },
     "ARD": {
         "name": "Automatic Relevance Determination Regression",
@@ -93,8 +93,8 @@ MODEL_INFO = {
             "alpha_1": "Shape parameter α₁ per feature.",
             "alpha_2": "Rate parameter α₂ per feature.",
             "lambda_1": "Shape parameter λ₁ of the noise prior.",
-            "lambda_2": "Rate parameter λ₂ of the noise prior."
-        }
+            "lambda_2": "Rate parameter λ₂ of the noise prior.",
+        },
     },
     "Huber": {
         "name": "Huber Regressor",
@@ -103,8 +103,8 @@ MODEL_INFO = {
         "equation": "Huber loss: squared for |error| ≤ ε, absolute otherwise.",
         "parameters": {
             "epsilon": "Threshold ε separating quadratic from linear loss.",
-            "alpha": "L2 regularisation strength."
-        }
+            "alpha": "L2 regularisation strength.",
+        },
     },
     "RANSAC": {
         "name": "RANSAC Regressor",
@@ -113,8 +113,8 @@ MODEL_INFO = {
         "equation": "— (iterative random subset consensus)",
         "parameters": {
             "max_trials": "Number of random subsets drawn.",
-            "residual_threshold": "Maximum residual to be considered an inlier."
-        }
+            "residual_threshold": "Maximum residual to be considered an inlier.",
+        },
     },
     "TheilSen": {
         "name": "Theil–Sen Estimator",
@@ -123,17 +123,15 @@ MODEL_INFO = {
         "equation": "median((y_j – y_i) / (x_j – x_i))",
         "parameters": {
             "n_subsamples": "Number of subsamples drawn.",
-            "max_subpopulation": "Maximum subpopulation size for slope computation."
-        }
+            "max_subpopulation": "Maximum subpopulation size for slope computation.",
+        },
     },
     "PLS": {
         "name": "Partial Least Squares Regression",
         "description": "Combines dimensionality reduction via latent variables with regression.",
         "history": "Developed by Sven Wold in the 1970s.",
         "equation": "X = T Pᵀ + E;  y = T q + f",
-        "parameters": {
-            "n_components": "Number of latent components."
-        }
+        "parameters": {"n_components": "Number of latent components."},
     },
     "MLP": {
         "name": "Multi-Layer Perceptron Regressor",
@@ -144,8 +142,8 @@ MODEL_INFO = {
             "hidden_layer_sizes": "Tuple specifying the number of units in each hidden layer.",
             "activation": "Activation function (relu, tanh, etc.).",
             "alpha": "L2 regularisation coefficient.",
-            "learning_rate": "Learning rate schedule (constant or adaptive)."
-        }
+            "learning_rate": "Learning rate schedule (constant or adaptive).",
+        },
     },
     "SVM": {
         "name": "Support Vector Regression",
@@ -156,8 +154,8 @@ MODEL_INFO = {
             "kernel": "Kernel function (rbf, linear).",
             "C": "Regularisation parameter.",
             "gamma": "Kernel coefficient for RBF.",
-            "epsilon": "Width of the ε-insensitive tube."
-        }
+            "epsilon": "Width of the ε-insensitive tube.",
+        },
     },
     "kNN": {
         "name": "K-Nearest Neighbours Regressor",
@@ -167,8 +165,8 @@ MODEL_INFO = {
         "parameters": {
             "n_neighbors": "Number of neighbours k.",
             "weights": "Weight function (uniform or distance).",
-            "p": "Power parameter for Minkowski distance."
-        }
+            "p": "Power parameter for Minkowski distance.",
+        },
     },
     "DT": {
         "name": "Decision Tree Regressor",
@@ -179,8 +177,8 @@ MODEL_INFO = {
             "max_depth": "Maximum tree depth.",
             "min_samples_split": "Minimum samples required to split an internal node.",
             "min_samples_leaf": "Minimum samples required at a leaf node.",
-            "max_features": "Number of features considered at each split."
-        }
+            "max_features": "Number of features considered at each split.",
+        },
     },
     "AdaBoost": {
         "name": "AdaBoost Regressor",
@@ -190,8 +188,8 @@ MODEL_INFO = {
         "parameters": {
             "n_estimators": "Number of weak learners.",
             "learning_rate": "Weight shrinkage applied to each learner.",
-            "loss": "Loss function (linear, square, or exponential)."
-        }
+            "loss": "Loss function (linear, square, or exponential).",
+        },
     },
     "RF": {
         "name": "Random Forest Regressor",
@@ -203,8 +201,8 @@ MODEL_INFO = {
             "max_depth": "Maximum tree depth.",
             "min_samples_split": "Minimum samples to split a node.",
             "min_samples_leaf": "Minimum samples at a leaf.",
-            "max_features": "Feature subset size per split."
-        }
+            "max_features": "Feature subset size per split.",
+        },
     },
     "ET": {
         "name": "Extra Trees Regressor",
@@ -216,8 +214,8 @@ MODEL_INFO = {
             "max_depth": "Maximum tree depth.",
             "min_samples_split": "Minimum samples to split a node.",
             "min_samples_leaf": "Minimum samples at a leaf.",
-            "max_features": "Feature subset size per split."
-        }
+            "max_features": "Feature subset size per split.",
+        },
     },
     "GBDT": {
         "name": "Gradient Boosting Regressor",
@@ -228,8 +226,8 @@ MODEL_INFO = {
             "n_estimators": "Number of boosting stages.",
             "learning_rate": "Step size per stage (η).",
             "max_depth": "Maximum tree depth.",
-            "subsample": "Fraction of samples used per stage."
-        }
+            "subsample": "Fraction of samples used per stage.",
+        },
     },
     "HGB": {
         "name": "Histogram Gradient Boosting Regressor",
@@ -240,8 +238,8 @@ MODEL_INFO = {
             "learning_rate": "Step size per stage.",
             "max_iter": "Maximum number of boosting iterations.",
             "max_leaf_nodes": "Maximum number of leaves per tree.",
-            "l2_regularization": "L2 regularisation strength."
-        }
+            "l2_regularization": "L2 regularisation strength.",
+        },
     },
     "KR": {
         "name": "Kernel Ridge Regression",
@@ -251,8 +249,8 @@ MODEL_INFO = {
         "parameters": {
             "alpha": "L2 regularisation strength.",
             "kernel": "Kernel type (linear, rbf, polynomial).",
-            "gamma": "Scale parameter for the RBF kernel."
-        }
+            "gamma": "Scale parameter for the RBF kernel.",
+        },
     },
     "PolyR": {
         "name": "Polynomial Ridge Regression",
@@ -262,8 +260,8 @@ MODEL_INFO = {
         "parameters": {
             "poly__degree": "Highest polynomial degree.",
             "poly__interaction_only": "Include only interaction terms if True.",
-            "ridge__alpha": "Ridge penalty coefficient (α)."
-        }
+            "ridge__alpha": "Ridge penalty coefficient (α).",
+        },
     },
     "ExtraTrees": {
         "name": "Extra Trees Regressor",
@@ -275,8 +273,8 @@ MODEL_INFO = {
             "max_depth": "Maximum tree depth.",
             "min_samples_split": "Minimum samples to split a node.",
             "min_samples_leaf": "Minimum samples at a leaf.",
-            "max_features": "Feature subset size per split."
-        }
+            "max_features": "Feature subset size per split.",
+        },
     },
     "GPR": {
         "name": "Gaussian Process Regressor",
@@ -285,8 +283,8 @@ MODEL_INFO = {
         "equation": "f(x) ~ GP(m(x), k(x, x'))",
         "parameters": {
             "kernel": "Covariance function (RBF, Matérn, etc.).",
-            "alpha": "Noise variance added to the kernel diagonal."
-        }
+            "alpha": "Noise variance added to the kernel diagonal.",
+        },
     },
     "Stack": {
         "name": "Stacking Regressor",
@@ -295,8 +293,8 @@ MODEL_INFO = {
         "equation": "F(x) = g(h₁(x), h₂(x), …, hₙ(x))",
         "parameters": {
             "final_estimator__alpha": "Ridge penalty for the meta-learner.",
-            "passthrough": "Append original features to meta-learner input if True."
-        }
+            "passthrough": "Append original features to meta-learner input if True.",
+        },
     },
     "Quantile": {
         "name": "Quantile Regressor",
@@ -305,8 +303,8 @@ MODEL_INFO = {
         "equation": "minimise Σ ρ_τ(yᵢ – xᵢᵀβ)",
         "parameters": {
             "quantile": "Target quantile τ (0–1).",
-            "alpha": "L2 regularisation strength."
-        }
+            "alpha": "L2 regularisation strength.",
+        },
     },
     "Poisson": {
         "name": "Poisson Regressor",
@@ -315,8 +313,8 @@ MODEL_INFO = {
         "equation": "log(μ) = Xβ",
         "parameters": {
             "alpha": "L2 regularisation strength.",
-            "max_iter": "Maximum number of solver iterations."
-        }
+            "max_iter": "Maximum number of solver iterations.",
+        },
     },
     "Tweedie": {
         "name": "Tweedie Regressor",
@@ -325,8 +323,8 @@ MODEL_INFO = {
         "equation": "V(y) = φ μ^p; link can be log or identity.",
         "parameters": {
             "power": "Distribution power parameter p.",
-            "alpha": "L2 regularisation strength."
-        }
+            "alpha": "L2 regularisation strength.",
+        },
     },
     "Gamma": {
         "name": "Gamma Regressor",
@@ -335,17 +333,15 @@ MODEL_INFO = {
         "equation": "g(μ) = Xβ, g = log link",
         "parameters": {
             "alpha": "L2 regularisation strength.",
-            "max_iter": "Maximum number of solver iterations."
-        }
+            "max_iter": "Maximum number of solver iterations.",
+        },
     },
     "OMP": {
         "name": "Orthogonal Matching Pursuit",
         "description": "Greedily selects features that best explain residuals at each step.",
         "history": "Rooted in Mallat and Zhang's sparse coding work (1993).",
         "equation": "—",
-        "parameters": {
-            "n_nonzero_coefs": "Maximum number of non-zero coefficients."
-        }
+        "parameters": {"n_nonzero_coefs": "Maximum number of non-zero coefficients."},
     },
     "PA": {
         "name": "Passive Aggressive Regressor",
@@ -354,8 +350,8 @@ MODEL_INFO = {
         "equation": "β_{t+1} = argmin_β ½||β – β_t||² + C L(β; x_t, y_t)",
         "parameters": {
             "C": "Regularisation parameter for the hinge loss.",
-            "epsilon": "Insensitivity threshold for regression."
-        }
+            "epsilon": "Insensitivity threshold for regression.",
+        },
     },
     "CAT": {
         "name": "CatBoost Regressor",
@@ -367,8 +363,8 @@ MODEL_INFO = {
             "learning_rate": "Step size per iteration (η).",
             "depth": "Tree depth.",
             "l2_leaf_reg": "L2 regularisation strength.",
-            "bagging_temperature": "Bayesian bootstrap temperature."
-        }
+            "bagging_temperature": "Bayesian bootstrap temperature.",
+        },
     },
     "NGBoost": {
         "name": "Natural Gradient Boosting",
@@ -379,8 +375,8 @@ MODEL_INFO = {
             "n_estimators": "Number of boosting rounds.",
             "learning_rate": "Shrinkage factor per round.",
             "minibatch_frac": "Fraction of data used per iteration.",
-            "col_sample": "Fraction of features sampled per tree."
-        }
+            "col_sample": "Fraction of features sampled per tree.",
+        },
     },
     "XGBoost_RF": {
         "name": "XGBoost Random Forest",
@@ -392,8 +388,8 @@ MODEL_INFO = {
             "max_depth": "Maximum tree depth.",
             "subsample": "Row subsampling ratio.",
             "colsample_bytree": "Column subsampling ratio per tree.",
-            "num_parallel_tree": "Number of parallel trees per round (RF depth)."
-        }
+            "num_parallel_tree": "Number of parallel trees per round (RF depth).",
+        },
     },
     "Voting": {
         "name": "Voting Regressor",
@@ -404,8 +400,7 @@ MODEL_INFO = {
             "xgb__n_estimators": "XGBoost number of trees.",
             "xgb__learning_rate": "XGBoost learning rate.",
             "lgb__n_estimators": "LightGBM number of trees.",
-            "rf__n_estimators": "Random Forest number of trees."
-        }
+            "rf__n_estimators": "Random Forest number of trees.",
+        },
     },
-
 }

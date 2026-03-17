@@ -26,11 +26,13 @@ feature_names = feature_df.columns.tolist()
 scaler = StandardScaler()
 scaler.fit(feature_df)
 
-scaling_df = pd.DataFrame({
-    "feature": feature_names,
-    "mean":    scaler.mean_,
-    "scale":   scaler.scale_,
-})
+scaling_df = pd.DataFrame(
+    {
+        "feature": feature_names,
+        "mean": scaler.mean_,
+        "scale": scaler.scale_,
+    }
+)
 scaling_df.to_csv("scaling_factors.csv", sep=";", decimal=",", index=False)
 print("Scaling factors saved → scaling_factors.csv")
 
@@ -39,44 +41,43 @@ print("Scaling factors saved → scaling_factors.csv")
 # ---------------------------------------------------------------------------
 
 MODEL_CONFIGS: dict[str, bool] = {
-    "OLS":        True,
-    "Ridge":      True,
-    "Lasso":      True,
-    "Elastic":    True,
-    "Bayesian":   True,
-    "ARD":        True,
-    "Huber":      True,
-    "RANSAC":     True,
-    "TheilSen":   True,
-    "PLS":        True,
-    "MLP":        True,
-    "SVM":        True,
-    "kNN":        True,
-    "KR":         True,
-    "PolyR":      True,
-    "GPR":        True,
-    "Stack":      True,
-    "Quantile":   True,
-    "Poisson":    True,
-    "Tweedie":    True,
-    "Gamma":      True,
-    "OMP":        True,
-    "PA":         True,
-    "DT":         False,
-    "AdaBoost":   False,
-    "RF":         False,
-    "ET":         False,
+    "OLS": True,
+    "Ridge": True,
+    "Lasso": True,
+    "Elastic": True,
+    "Bayesian": True,
+    "ARD": True,
+    "Huber": True,
+    "RANSAC": True,
+    "TheilSen": True,
+    "PLS": True,
+    "MLP": True,
+    "SVM": True,
+    "kNN": True,
+    "KR": True,
+    "PolyR": True,
+    "GPR": True,
+    "Stack": True,
+    "Quantile": True,
+    "Poisson": True,
+    "Tweedie": True,
+    "Gamma": True,
+    "OMP": True,
+    "PA": True,
+    "DT": False,
+    "AdaBoost": False,
+    "RF": False,
+    "ET": False,
     "ExtraTrees": False,
-    "GBDT":       False,
-    "HGB":        False,
-    "XGBoost":    False,
-    "LightGBM":   False,
-    "CAT":        False,
+    "GBDT": False,
+    "HGB": False,
+    "XGBoost": False,
+    "LightGBM": False,
+    "CAT": False,
 }
 
-model_scaling_info = pd.DataFrame([
-    {"model": name, "scale": flag}
-    for name, flag in MODEL_CONFIGS.items()
-])
+model_scaling_info = pd.DataFrame(
+    [{"model": name, "scale": flag} for name, flag in MODEL_CONFIGS.items()]
+)
 model_scaling_info.to_csv("model_scaling_info.csv", sep=";", index=False)
 print("Model scaling flags saved → model_scaling_info.csv")
