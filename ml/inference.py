@@ -66,7 +66,7 @@ def predict_fss(input_values, model=None, selected_features=None):
 
     input_array = np.array([input_values])
     input_df    = pd.DataFrame(input_array, columns=selected_features)
-    prediction  = model.predict(input_df)
+    prediction  = model.predict(input_df.values)
     return float(prediction[0])
 
 

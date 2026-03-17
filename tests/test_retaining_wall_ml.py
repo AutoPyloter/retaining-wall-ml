@@ -22,6 +22,14 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "ml"))
 sys.path.insert(0, os.path.join(ROOT, "app"))
 
+# joblib, select_top_k_features'ı __main__ namespace'inde arar
+import __main__ as _main
+import pipeline_components as _pc
+_main.select_top_k_features = _pc.select_top_k_features
+_main.OptionalScaler        = _pc.OptionalScaler
+_main.set_shap_order        = _pc.set_shap_order
+sys.modules['pipeline_components'] = _pc
+
 # ── Constants ─────────────────────────────────────────────────────────────────
 def _find_dataset():
     candidates = [
@@ -39,11 +47,22 @@ DATASET_PATH     = _find_dataset()
 SAVED_MODELS_DIR = os.path.join(ROOT, "ml", "outputs", "saved_models")
 SPLIT_DATASET_PY = os.path.join(ROOT, "ml", "split_dataset.py")
 
+# Tüm 18 feature — IMPORTANCE_ORDER sırası ile
+# H=7m, Scenario S2: hw = H = 7.0m
+# Derived: v2 = X2*H, x1 = X1, s1 = X3+X4
 EXAMPLE_INPUTS = {
-    "H": 7.0, "X1": 3.5,  "X2": 0.6,  "X3": 0.45, "X4": 0.35,
-    "X5": 0.42, "X6": 0.50, "X7": 0.35, "X8": 1.2,
-    "q": 10, "sds": 1.2, "gama": 19.0, "c": 20.0, "fi": 30.0, "hw": 2
+    "gama": 19.0, "hw": 7.0,  "H": 7.0,   "sds": 1.2,
+    "fi":   30.0, "q":  10.0, "X5": 0.42, "v2":  4.2,
+    "x1":   3.5,  "X8": 1.2,  "X2": 0.6,  "X1":  3.5,
+    "s1":   0.80, "X7": 0.35, "X6": 0.50, "X4":  0.35,
+    "X3":   0.45, "c":  20.0,
 }
+# Düz liste — IMPORTANCE_ORDER sırasında, inference.py'ye geçmek için
+EXAMPLE_INPUT_VECTOR = [
+    19.0, 7.0, 7.0, 1.2, 30.0, 10.0, 0.42, 4.2,
+    3.5,  1.2, 0.6, 3.5, 0.80, 0.35, 0.50, 0.35,
+    0.45, 20.0,
+]
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -117,7 +136,11 @@ def dataset():
 
 @pytest.fixture
 def loaded_model():
-    pkls = _find_models()
+    """GPR modelini yükler — inference.py ile en uyumlu model."""
+    pkls = _find_models("GPR*.pkl")
+    if not pkls:
+        # GPR yoksa herhangi bir modeli dene
+        pkls = _find_models()
     if not pkls:
         pytest.skip("No .pkl files in ml/outputs/saved_models/ — "
                     "run ml/train_models.py first.")
@@ -320,15 +343,21 @@ class TestInference:
     def test_predict_returns_float(self, loaded_model, example_inputs):
         from inference import predict_fss
         model, features = loaded_model
-        vals = [example_inputs[f] for f in features if f in example_inputs]
-        result = predict_fss(vals, model=model, selected_features=features)
+        # inference.py: selected_features kadar değer bekliyor
+        # EXAMPLE_INPUT_VECTOR IMPORTANCE_ORDER sırasında — ilk k eleman
+        k = len(features)
+        result = predict_fss(EXAMPLE_INPUT_VECTOR[:k], model=model,
+                             selected_features=features)
         assert isinstance(result, (float, np.floating, int))
 
     def test_predict_positive(self, loaded_model, example_inputs):
         from inference import predict_fss
         model, features = loaded_model
-        vals = [example_inputs[f] for f in features if f in example_inputs]
-        result = predict_fss(vals, model=model, selected_features=features)
+        # inference.py: selected_features kadar değer bekliyor
+        # EXAMPLE_INPUT_VECTOR IMPORTANCE_ORDER sırasında — ilk k eleman
+        k = len(features)
+        result = predict_fss(EXAMPLE_INPUT_VECTOR[:k], model=model,
+                             selected_features=features)
         assert float(result) > 0
 
     def test_predict_plausible_range(self, loaded_model, example_inputs):
@@ -343,8 +372,8 @@ class TestInference:
     def test_gpr_illustrative_scenario(self, loaded_gpr_model):
         from inference import predict_fss
         model, features = loaded_gpr_model
-        vals = [EXAMPLE_INPUTS[f] for f in features if f in EXAMPLE_INPUTS]
-        result = float(predict_fss(vals, model=model,
+        k = len(features)
+        result = float(predict_fss(EXAMPLE_INPUT_VECTOR[:k], model=model,
                                    selected_features=features))
         assert abs(result - 1.4287) < 0.30, \
             f"GPR prediction {result:.4f} far from paper value 1.4287"
@@ -397,7 +426,7 @@ class TestSplitDataset:
 
     def test_existing_splits_have_correct_ratios(self):
         """If splits already exist, verify their row-count ratios."""
-        out_dir = os.path.join(ROOT, "ml", "outputs")
+        out_dir = os.path.join(ROOT, "ml")
         paths = {
             "train":  os.path.join(out_dir, "train.csv"),
             "test":   os.path.join(out_dir, "test.csv"),
@@ -414,7 +443,7 @@ class TestSplitDataset:
 
     def test_existing_splits_no_nulls(self):
         """Splits must not contain null values in the target column."""
-        out_dir = os.path.join(ROOT, "ml", "outputs")
+        out_dir = os.path.join(ROOT, "ml")
         for fname in ("train.csv", "test.csv", "unseen.csv"):
             p = os.path.join(out_dir, fname)
             if not os.path.isfile(p):
