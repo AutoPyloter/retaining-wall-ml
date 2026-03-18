@@ -8,13 +8,14 @@ Run from project root:
     pytest tests/ -v --tb=short
 """
 
-import os
-import sys
 import glob
+import os
 import subprocess
-import pytest
+import sys
+
 import numpy as np
 import pandas as pd
+import pytest
 
 # ── Path setup ────────────────────────────────────────────────────────────────
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,16 +26,21 @@ sys.path.insert(0, os.path.join(ROOT, "app"))
 # joblib, select_top_k_features'ı __main__ namespace'inde arar
 import __main__ as _main
 import pipeline_components as _pc
+
 _main.select_top_k_features = _pc.select_top_k_features
-_main.OptionalScaler        = _pc.OptionalScaler
-_main.set_shap_order        = _pc.set_shap_order
-sys.modules['pipeline_components'] = _pc
+_main.OptionalScaler = _pc.OptionalScaler
+_main.set_shap_order = _pc.set_shap_order
+sys.modules["pipeline_components"] = _pc
+
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 def _find_dataset():
     candidates = [
-        "output.csv", "output.txt", "dataset.csv",
-        "data.csv", "dataset.txt",
+        "output.csv",
+        "output.txt",
+        "dataset.csv",
+        "data.csv",
+        "dataset.txt",
     ]
     for name in candidates:
         for base in (ROOT, os.path.join(ROOT, "ml")):
@@ -43,7 +49,8 @@ def _find_dataset():
                 return p
     return os.path.join(ROOT, "output.csv")
 
-DATASET_PATH     = _find_dataset()
+
+DATASET_PATH = _find_dataset()
 SAVED_MODELS_DIR = os.path.join(ROOT, "ml", "outputs", "saved_models")
 SPLIT_DATASET_PY = os.path.join(ROOT, "ml", "split_dataset.py")
 
@@ -51,17 +58,45 @@ SPLIT_DATASET_PY = os.path.join(ROOT, "ml", "split_dataset.py")
 # H=7m, Scenario S2: hw = H = 7.0m
 # Derived: v2 = X2*H, x1 = X1, s1 = X3+X4
 EXAMPLE_INPUTS = {
-    "gama": 19.0, "hw": 7.0,  "H": 7.0,   "sds": 1.2,
-    "fi":   30.0, "q":  10.0, "X5": 0.42, "v2":  4.2,
-    "x1":   3.5,  "X8": 1.2,  "X2": 0.6,  "X1":  3.5,
-    "s1":   0.80, "X7": 0.35, "X6": 0.50, "X4":  0.35,
-    "X3":   0.45, "c":  20.0,
+    "gama": 19.0,
+    "hw": 7.0,
+    "H": 7.0,
+    "sds": 1.2,
+    "fi": 30.0,
+    "q": 10.0,
+    "X5": 0.42,
+    "v2": 4.2,
+    "x1": 3.5,
+    "X8": 1.2,
+    "X2": 0.6,
+    "X1": 3.5,
+    "s1": 0.80,
+    "X7": 0.35,
+    "X6": 0.50,
+    "X4": 0.35,
+    "X3": 0.45,
+    "c": 20.0,
 }
 # Düz liste — IMPORTANCE_ORDER sırasında, inference.py'ye geçmek için
 EXAMPLE_INPUT_VECTOR = [
-    19.0, 7.0, 7.0, 1.2, 30.0, 10.0, 0.42, 4.2,
-    3.5,  1.2, 0.6, 3.5, 0.80, 0.35, 0.50, 0.35,
-    0.45, 20.0,
+    19.0,
+    7.0,
+    7.0,
+    1.2,
+    30.0,
+    10.0,
+    0.42,
+    4.2,
+    3.5,
+    1.2,
+    0.6,
+    3.5,
+    0.80,
+    0.35,
+    0.50,
+    0.35,
+    0.45,
+    20.0,
 ]
 
 
@@ -72,7 +107,8 @@ def _read_dataset():
     try:
         df = pd.read_csv(DATASET_PATH, sep=";", decimal=",")
         if len(df.columns) > 5 and pd.api.types.is_numeric_dtype(
-                pd.to_numeric(df.iloc[:, 0], errors="coerce")):
+            pd.to_numeric(df.iloc[:, 0], errors="coerce")
+        ):
             return df
     except Exception:
         pass
@@ -96,28 +132,27 @@ def _find_models(pattern="*.pkl"):
 def _load_model_pair(pkl_path):
     """Load model + its features file. Returns (model, features) or raises."""
     from inference import load_model
+
     # 1. Try same base name with _selected_features.csv suffix
     features_path = pkl_path.replace(".pkl", "_selected_features.csv")
     # 2. Try any *selected_features* CSV in the same folder
     if not os.path.isfile(features_path):
-        candidates = glob.glob(
-            os.path.join(SAVED_MODELS_DIR, "*selected_features*"))
+        candidates = glob.glob(os.path.join(SAVED_MODELS_DIR, "*selected_features*"))
         features_path = candidates[0] if candidates else None
     # 3. Try any *features* CSV in saved_models/
     if not features_path or not os.path.isfile(features_path):
-        candidates = glob.glob(
-            os.path.join(SAVED_MODELS_DIR, "*features*"))
+        candidates = glob.glob(os.path.join(SAVED_MODELS_DIR, "*features*"))
         features_path = candidates[0] if candidates else None
     # 4. Try ml/outputs/ directly
     if not features_path or not os.path.isfile(features_path):
-        candidates = glob.glob(
-            os.path.join(ROOT, "ml", "outputs", "*selected_features*"))
+        candidates = glob.glob(os.path.join(ROOT, "ml", "outputs", "*selected_features*"))
         features_path = candidates[0] if candidates else None
     if not features_path or not os.path.isfile(features_path):
         raise FileNotFoundError(
             "No features CSV found. Expected a file matching "
             "'*selected_features*.csv' in ml/outputs/saved_models/ "
-            "or ml/outputs/. Run train_models.py to generate it.")
+            "or ml/outputs/. Run train_models.py to generate it."
+        )
     return load_model(model_file=pkl_path, features_file=features_path)
 
 
@@ -142,8 +177,7 @@ def loaded_model():
         # GPR yoksa herhangi bir modeli dene
         pkls = _find_models()
     if not pkls:
-        pytest.skip("No .pkl files in ml/outputs/saved_models/ — "
-                    "run ml/train_models.py first.")
+        pytest.skip("No .pkl files in ml/outputs/saved_models/ — " "run ml/train_models.py first.")
     try:
         model, features = _load_model_pair(pkls[0])
         return model, features
@@ -170,18 +204,37 @@ class TestDataset:
 
     def test_dataset_exists(self):
         assert os.path.isfile(DATASET_PATH), (
-            f"Dataset not found. Searched in {ROOT} for: "
-            "output.csv, output.txt, dataset.csv.")
+            f"Dataset not found. Searched in {ROOT} for: " "output.csv, output.txt, dataset.csv."
+        )
 
     def test_dataset_columns(self, dataset):
-        expected = {"H","X1","X2","X3","X4","X5","X6","X7","X8",
-                    "q","sds","v2","x1","s1","gama","c","fi","hw","fss"}
-        assert expected.issubset(set(dataset.columns)), \
-            f"Missing columns: {expected - set(dataset.columns)}"
+        expected = {
+            "H",
+            "X1",
+            "X2",
+            "X3",
+            "X4",
+            "X5",
+            "X6",
+            "X7",
+            "X8",
+            "q",
+            "sds",
+            "v2",
+            "x1",
+            "s1",
+            "gama",
+            "c",
+            "fi",
+            "hw",
+            "fss",
+        }
+        assert expected.issubset(
+            set(dataset.columns)
+        ), f"Missing columns: {expected - set(dataset.columns)}"
 
     def test_dataset_row_count(self, dataset):
-        assert len(dataset) >= 2000, \
-            f"Expected ≥2000 rows, got {len(dataset)}"
+        assert len(dataset) >= 2000, f"Expected ≥2000 rows, got {len(dataset)}"
 
     def test_dataset_key_columns_numeric(self, dataset):
         """Key numeric columns must be numeric dtype after correct CSV read."""
@@ -191,59 +244,54 @@ class TestDataset:
                 # Try converting if still string
                 if not pd.api.types.is_numeric_dtype(series):
                     series = series.str.replace(",", ".").astype(float)
-                assert pd.api.types.is_numeric_dtype(series) or \
-                       series.apply(lambda x: isinstance(x, (int, float))).all(), \
-                    f"Column '{col}' could not be converted to numeric"
+                assert (
+                    pd.api.types.is_numeric_dtype(series)
+                    or series.apply(lambda x: isinstance(x, (int, float))).all()
+                ), f"Column '{col}' could not be converted to numeric"
 
     def test_dataset_no_nulls_key_columns(self, dataset):
-        key_cols = [c for c in
-                    ["H","X1","sds","gama","c","fi","hw","fss"]
-                    if c in dataset.columns]
+        key_cols = [
+            c for c in ["H", "X1", "sds", "gama", "c", "fi", "hw", "fss"] if c in dataset.columns
+        ]
         null_counts = dataset[key_cols].isnull().sum()
-        assert null_counts.sum() == 0, \
-            f"Null values:\n{null_counts[null_counts > 0]}"
+        assert null_counts.sum() == 0, f"Null values:\n{null_counts[null_counts > 0]}"
 
     def _to_numeric(self, series):
         """Convert series to numeric, handling comma decimal if needed."""
         if pd.api.types.is_numeric_dtype(series):
             return series
-        return pd.to_numeric(
-            series.astype(str).str.replace(",", "."), errors="coerce")
+        return pd.to_numeric(series.astype(str).str.replace(",", "."), errors="coerce")
 
     def test_fss_positive(self, dataset):
         fss = self._to_numeric(dataset["fss"])
-        assert fss.notna().all(), \
-            "fss column contains non-convertible values"
+        assert fss.notna().all(), "fss column contains non-convertible values"
         assert (fss > 0).all(), "Fss values must be positive"
 
     def test_fss_plausible_range(self, dataset):
         fss = self._to_numeric(dataset["fss"])
         lo, hi = fss.min(), fss.max()
-        assert 0.3 <= lo and hi <= 15.0, \
-            f"Fss range [{lo:.3f}, {hi:.3f}] outside expected [0.3, 15.0]"
+        assert (
+            0.3 <= lo and hi <= 15.0
+        ), f"Fss range [{lo:.3f}, {hi:.3f}] outside expected [0.3, 15.0]"
 
     def test_H_within_design_space(self, dataset):
         H = self._to_numeric(dataset["H"])
-        assert H.between(3.5, 10.5).all(), \
-            "H values outside design space [4, 10] m"
+        assert H.between(3.5, 10.5).all(), "H values outside design space [4, 10] m"
 
     def test_sds_within_design_space(self, dataset):
         sds = self._to_numeric(dataset["sds"])
-        assert sds.between(0.55, 1.85).all(), \
-            "sds values outside design space [0.6, 1.8] g"
+        assert sds.between(0.55, 1.85).all(), "sds values outside design space [0.6, 1.8] g"
 
     def test_hw_non_negative(self, dataset):
         """hw stores groundwater depth in metres — must be non-negative."""
         hw = self._to_numeric(dataset["hw"])
         assert hw.notna().all(), "hw column contains non-convertible values"
-        assert (hw >= 0).all(), \
-            f"hw values must be non-negative, found min={hw.min():.3f}"
+        assert (hw >= 0).all(), f"hw values must be non-negative, found min={hw.min():.3f}"
 
     def test_geometric_consistency_stem(self, dataset):
         X3 = self._to_numeric(dataset["X3"])
         X4 = self._to_numeric(dataset["X4"])
-        assert (X4 <= X3 + 0.01).all(), \
-            "Geometric constraint violated: X4 > X3 in some rows"
+        assert (X4 <= X3 + 0.01).all(), "Geometric constraint violated: X4 > X3 in some rows"
 
 
 # =============================================================================
@@ -256,10 +304,12 @@ class TestPipelineComponents:
 
     def test_optional_scaler_exists(self):
         from pipeline_components import OptionalScaler
+
         assert OptionalScaler is not None
 
     def test_optional_scaler_passthrough(self):
         from pipeline_components import OptionalScaler
+
         scaler = OptionalScaler(scaler=None)
         X = np.array([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]])
         result = scaler.fit_transform(X)
@@ -268,15 +318,16 @@ class TestPipelineComponents:
     def test_optional_scaler_with_standard(self):
         from pipeline_components import OptionalScaler
         from sklearn.preprocessing import StandardScaler
+
         scaler = OptionalScaler(scaler=StandardScaler())
         X = np.array([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]])
         result = scaler.fit_transform(X)
         assert result.shape == X.shape
-        np.testing.assert_almost_equal(result.mean(axis=0), [0.0, 0.0],
-                                       decimal=8)
+        np.testing.assert_almost_equal(result.mean(axis=0), [0.0, 0.0], decimal=8)
 
     def test_select_top_k_importable(self):
         from pipeline_components import select_top_k_features
+
         assert callable(select_top_k_features)
 
 
@@ -302,17 +353,32 @@ class TestMetrics:
 
     def test_returns_17_metrics(self, sample_data):
         from metrics import compute_metrics
+
         result = compute_metrics(*sample_data)
-        assert len(result) == 17, \
-            f"Expected 17 metrics, got {len(result)}: {list(result.keys())}"
+        assert len(result) == 17, f"Expected 17 metrics, got {len(result)}: {list(result.keys())}"
 
     def test_all_keys_present(self, sample_data):
         from metrics import compute_metrics
+
         result = compute_metrics(*sample_data)
         expected_keys = [
-            "MAE", "MSE", "RMSE", "RSR", "MAPE", "sMAPE",
-            "R2", "EVS", "MBE", "CV(RMSE)%", "MdAE", "MaxE",
-            "NSE", "KGE", "CCC", "VAF(%)", "PI",
+            "MAE",
+            "MSE",
+            "RMSE",
+            "RSR",
+            "MAPE",
+            "sMAPE",
+            "R2",
+            "EVS",
+            "MBE",
+            "CV(RMSE)%",
+            "MdAE",
+            "MaxE",
+            "NSE",
+            "KGE",
+            "CCC",
+            "VAF(%)",
+            "PI",
         ]
         for key in expected_keys:
             assert key in result, f"Key '{key}' missing from metrics output"
@@ -320,37 +386,44 @@ class TestMetrics:
     # ── Standard metrics ──────────────────────────────────────────────────
     def test_mae_perfect(self, perfect_data):
         from metrics import compute_metrics
+
         result = compute_metrics(*perfect_data)
         assert result["MAE"] < 1e-10
 
     def test_mse_perfect(self, perfect_data):
         from metrics import compute_metrics
+
         result = compute_metrics(*perfect_data)
         assert result["MSE"] < 1e-10
 
     def test_rmse_perfect(self, perfect_data):
         from metrics import compute_metrics
+
         result = compute_metrics(*perfect_data)
         assert result["RMSE"] < 1e-10
 
     def test_r2_perfect(self, perfect_data):
         from metrics import compute_metrics
+
         result = compute_metrics(*perfect_data)
         assert abs(result["R2"] - 1.0) < 1e-6
 
     def test_r2_range(self, sample_data):
         from metrics import compute_metrics
+
         result = compute_metrics(*sample_data)
         assert result["R2"] <= 1.0
 
     def test_evs_perfect(self, perfect_data):
         from metrics import compute_metrics
+
         result = compute_metrics(*perfect_data)
         assert abs(result["EVS"] - 1.0) < 1e-6
 
     def test_mbe_direction(self):
         """MBE should be positive when predictions consistently overestimate."""
         from metrics import compute_metrics
+
         y_true = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
         y_pred = y_true + 0.5  # sabit +0.5 bias
         result = compute_metrics(y_true, y_pred)
@@ -359,6 +432,7 @@ class TestMetrics:
     def test_mbe_negative(self):
         """MBE should be negative when predictions consistently underestimate."""
         from metrics import compute_metrics
+
         y_true = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
         y_pred = y_true - 0.5  # sabit -0.5 bias
         result = compute_metrics(y_true, y_pred)
@@ -367,6 +441,7 @@ class TestMetrics:
     def test_maxe_value(self):
         """MaxE should equal the largest single absolute error."""
         from metrics import compute_metrics
+
         y_true = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
         y_pred = np.array([1.1, 2.1, 3.1, 4.1, 5.5])  # max error = 0.5
         result = compute_metrics(y_true, y_pred)
@@ -375,6 +450,7 @@ class TestMetrics:
     def test_mape_zero_excluded(self):
         """MAPE should handle zero values in y_true without crashing."""
         from metrics import compute_metrics
+
         y_true = np.array([0.0, 1.0, 2.0, 3.0, 4.0])
         y_pred = np.array([0.1, 1.1, 2.1, 3.1, 4.1])
         result = compute_metrics(y_true, y_pred)
@@ -383,6 +459,7 @@ class TestMetrics:
     def test_rsr_perfect(self, perfect_data):
         """RSR should be 0 for perfect predictions."""
         from metrics import compute_metrics
+
         result = compute_metrics(*perfect_data)
         assert result["RSR"] < 1e-10
 
@@ -390,18 +467,21 @@ class TestMetrics:
     def test_nse_perfect(self, perfect_data):
         """NSE = 1 for perfect predictions."""
         from metrics import compute_metrics
+
         result = compute_metrics(*perfect_data)
         assert abs(result["NSE"] - 1.0) < 1e-6
 
     def test_nse_range(self, sample_data):
         """NSE should be <= 1."""
         from metrics import compute_metrics
+
         result = compute_metrics(*sample_data)
         assert result["NSE"] <= 1.0
 
     def test_nse_bad_model(self):
         """NSE = 0 when model predicts the mean."""
         from metrics import compute_metrics
+
         y_true = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
         y_pred = np.full_like(y_true, np.mean(y_true))
         result = compute_metrics(y_true, y_pred)
@@ -410,54 +490,63 @@ class TestMetrics:
     def test_kge_perfect(self, perfect_data):
         """KGE = 1 for perfect predictions."""
         from metrics import compute_metrics
+
         result = compute_metrics(*perfect_data)
         assert abs(result["KGE"] - 1.0) < 1e-6
 
     def test_kge_range(self, sample_data):
         """KGE should be <= 1."""
         from metrics import compute_metrics
+
         result = compute_metrics(*sample_data)
         assert result["KGE"] <= 1.0
 
     def test_ccc_perfect(self, perfect_data):
         """CCC = 1 for perfect predictions."""
         from metrics import compute_metrics
+
         result = compute_metrics(*perfect_data)
         assert abs(result["CCC"] - 1.0) < 1e-6
 
     def test_ccc_range(self, sample_data):
         """CCC should be in [-1, 1]."""
         from metrics import compute_metrics
+
         result = compute_metrics(*sample_data)
         assert -1.0 <= result["CCC"] <= 1.0
 
     def test_vaf_perfect(self, perfect_data):
         """VAF = 100% for perfect predictions."""
         from metrics import compute_metrics
+
         result = compute_metrics(*perfect_data)
         assert abs(result["VAF(%)"] - 100.0) < 1e-4
 
     def test_vaf_range(self, sample_data):
         """VAF should be <= 100."""
         from metrics import compute_metrics
+
         result = compute_metrics(*sample_data)
         assert result["VAF(%)"] <= 100.0
 
     def test_pi_positive(self, sample_data):
         """PI = R2/RMSE should be positive for good models."""
         from metrics import compute_metrics
+
         result = compute_metrics(*sample_data)
         assert result["PI"] > 0
 
     def test_smape_range(self, sample_data):
         """sMAPE should be in [0, 200]."""
         from metrics import compute_metrics
+
         result = compute_metrics(*sample_data)
         assert 0 <= result["sMAPE"] <= 200
 
     def test_metrics_all_finite(self, sample_data):
         """All metrics except PI should be finite."""
         from metrics import compute_metrics
+
         result = compute_metrics(*sample_data)
         for key, val in result.items():
             if key != "PI":  # PI = R2/RMSE, can be inf if RMSE≈0
@@ -470,60 +559,67 @@ class TestMetrics:
 class TestInference:
 
     def test_importable(self):
-        from inference import predict_fss, load_model  # noqa: F401
+        from inference import load_model, predict_fss  # noqa: F401
 
     def test_load_model_signature(self):
         import inspect
+
         from inference import load_model
+
         sig = inspect.signature(load_model)
-        assert "model_file"    in sig.parameters
+        assert "model_file" in sig.parameters
         assert "features_file" in sig.parameters
 
     def test_predict_fss_signature(self):
         import inspect
+
         from inference import predict_fss
-        sig    = inspect.signature(predict_fss)
+
+        sig = inspect.signature(predict_fss)
         params = list(sig.parameters.keys())
-        assert params[0] == "input_values", \
-            f"First param should be 'input_values', got '{params[0]}'"
+        assert (
+            params[0] == "input_values"
+        ), f"First param should be 'input_values', got '{params[0]}'"
 
     def test_predict_returns_float(self, loaded_model, example_inputs):
         from inference import predict_fss
+
         model, features = loaded_model
         # inference.py: selected_features kadar değer bekliyor
         # EXAMPLE_INPUT_VECTOR IMPORTANCE_ORDER sırasında — ilk k eleman
         k = len(features)
-        result = predict_fss(EXAMPLE_INPUT_VECTOR[:k], model=model,
-                             selected_features=features)
+        result = predict_fss(EXAMPLE_INPUT_VECTOR[:k], model=model, selected_features=features)
         assert isinstance(result, (float, np.floating, int))
 
     def test_predict_positive(self, loaded_model, example_inputs):
         from inference import predict_fss
+
         model, features = loaded_model
         # inference.py: selected_features kadar değer bekliyor
         # EXAMPLE_INPUT_VECTOR IMPORTANCE_ORDER sırasında — ilk k eleman
         k = len(features)
-        result = predict_fss(EXAMPLE_INPUT_VECTOR[:k], model=model,
-                             selected_features=features)
+        result = predict_fss(EXAMPLE_INPUT_VECTOR[:k], model=model, selected_features=features)
         assert float(result) > 0
 
     def test_predict_plausible_range(self, loaded_model, example_inputs):
         from inference import predict_fss
+
         model, features = loaded_model
         vals = [example_inputs[f] for f in features if f in example_inputs]
-        result = float(predict_fss(vals, model=model,
-                                   selected_features=features))
-        assert 0.3 < result < 15.0, \
-            f"Predicted Fss {result:.4f} outside plausible range"
+        result = float(predict_fss(vals, model=model, selected_features=features))
+        assert 0.3 < result < 15.0, f"Predicted Fss {result:.4f} outside plausible range"
 
     def test_gpr_illustrative_scenario(self, loaded_gpr_model):
         from inference import predict_fss
+
         model, features = loaded_gpr_model
         k = len(features)
-        result = float(predict_fss(EXAMPLE_INPUT_VECTOR[:k], model=model,
-                                   selected_features=features))
-        assert abs(result - 1.4287) < 0.30, \
-            f"GPR prediction {result:.4f} far from paper value 1.4287"
+        result = float(
+            predict_fss(EXAMPLE_INPUT_VECTOR[:k], model=model, selected_features=features)
+        )
+        assert (
+            abs(result - 1.4287) < 0.30
+        ), f"GPR prediction {result:.4f} far from paper value 1.4287"
 
 
 # =============================================================================
@@ -532,8 +628,7 @@ class TestInference:
 class TestSplitDataset:
 
     def test_split_script_exists(self):
-        assert os.path.isfile(SPLIT_DATASET_PY), \
-            f"split_dataset.py not found at {SPLIT_DATASET_PY}"
+        assert os.path.isfile(SPLIT_DATASET_PY), f"split_dataset.py not found at {SPLIT_DATASET_PY}"
 
     def test_split_importable(self):
         import split_dataset  # noqa: F401
@@ -543,18 +638,17 @@ class TestSplitDataset:
         if not os.path.isfile(DATASET_PATH):
             pytest.skip("Dataset not found — cannot test splitting.")
         result = subprocess.run(
-            [sys.executable, SPLIT_DATASET_PY,
-             "--input",  DATASET_PATH,
-             "--outdir", str(tmp_path)],
-            capture_output=True, text=True, cwd=ROOT
+            [sys.executable, SPLIT_DATASET_PY, "--input", DATASET_PATH, "--outdir", str(tmp_path)],
+            capture_output=True,
+            text=True,
+            cwd=ROOT,
         )
         # If the script doesn't accept --input/--outdir, fall back to
         # checking that the default output files exist after running
         if result.returncode != 0:
             # Try running without arguments (uses hardcoded paths)
             result2 = subprocess.run(
-                [sys.executable, SPLIT_DATASET_PY],
-                capture_output=True, text=True, cwd=ROOT
+                [sys.executable, SPLIT_DATASET_PY], capture_output=True, text=True, cwd=ROOT
             )
             default_out = os.path.join(ROOT, "ml", "outputs")
             for fname in ("train.csv", "test.csv", "unseen.csv"):
@@ -563,29 +657,28 @@ class TestSplitDataset:
                     return  # Files exist from previous run — pass
             pytest.skip(
                 "split_dataset.py does not accept --input/--outdir; "
-                "run it manually once to generate train/test/unseen splits.")
+                "run it manually once to generate train/test/unseen splits."
+            )
 
         for fname in ("train.csv", "test.csv", "unseen.csv"):
-            assert (tmp_path / fname).exists() or \
-                   os.path.isfile(os.path.join(
-                       ROOT, "ml", "outputs", fname)), \
-                f"{fname} not found after running split_dataset.py"
+            assert (tmp_path / fname).exists() or os.path.isfile(
+                os.path.join(ROOT, "ml", "outputs", fname)
+            ), f"{fname} not found after running split_dataset.py"
 
     def test_existing_splits_have_correct_ratios(self):
         """If splits already exist, verify their row-count ratios."""
         out_dir = os.path.join(ROOT, "ml")
         paths = {
-            "train":  os.path.join(out_dir, "train.csv"),
-            "test":   os.path.join(out_dir, "test.csv"),
+            "train": os.path.join(out_dir, "train.csv"),
+            "test": os.path.join(out_dir, "test.csv"),
             "unseen": os.path.join(out_dir, "unseen.csv"),
         }
         if not all(os.path.isfile(p) for p in paths.values()):
             pytest.skip("Split files not yet generated — run split_dataset.py")
-        dfs = {k: pd.read_csv(p, sep=";", decimal=",")
-               for k, p in paths.items()}
+        dfs = {k: pd.read_csv(p, sep=";", decimal=",") for k, p in paths.items()}
         total = sum(len(df) for df in dfs.values())
-        assert abs(len(dfs["train"])  / total - 0.70) < 0.03
-        assert abs(len(dfs["test"])   / total - 0.20) < 0.03
+        assert abs(len(dfs["train"]) / total - 0.70) < 0.03
+        assert abs(len(dfs["test"]) / total - 0.20) < 0.03
         assert abs(len(dfs["unseen"]) / total - 0.10) < 0.03
 
     def test_existing_splits_no_nulls(self):
@@ -597,8 +690,7 @@ class TestSplitDataset:
                 pytest.skip(f"{fname} not found — run split_dataset.py")
             df = pd.read_csv(p, sep=";", decimal=",")
             if "fss" in df.columns:
-                assert df["fss"].notna().all(), \
-                    f"Null fss values found in {fname}"
+                assert df["fss"].notna().all(), f"Null fss values found in {fname}"
 
 
 # =============================================================================
@@ -611,65 +703,71 @@ class TestPreprocessing:
 
     def test_output_is_array_like(self, example_inputs):
         from preprocessing import preprocess_inputs
+
         result = np.array(preprocess_inputs(example_inputs)).flatten()
         assert len(result) > 0
 
     def test_output_has_18_features(self, example_inputs):
         from preprocessing import preprocess_inputs
+
         result = np.array(preprocess_inputs(example_inputs)).flatten()
-        assert len(result) == 18, \
-            f"Expected 18 features, got {len(result)}"
+        assert len(result) == 18, f"Expected 18 features, got {len(result)}"
 
     def test_output_finite(self, example_inputs):
         from preprocessing import preprocess_inputs
+
         result = np.array(preprocess_inputs(example_inputs)).flatten()
-        assert np.all(np.isfinite(result)), \
-            "Preprocessed inputs contain NaN or Inf"
+        assert np.all(np.isfinite(result)), "Preprocessed inputs contain NaN or Inf"
 
     def test_output_shape(self, example_inputs):
         from preprocessing import preprocess_inputs
+
         result = preprocess_inputs(example_inputs)
-        assert result.shape == (1, 18), \
-            f"Expected shape (1, 18), got {result.shape}"
+        assert result.shape == (1, 18), f"Expected shape (1, 18), got {result.shape}"
 
     def test_importance_order_length(self):
         from preprocessing import IMPORTANCE_ORDER
-        assert len(IMPORTANCE_ORDER) == 18, \
-            f"IMPORTANCE_ORDER should have 18 features, got {len(IMPORTANCE_ORDER)}"
+
+        assert (
+            len(IMPORTANCE_ORDER) == 18
+        ), f"IMPORTANCE_ORDER should have 18 features, got {len(IMPORTANCE_ORDER)}"
 
     def test_importance_order_no_duplicates(self):
         from preprocessing import IMPORTANCE_ORDER
-        assert len(IMPORTANCE_ORDER) == len(set(IMPORTANCE_ORDER)), \
-            "IMPORTANCE_ORDER contains duplicate feature names"
+
+        assert len(IMPORTANCE_ORDER) == len(
+            set(IMPORTANCE_ORDER)
+        ), "IMPORTANCE_ORDER contains duplicate feature names"
 
     def test_importance_order_contains_key_features(self):
         from preprocessing import IMPORTANCE_ORDER
+
         for feat in ("H", "gama", "fi", "c", "hw", "sds", "q"):
-            assert feat in IMPORTANCE_ORDER, \
-                f"Key feature '{feat}' missing from IMPORTANCE_ORDER"
+            assert feat in IMPORTANCE_ORDER, f"Key feature '{feat}' missing from IMPORTANCE_ORDER"
 
     def test_input_map_coverage(self):
         """INPUT_MAP should cover all UI widget keys."""
-        from preprocessing import INPUT_MAP, IMPORTANCE_ORDER
+        from preprocessing import IMPORTANCE_ORDER, INPUT_MAP
+
         mapped_features = set(INPUT_MAP.values())
         # v2, x1, s1, X1, X3, X6 are derived geometric quantities
         # not directly entered via UI widgets
         derived = {"v2", "x1", "s1", "X1", "X3", "X6"}
         for feat in IMPORTANCE_ORDER:
             if feat not in derived:
-                assert feat in mapped_features, \
-                    f"Feature '{feat}' not mapped in INPUT_MAP"
+                assert feat in mapped_features, f"Feature '{feat}' not mapped in INPUT_MAP"
 
     def test_reverse_map_consistency(self):
         """REVERSE_MAP should be the inverse of INPUT_MAP."""
         from preprocessing import INPUT_MAP, REVERSE_MAP
+
         for ui_key, feat in INPUT_MAP.items():
-            assert REVERSE_MAP.get(feat) == ui_key, \
-                f"REVERSE_MAP[{feat}] != {ui_key}"
+            assert REVERSE_MAP.get(feat) == ui_key, f"REVERSE_MAP[{feat}] != {ui_key}"
 
     def test_missing_key_defaults_to_zero(self):
         """Missing UI keys should default to 0.0, not raise an error."""
         from preprocessing import preprocess_inputs
+
         result = preprocess_inputs({})  # boş dict
         arr = np.array(result).flatten()
         assert len(arr) == 18
@@ -677,7 +775,8 @@ class TestPreprocessing:
 
     def test_gama_value_position(self, example_inputs):
         """gama should be the first element (index 0) in IMPORTANCE_ORDER."""
-        from preprocessing import preprocess_inputs, IMPORTANCE_ORDER
+        from preprocessing import IMPORTANCE_ORDER, preprocess_inputs
+
         assert IMPORTANCE_ORDER[0] == "gama"
         result = np.array(preprocess_inputs(example_inputs)).flatten()
         assert result[0] == float(example_inputs.get("gama", 0.0))
@@ -685,9 +784,9 @@ class TestPreprocessing:
     def test_output_dtype_float(self, example_inputs):
         """Output array should be float dtype."""
         from preprocessing import preprocess_inputs
+
         result = preprocess_inputs(example_inputs)
-        assert np.issubdtype(result.dtype, np.floating), \
-            f"Expected float dtype, got {result.dtype}"
+        assert np.issubdtype(result.dtype, np.floating), f"Expected float dtype, got {result.dtype}"
 
 
 # =============================================================================
